@@ -1,4 +1,4 @@
-package com.example.stocker
+package com.nstudiosappdev.stocker
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

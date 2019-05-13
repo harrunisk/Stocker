@@ -1,4 +1,4 @@
-package com.example.stocker
+package com.nstudiosappdev.stocker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
