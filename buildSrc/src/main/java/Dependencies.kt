@@ -27,7 +27,7 @@ object TestLibraries {
  * Common Libraries
  */
 object Libraries {
-    const val dagger2AndroidSupport = "com.google.dagger-android-support:${Versions.dagger2Version}"
+    const val dagger2AndroidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger2Version}"
     const val dagger2Compiler = "com.google.dagger:dagger-compiler:${Versions.dagger2Version}"
     const val dagger2AndroidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger2Version}"
     const val javaxAnnotation = "org.glassfish:javax.annotation:${Versions.javaxAnnotationVersion}"
@@ -36,7 +36,7 @@ object Libraries {
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
     const val logInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpLoggingInterceptorVersion}"
     const val gson = "com.squareup.retrofit2:converter-gson:${Versions.gsonVersion}"
-    const val okHttp = "com.squareup.okhttp3:okhttp${Versions.okHttpVersion}"
+    const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttpVersion}"
     const val retrofitCoroutineAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutineAdapterVersion}"
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.viewModelVersion}"
     const val lifeCycleExtensions = "androidx.lifecycle:lifecycle-viewmodel:${Versions.viewModelVersion}"
@@ -44,12 +44,3 @@ object Libraries {
     const val roomCompiler = "androidx.room:room-compiler:${Versions.roomVersion}"
     const val picasso = "com.squareup.picasso:picasso:${Versions.picassoVersion}"
 }
-
-
-/*
-object Versions{
-    val kotlin = "1.3.31"
-}
-object Deps{
-    val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-}*/

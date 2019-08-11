@@ -1,1 +1,3 @@
-include ':app', ':base', ':core', ':core_data', ':core_domain', ':core_presentation'
+include Modules.app
+include Modules.core, Modules.corePresentation, Modules.coreDomain, Modules.coreData
+include Modules.navigation

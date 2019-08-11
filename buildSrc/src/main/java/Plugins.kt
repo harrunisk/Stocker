@@ -7,5 +7,4 @@ object Plugins {
     const val kotlinAndroid = "kotlin-android"
     const val kotlinAndroidExtensions = "kotlin-android-extensions"
     const val kotlinKapt = "kotlin-kapt"
-    const val fabric = "io.fabric"
 }
