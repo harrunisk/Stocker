@@ -18,7 +18,7 @@ object Versions {
     const val jUnitVersion = "4.12"
     const val testRunnerVersion = "1.1.0"
     const val espressoCoreVersion = "3.1.0"
-    const val dagger2Version = "2.24"
+    const val dagger2Version = "2.11"
     const val javaxAnnotationVersion = "10.0-b28"
     const val coroutinesVersion = "1.0.1"
     const val retrofitVersion = "2.5.0"
