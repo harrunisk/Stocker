@@ -1,6 +1,4 @@
-package error
-
-import java.lang.Error
+package com.nstudiosappdev.core.error
 
 interface ErrorFactory {
 
@@ -13,4 +11,7 @@ interface ErrorFactory {
     fun createAuthenticationError(): Error
 
     fun createInvalidResponseError(): Error
+
+    fun createBusinessError(code: Int, message: String?): Error
+
 }

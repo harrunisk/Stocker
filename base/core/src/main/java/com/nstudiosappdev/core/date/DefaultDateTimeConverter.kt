@@ -1,4 +1,4 @@
-package date
+package com.nstudiosappdev.core.date
 
 import java.text.SimpleDateFormat
 import java.util.*

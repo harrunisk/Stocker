@@ -1,4 +1,4 @@
-package application
+package com.nstudiosappdev.core.application
 
 import android.app.Activity
 import android.app.Application

@@ -1,6 +1,6 @@
 package com.nstudiosappdev.stocker
 
-import application.CoreApplicationImpl
+import com.nstudiosappdev.core.application.CoreApplicationImpl
 
 class StockerApp : CoreApplicationImpl() {
 

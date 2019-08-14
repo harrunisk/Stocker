@@ -1,4 +1,4 @@
-package coroutines
+package com.nstudiosappdev.core.coroutines
 
 import kotlinx.coroutines.Dispatchers
 

@@ -1,4 +1,4 @@
-package date
+package com.nstudiosappdev.core.date
 
 class DateTimeConstants {
     companion object {
