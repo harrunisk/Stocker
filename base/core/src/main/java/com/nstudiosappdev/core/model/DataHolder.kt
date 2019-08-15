@@ -1,5 +1,6 @@
 package com.nstudiosappdev.core.model
 
+import com.nstudiosappdev.core.error.Error
 
 sealed class DataHolder<out T : Any> {
 
