@@ -1,3 +1,4 @@
 include Modules.app
 include Modules.core, Modules.corePresentation, Modules.coreDomain, Modules.coreData
 include Modules.navigation
+include Modules.dashboardPresentation, Modules.dashboardDomain, Modules.dashboardData
