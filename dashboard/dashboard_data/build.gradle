@@ -2,5 +2,5 @@ apply from: "$rootDir/common-android-library.gradle"
 dependencies {
     implementation project(Modules.core)
     implementation project(Modules.coreData)
-    implementation project(Modules.dasboardDomain)
+    implementation project(Modules.dashboardDomain)
 }
