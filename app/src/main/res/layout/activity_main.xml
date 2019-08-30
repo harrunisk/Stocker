@@ -15,9 +15,26 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+			<include
+				layout="@layout/toolbar_default"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+			<com.google.android.material.tabs.TabLayout
+				android:id="@+id/tabs"
+				android:layout_width="match_parent"
+				android:layout_height="?attr/actionBarSize"
+				app:tabGravity="fill"
+				app:tabMaxWidth="0dp"
+				app:tabIndicatorHeight="4dp"
+				app:tabMode="fixed"
+				app:tabTextColor="@color/colorSecondaryText"
+				app:tabSelectedTextColor="@color/colorPrimary"
+				app:tabIndicatorColor="@color/colorPrimary"
+				android:background="#f5f5f5"/>
 
 		</com.google.android.material.appbar.AppBarLayout>
 
+		<include layout="@layout/content_home"/>
 
 	</LinearLayout>
 

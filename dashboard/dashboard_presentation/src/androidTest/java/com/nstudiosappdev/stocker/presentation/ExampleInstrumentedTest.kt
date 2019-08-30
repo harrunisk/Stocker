@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard_presentation
+package com.nstudiosappdev.stocker.presentation
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
