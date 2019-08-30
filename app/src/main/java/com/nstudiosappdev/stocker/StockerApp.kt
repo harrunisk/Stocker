@@ -3,6 +3,7 @@ package com.nstudiosappdev.stocker
 import android.app.Activity
 import android.app.Application
 import com.nstudiosappdev.stocker.injection.components.AppComponent
+import com.nstudiosappdev.stocker.injection.components.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
