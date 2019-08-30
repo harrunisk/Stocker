@@ -7,6 +7,7 @@ dependencies {
     api SupportLibraries.appCompat
     api SupportLibraries.design
     api SupportLibraries.recyclerView
+    api SupportLibraries.constraintLayout
     api Libraries.lifecycleExtensions
     api Libraries.picasso
 

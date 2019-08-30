@@ -22,6 +22,10 @@ dependencies {
     implementation project(Modules.coreDomain)
     implementation project(Modules.coreData)
 
+    implementation project(Modules.dashboardPresentation)
+    implementation project(Modules.dashboardDomain)
+    implementation project(Modules.dashboardData)
+
     // Support Libraries
     implementation SupportLibraries.appCompat
 

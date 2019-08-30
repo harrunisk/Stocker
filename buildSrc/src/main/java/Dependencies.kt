@@ -12,8 +12,8 @@ object SupportLibraries {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.xVersion}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.xVersion}"
     const val design = "com.google.android.material:material:${Versions.supportDesignVersion}"
-
-   }
+    const val constraintLayout = "com.android.support.constraint:constraint-layout:${Versions.constraintLayoutVersion}"
+}
 /**
  * Test Libraries
  */

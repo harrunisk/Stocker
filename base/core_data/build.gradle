@@ -5,7 +5,6 @@ dependencies {
     // RETROFIT
     api Libraries.retrofit
     api Libraries.logInterceptor
-    api Libraries.gson
     api Libraries.okHttp
     api Libraries.retrofitCoroutineAdapter
     api Libraries.room

@@ -2,15 +2,17 @@ package com.nstudiosappdev.stocker.ui
 
 import android.os.Bundle
 import android.widget.TableLayout
+import com.google.android.material.tabs.TabLayout
+import com.nstudiosappdev.core.presentation.TabProvider
 import com.nstudiosappdev.core.presentation.base.BaseActivity
 import com.nstudiosappdev.core.presentation.extensions.transact
 import com.nstudiosappdev.core.presentation.navigation.UiNavigation
 import com.nstudiosappdev.navigation.features.Currencies
 import com.nstudiosappdev.stocker.R
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), TabProvider {
 
-    private lateinit var tabs: TableLayout
+    private lateinit var tabs: TabLayout
 
     override fun getLayoutRes() = R.layout.activity_main
 
@@ -31,4 +33,7 @@ class MainActivity : BaseActivity() {
             }
         }
     }
+
+    override fun provideTabLayout(): TabLayout = tabs
+
 }

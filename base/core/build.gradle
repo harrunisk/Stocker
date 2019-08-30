@@ -5,4 +5,7 @@ dependencies {
 
     // Dagger2
     api Libraries.dagger2AndroidSupport
+
+    // Gson
+    api Libraries.gson
 }

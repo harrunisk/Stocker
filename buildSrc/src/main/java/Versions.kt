@@ -32,5 +32,6 @@ object Versions {
     const val beaverVersion = "1.0.0-alpha"
     const val picassoVersion = "2.71828"
     const val playServicesVersion = "11.8.0"
+    const val constraintLayoutVersion = "1.1.2"
 }
 
