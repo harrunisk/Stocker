@@ -28,6 +28,12 @@ abstract class BaseActivity : AppCompatActivity() {
     @IdRes
     open val toolbarRes = Constants.NO_RES
 
+    @IdRes
+    open val toolbarId = Constants.NO_RES
+
+
+    open val shouldOnBackPressedWork = true
+
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         initNavigation(uiNavigation)
         setScreenTitle(getString(titleRes))
+        initToolBar()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -78,5 +85,18 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun setScreenTitle(title: String?) {
         supportActionBar?.title = title ?: getString(R.string.app_name)
+    }
+
+    override fun onBackPressed() {
+        if (shouldOnBackPressedWork) {
+            super.onBackPressed()
+        }
+    }
+
+    private fun initToolBar() {
+        if (toolbarId == Constants.NO_RES) return
+        findViewById<Toolbar>(toolbarId)?.let {
+            setToolbar(it)
+        }
     }
 }

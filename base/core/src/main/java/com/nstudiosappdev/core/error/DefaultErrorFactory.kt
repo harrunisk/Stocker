@@ -1,24 +1,50 @@
 package com.nstudiosappdev.core.error
 
-import com.nstudiosappdev.core.error.Error.ApiError
-import com.nstudiosappdev.core.error.Error.UnknownError
-import com.nstudiosappdev.core.error.Error.AuthenticationError
-import com.nstudiosappdev.core.error.Error.BusinessError
-import com.nstudiosappdev.core.error.Error.InvalidResponseError
+import javax.inject.Inject
 
 
-object DefaultErrorFactory : ErrorFactory {
+class DefaultErrorFactory @Inject constructor() : ErrorFactory {
 
-    override fun createUnknownError(): Error = UnknownError("Bilinmeyen bir hata oluştu!")
+    override fun createApiError(code: String, messages: String) =
+        Error.ApiError(code, messages)
 
-    override fun createApiError(code: Int, message: String?): Error = ApiError(code, message)
+    override fun createApiError(statusError: StatusError): Error {
+        if (statusError.code == null) {
+            return createUnknownError()
+        }
 
-    override fun createErrorFromThrowable(t: Throwable): Error = ApiError(message = t.localizedMessage)
+        val message = statusError.message ?: "Hata oluştu."
+        return createApiError(statusError.code, message)
+    }
 
-    override fun createAuthenticationError(): Error = AuthenticationError()
+    override fun createErrors(errors: List<StatusError>?): Error {
+        val safeErrorList = ArrayList<Error>()
+        if (errors != null && errors.isNotEmpty()) {
+            for (statusError in errors) {
+                val apiError = createApiError(statusError)
+                safeErrorList.add(apiError)
+            }
+        }
 
-    override fun createInvalidResponseError(): Error = InvalidResponseError("Invalid Response!")
+        return Error.ApiErrors(safeErrorList)
+    }
 
-    override fun createBusinessError(code: Int, message: String?): Error = BusinessError(code, message)
+    override fun createUnknownError(): Error = Error.UnknownError("Bilinmeyen Hata Oluştu.")
+
+    override fun createErrorFromThrowable(t: Throwable) = Error.ExceptionalError(message = t.localizedMessage)
+
+    override fun createInvalidResponseError() = Error.InvalidResponseError("Invalid Response!")
+
+    override fun createUnHandledStateError() = Error.UnhandledStateError()
+
+    override fun createInvalidInteractorRequestError() = Error.InvalidInteractorRequestError()
+
+    override fun createAuthenticationError() = Error.AuthenticationError()
+
+    override fun emptyCacheResultError() = Error.EmptyCacheResult()
+
+    override fun createConnectionError() = Error.ConnectionError()
+
+    override fun createBusinessError(code: Int, message: String?) = Error.BusinessError()
 
 }

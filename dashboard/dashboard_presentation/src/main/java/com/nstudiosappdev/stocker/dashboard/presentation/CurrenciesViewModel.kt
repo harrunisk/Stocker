@@ -28,7 +28,7 @@ class CurrenciesViewModel @Inject constructor(
         fetchCurrencies()
     }
 
-    private fun fetchCurrencies() = handleLaunch(execution = {
+    fun fetchCurrencies() = handleLaunch(execution = {
         _currencies.value = DataHolder.Loading()
         _currencies.value = getCurrenciesInteractor.execute().await()
     }, error = {

@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.base.BaseView
-import com.nstudiosappdev.core.presentation.entity.ViewEntity
 
-inline fun <T : ViewEntity> LiveData<DataHolder<T>>.observeApi(
+inline fun <T : Any> LiveData<DataHolder<T>>.observeApi(
     lifecycleOwner: LifecycleOwner,
     crossinline body: (DataHolder<T>?) -> Unit
 ) {
