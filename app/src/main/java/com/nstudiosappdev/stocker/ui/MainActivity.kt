@@ -18,8 +18,6 @@ class MainActivity : BaseActivity(), TabProvider {
 
     override val uiNavigation = UiNavigation.ROOT
 
-    override val toolbarRes = R.id.default_toolbar
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

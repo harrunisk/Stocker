@@ -1,5 +1,7 @@
 package com.nstudiosappdev.navigation
 
+const val PACKAGE_NAME = "com.nstudiosappdev.stocker"
+
 private val classMap = mutableMapOf<String, Class<*>>()
 
 private inline fun <reified T : Any> Any.castOrReturnNull() = this as? T

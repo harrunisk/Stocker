@@ -6,6 +6,8 @@ import com.nstudiosappdev.stocker.presentation.R
 class CurrenciesFragment : BaseFragment(){
     override fun getLayoutRes(): Int = R.layout.fragment_currencies
 
+    override fun getMode
+
     companion object {
         fun newInstance() = CurrenciesFragment()
     }
