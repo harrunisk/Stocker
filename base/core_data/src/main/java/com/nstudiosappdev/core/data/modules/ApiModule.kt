@@ -20,21 +20,6 @@ class ApiModule {
 
     @Provides
     @Singleton
-    @Named(NAME_URL)
-    fun provideUsdUrl(): String = "http://138.68.103.38:3000/currency_type=usd"
-
-    @Provides
-    @Singleton
-    @Named(NAME_URL)
-    fun provideEuroUrl(): String = "http://138.68.103.38:3000/currency_type=euro"
-
-    @Provides
-    @Singleton
-    @Named(NAME_URL)
-    fun provideGoldUrl(): String = "http://138.68.103.38:3000/currency_type=gold"
-
-    @Provides
-    @Singleton
     fun provideReqestInterceptor(): Interceptor = DefaultRequestInterceptor()
 
     @Provides

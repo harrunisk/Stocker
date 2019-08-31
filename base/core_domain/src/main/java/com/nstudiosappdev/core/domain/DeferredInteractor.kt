@@ -5,8 +5,20 @@ import kotlinx.coroutines.Deferred
 
 interface Interactor {
 
-    interface DeferredInteractor<P : Params, T : Any> : Interactor {
-        suspend fun execute(params: P?): Deferred<DataHolder<T>>
+    interface DeferredInteractor<params : Params, T : Any> : Interactor {
+        suspend fun execute(postParams: params): Deferred<DataHolder<T>>
+    }
+
+    interface DeferredRetrieveInteractor<T : Any> : Interactor {
+        suspend fun execute(): Deferred<DataHolder<T>>
+    }
+
+    interface SingleInteractor<params : Params, T : Any> : Interactor {
+        fun execute(params: params): T?
+    }
+
+    interface SingleRetrieveInteractor<T : Any?> {
+        fun execute(): T?
     }
 
     abstract class Params {

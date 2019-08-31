@@ -1,5 +1,6 @@
 package com.nstudiosappdev.stocker.dashboard.data
 
+import com.nstudiosappdev.core.data.api.response.ApiResponse
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.stocker.dashboard.domain.Currencies
 import kotlinx.coroutines.Deferred
@@ -8,7 +9,7 @@ import retrofit2.http.GET
 interface CurrenciesServices {
 
     @GET("${END_POINT}${USD}")
-    fun getUsdCurrencies() : Deferred<DataHolder<Currencies>>
+    fun getUsdCurrencies() : Deferred<ApiResponse<Currencies?>>
 
     @GET("${END_POINT}${EURO}")
     fun getEuroCurrencies() : Deferred<DataHolder<Currencies>>
