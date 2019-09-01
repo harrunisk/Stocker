@@ -18,6 +18,12 @@ import javax.inject.Singleton
 @Module
 class ApiModule {
 
+
+    @Provides
+    @Singleton
+    @Named(NAME_URL)
+    fun provideUsdUrl(): String = "http://138.68.103.38:3000/currency_type/"
+
     @Provides
     @Singleton
     fun provideReqestInterceptor(): Interceptor = DefaultRequestInterceptor()

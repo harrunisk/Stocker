@@ -21,7 +21,7 @@ abstract class BaseViewModelFragment<VM : ViewModel> : BaseInjectionFragment() {
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this,vmFactory).get(getModelClass())
+        viewModel = ViewModelProviders.of(this, vmFactory).get(getModelClass())
     }
 
     @CallSuper

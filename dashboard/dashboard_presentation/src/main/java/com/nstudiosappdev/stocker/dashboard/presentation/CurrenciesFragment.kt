@@ -7,7 +7,7 @@ import com.nstudiosappdev.stocker.presentation.R
 
 class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
-    override fun getModelClass(): Class<CurrenciesViewModel> = CurrenciesViewModel::class.java
+    override fun getModelClass() = CurrenciesViewModel::class.java
 
     override fun getLayoutRes(): Int = R.layout.fragment_currencies
 
@@ -18,7 +18,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
         }
         viewModel.fetchCurrencies()
-        }
+    }
 
     companion object {
         fun newInstance() = CurrenciesFragment()
