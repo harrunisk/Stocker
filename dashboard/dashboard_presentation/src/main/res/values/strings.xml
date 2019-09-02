@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">dashboard_presentation</string>
+
+    <!-- Main ViewPager Items -->
+    <string-array name="main_items">
+        <item>USD</item>
+        <item>EURO</item>
+        <item>GOLD</item>
+    </string-array>
 </resources>
