@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/space_m"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_m"
+            android:layout_marginBottom="@dimen/space_s"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/font_xxlarge"
+            android:textStyle="bold"
             android:id="@+id/textViewBankName"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_m"
+            android:layout_marginBottom="@dimen/space_s"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/textViewBankName"
+            app:layout_constraintEnd_toStartOf="@+id/textSellingPrice"
+            android:layout_marginEnd="@dimen/space_m"
+            android:textSize="@dimen/font_xxlarge"
+            android:textStyle="bold"
             android:id="@+id/textViewBuyingPrice"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_m"
+            android:layout_marginBottom="@dimen/space_s"
+            android:layout_marginEnd="@dimen/space_m"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/textViewBuyingPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/font_xxlarge"
+            android:textStyle="bold"
             android:id="@+id/textSellingPrice"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
