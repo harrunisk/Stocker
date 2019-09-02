@@ -11,11 +11,6 @@ class ApiCallAdapter<T : Any>  @Inject constructor(private val errorFactory: Err
     override suspend fun adapt(apiCall: Deferred<ApiResponse<T?>>): DataHolder<T> {
         val apiResult = apiCall.await()
 
-        if (apiResult.code != "0") {
-            val error = errorFactory.createApiError(apiResult.code, apiResult.message)
-            return DataHolder.Fail(error)
-        }
-
         if (apiResult.data == null) {
             return DataHolder.Fail(errorFactory.createInvalidResponseError())
         }

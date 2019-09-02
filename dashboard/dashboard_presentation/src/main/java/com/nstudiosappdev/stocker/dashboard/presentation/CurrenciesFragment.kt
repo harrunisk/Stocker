@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
 import com.nstudiosappdev.core.presentation.livedata.observeApi
 import com.nstudiosappdev.stocker.presentation.R
+import kotlinx.android.synthetic.main.fragment_currencies.*
 
 class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
@@ -18,6 +19,13 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
         }
         viewModel.fetchCurrencies()
+    }
+
+    override fun initView() {
+        super.initView()
+        get.setOnClickListener {
+            viewModel.fetchCurrencies()
+        }
     }
 
     companion object {

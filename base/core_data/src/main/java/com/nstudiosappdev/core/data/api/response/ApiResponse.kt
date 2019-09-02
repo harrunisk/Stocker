@@ -1,3 +1,7 @@
 package com.nstudiosappdev.core.data.api.response
 
-data class ApiResponse<T>(val code: String = "0", val message: String, val data: T?)
+import com.google.gson.annotations.SerializedName
+
+data class ApiResponse<T>(
+    @SerializedName("GetPriceBankListResult") val data: T?
+)
