@@ -13,10 +13,10 @@ interface CurrenciesServices {
     fun getUsdCurrencies() : Deferred<ApiResponse<List<Currency>?>>
 
     @GET("${END_POINT}${EURO}")
-    fun getEuroCurrencies() : Deferred<DataHolder<Currencies>>
+    fun getEuroCurrencies() : Deferred<ApiResponse<List<Currency>?>>
 
     @GET("${END_POINT}${GOLD}")
-    fun getGoldCurrencies() : Deferred<DataHolder<Currencies>>
+    fun getGoldCurrencies() : Deferred<ApiResponse<List<Currency>?>>
 
     companion object {
         const val END_POINT = "http://138.68.103.38:3000/currency_type="

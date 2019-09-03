@@ -18,11 +18,10 @@ class DashboardPagerAdapter(private val titles: MutableList<String>, fm: Fragmen
         get() = _fragments
 
     override fun getItem(position: Int): Fragment {
-        Log.e("counter", "counter")
         return when (position) {
-            CurrenciesPresentationConstants.TYPES.USD -> CurrenciesFragment.newInstance()
-            CurrenciesPresentationConstants.TYPES.EURO -> CurrenciesFragment.newInstance()
-            CurrenciesPresentationConstants.TYPES.GOLD -> CurrenciesFragment.newInstance()
+            CurrenciesPresentationConstants.TYPES.USD -> CurrenciesFragment.newInstance(CurrenciesPresentationConstants.TYPES.USD)
+            CurrenciesPresentationConstants.TYPES.EURO -> CurrenciesFragment.newInstance(CurrenciesPresentationConstants.TYPES.EURO)
+            CurrenciesPresentationConstants.TYPES.GOLD -> CurrenciesFragment.newInstance(CurrenciesPresentationConstants.TYPES.GOLD)
             else -> throw IllegalArgumentException("Unknown position!")
         }
     }

@@ -4,5 +4,5 @@ import com.nstudiosappdev.core.model.DataHolder
 import kotlinx.coroutines.Deferred
 
 interface CurrenciesRepository {
-    suspend fun getCurrencies(): Deferred<DataHolder<List<Currency>>>
+    suspend fun getCurrencies(currenciesRequest: CurrenciesRequest): Deferred<DataHolder<List<Currency>>>
 }

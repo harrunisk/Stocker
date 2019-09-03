@@ -12,6 +12,8 @@ import javax.inject.Inject
 
 class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
+    private var currencyType: Int? = null
+
     @Inject
     lateinit var currenciesAdapter: RecyclerViewAdapter
 
@@ -22,6 +24,15 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initObservers()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            currencyType = it.getInt(BUNDLE_CURRENCY_TYPE)
+            viewModel.fetchCurrencies(currencyType!!)
+        }
+
     }
 
 
@@ -46,11 +57,15 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
             }
         }
-        viewModel.fetchCurrencies()
     }
 
     companion object {
-        fun newInstance() =
-            CurrenciesFragment()
+        private const val BUNDLE_CURRENCY_TYPE = "bundle_currency_type"
+
+        fun newInstance(currencyType: Int) = CurrenciesFragment().apply {
+            arguments = Bundle().apply {
+                putInt(BUNDLE_CURRENCY_TYPE, currencyType)
+            }
+        }
     }
 }

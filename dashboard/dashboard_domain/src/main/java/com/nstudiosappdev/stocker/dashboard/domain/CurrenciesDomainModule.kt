@@ -16,6 +16,6 @@ class CurrenciesDomainModule {
         @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager,
         errorFactory: ErrorFactory,
         currenciesRepository: CurrenciesRepository
-    ): Interactor.DeferredRetrieveInteractor<List<Currency>> =
+    ): Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>> =
             GetCurrenciesInteractor(currenciesRepository, errorFactory, asyncManager)
 }

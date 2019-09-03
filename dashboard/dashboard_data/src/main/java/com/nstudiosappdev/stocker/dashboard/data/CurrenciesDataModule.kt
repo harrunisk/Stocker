@@ -6,6 +6,7 @@ import com.nstudiosappdev.core.error.ErrorFactory
 import com.nstudiosappdev.core.injection.modules.CoroutineManagerModule
 import com.nstudiosappdev.stocker.dashboard.domain.Currencies
 import com.nstudiosappdev.stocker.dashboard.domain.CurrenciesRepository
+import com.nstudiosappdev.stocker.dashboard.domain.CurrenciesRequest
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import dagger.Module
 import dagger.Provides
@@ -26,13 +27,13 @@ class CurrenciesDataModule {
     fun provideCurrenciesRemoteDataSource(
         currenciesServices: CurrenciesServices,
         errorFactory: ErrorFactory
-    ): DataSource.RemoteDataSource.FetchDataSource<List<Currency>> =
+    ): DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>> =
         CurrenciesRemoteDataSource(currenciesServices, errorFactory)
 
     @Provides
     @Singleton
     fun provideCurrenciesRepository(
-        currenciesRemoteDataSource: DataSource.RemoteDataSource.FetchDataSource<List<Currency>>,
+        currenciesRemoteDataSource: DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>>,
         @Named(CoroutineManagerModule.AM_NAME_REPOSITORY) asyncManager: AsyncManager
     ): CurrenciesRepository = CurrenciesRepositoryImpl(currenciesRemoteDataSource, asyncManager)
 

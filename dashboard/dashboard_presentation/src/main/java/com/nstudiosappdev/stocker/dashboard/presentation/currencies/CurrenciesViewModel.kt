@@ -11,12 +11,13 @@ import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItemListMapper
 import com.nstudiosappdev.core.presentation.viewmodel.BaseViewModel
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
+import com.nstudiosappdev.stocker.dashboard.domain.GetCurrenciesInteractor
 import javax.inject.Inject
 import javax.inject.Named
 
 class CurrenciesViewModel @Inject constructor(
     @Named(CoroutineManagerModule.CM_VIEWMODEL) coroutineManager: CoroutineManager,
-    private val getCurrenciesInteractor: Interactor.DeferredRetrieveInteractor<List<Currency>>,
+    private val getCurrenciesInteractor: Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>>,
     private val currenciesListMapper: DisplayItemListMapper<Currency>,
     private val errorFactory: ErrorFactory
 ) : BaseViewModel(coroutineManager) {
@@ -26,13 +27,19 @@ class CurrenciesViewModel @Inject constructor(
     val currencies: LiveData<DataHolder<List<DisplayItem>>>
         get() = _currencies
 
-    init {
+/*    init {
         fetchCurrencies()
-    }
+    }*/
 
-    fun fetchCurrencies() = handleLaunch(execution = {
+    fun fetchCurrencies(
+        currencyType: Int
+    ) = handleLaunch(execution = {
         _currencies.value = DataHolder.Loading()
-        val currenciesResult = getCurrenciesInteractor.execute().await()
+        val currenciesParams = GetCurrenciesInteractor.Params(
+            currencyType = currencyType
+        )
+
+        val currenciesResult = getCurrenciesInteractor.execute(currenciesParams).await()
         if(currenciesResult is DataHolder.Success) {
             _currencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
         }
