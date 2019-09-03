@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_like_black"
+        android:title="Döviz Kurları"/>
+
+    <item
+        android:id="@+id/navigation_albums"
+        android:icon="@drawable/ic_like_trans"
+        android:title="Favorilerim"/>
+
+</menu>

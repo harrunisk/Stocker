@@ -8,6 +8,7 @@ import com.nstudiosappdev.core.presentation.base.BaseActivity
 import com.nstudiosappdev.core.presentation.base.BaseInjectionActivity
 import com.nstudiosappdev.core.presentation.extensions.transact
 import com.nstudiosappdev.core.presentation.navigation.UiNavigation
+import com.nstudiosappdev.navigation.features.BottomNavigation
 import com.nstudiosappdev.navigation.features.Currencies
 import com.nstudiosappdev.navigation.features.Dashboard
 import com.nstudiosappdev.stocker.R
@@ -29,6 +30,14 @@ class MainActivity : BaseInjectionActivity(), TabProvider {
             if (savedInstanceState == null) {
                 supportFragmentManager.transact {
                     replace(R.id.fl_main, it)
+                }
+            }
+        }
+
+        BottomNavigation.dynamicStart?.let {
+            if (savedInstanceState == null) {
+                supportFragmentManager.transact {
+                    replace(R.id.fl_bottom_navigation, it)
                 }
             }
         }

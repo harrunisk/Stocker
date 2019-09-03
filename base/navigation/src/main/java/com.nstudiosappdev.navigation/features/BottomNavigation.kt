@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment
 import com.nstudiosappdev.navigation.PACKAGE_NAME
 import com.nstudiosappdev.navigation.loadFragmentOrReturnNull
 
-object Dashboard : Feature<Fragment> {
-    private const val DASHBOARD = "$PACKAGE_NAME.dashboard.presentation.DashboardFragment"
+object BottomNavigation : Feature<Fragment> {
+    private const val BOTTOM_NAVIGATION = "$PACKAGE_NAME.dashboard.presentation.bottom.BottomNavigationFragment"
 
     override val dynamicStart: Fragment?
-        get() = DASHBOARD.loadFragmentOrReturnNull()
+        get() = BOTTOM_NAVIGATION.loadFragmentOrReturnNull()
 }
 
