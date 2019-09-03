@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation
+package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import com.nstudiosappdev.core.presentation.entity.ViewEntity
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
@@ -12,5 +12,6 @@ class CurrenciesViewEntity(
     val sellStatus: CurrencyStatus?
 ) : ViewEntity, DisplayItem{
 
-    override fun type(): Int = CurrenciesPresentationConstants.TYPES.USD
+    override fun type(): Int =
+        CurrenciesPresentationConstants.TYPES.USD
 }

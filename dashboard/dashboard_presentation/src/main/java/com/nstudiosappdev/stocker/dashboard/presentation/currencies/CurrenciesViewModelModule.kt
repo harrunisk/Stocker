@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation
+package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import androidx.lifecycle.ViewModel
 import com.nstudiosappdev.core.presentation.entity.ViewEntityMapper
@@ -21,11 +21,14 @@ abstract class CurrenciesViewModelModule {
     companion object {
         @JvmStatic
         @Provides
-        fun provideCurrenciesViewEntityMapper(): ViewEntityMapper<Currency, CurrenciesViewEntity> = CurrenciesViewEntityMapper()
+        fun provideCurrenciesViewEntityMapper(): ViewEntityMapper<Currency, CurrenciesViewEntity> =
+            CurrenciesViewEntityMapper()
 
         @JvmStatic
         @Provides
         fun provideCurrenciesDisplayListMapper(viewEntityMapper: ViewEntityMapper<Currency, CurrenciesViewEntity>): DisplayItemListMapper<Currency> =
-            CurrenciesListMapper(viewEntityMapper)
+            CurrenciesListMapper(
+                viewEntityMapper
+            )
     }
 }

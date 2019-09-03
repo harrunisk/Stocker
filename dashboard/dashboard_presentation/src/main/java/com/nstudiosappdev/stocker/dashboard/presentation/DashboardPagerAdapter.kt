@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesFragment
+import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesPresentationConstants
 import java.lang.IllegalArgumentException
 
-class CurrenciesPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class DashboardPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private val _fragments = SparseArray<Fragment>()
 

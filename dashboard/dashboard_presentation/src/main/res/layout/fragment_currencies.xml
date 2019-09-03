@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerCurrencies"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

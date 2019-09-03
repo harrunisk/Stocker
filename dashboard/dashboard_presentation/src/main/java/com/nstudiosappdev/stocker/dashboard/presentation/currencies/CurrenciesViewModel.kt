@@ -1,8 +1,7 @@
-package com.nstudiosappdev.stocker.dashboard.presentation
+package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.nstudiosappdev.core.coroutines.CoroutineManager
 import com.nstudiosappdev.core.domain.Interactor
 import com.nstudiosappdev.core.error.ErrorFactory
@@ -11,7 +10,6 @@ import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItemListMapper
 import com.nstudiosappdev.core.presentation.viewmodel.BaseViewModel
-import com.nstudiosappdev.stocker.dashboard.domain.Currencies
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import javax.inject.Inject
 import javax.inject.Named

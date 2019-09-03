@@ -2,7 +2,7 @@ package com.nstudiosappdev.stocker.injection.modules
 
 import androidx.lifecycle.ViewModelProvider
 import com.nstudiosappdev.core.presentation.viewmodel.VmFactory
-import com.nstudiosappdev.stocker.dashboard.presentation.CurrenciesViewModelModule
+import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesViewModelModule
 import dagger.Binds
 import dagger.Module
 

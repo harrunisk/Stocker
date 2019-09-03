@@ -1,8 +1,8 @@
-package com.nstudiosappdev.stocker.dashboard.presentation
+package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import com.nstudiosappdev.core.preconditions.AndroidPreConditions
 import com.nstudiosappdev.core.presentation.recyclerview.*
-import com.nstudiosappdev.stocker.dashboard.presentation.CurrenciesPresentationConstants.TYPES.USD
+import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesPresentationConstants.TYPES.USD
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
