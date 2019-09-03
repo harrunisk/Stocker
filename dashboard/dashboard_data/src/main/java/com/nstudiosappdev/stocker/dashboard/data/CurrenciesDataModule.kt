@@ -36,6 +36,4 @@ class CurrenciesDataModule {
         currenciesRemoteDataSource: DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>>,
         @Named(CoroutineManagerModule.AM_NAME_REPOSITORY) asyncManager: AsyncManager
     ): CurrenciesRepository = CurrenciesRepositoryImpl(currenciesRemoteDataSource, asyncManager)
-
-
 }
