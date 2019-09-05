@@ -17,6 +17,8 @@ class DashboardFragment : BaseFragment() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_dashboard
 
+    override val toolbarId = R.id.default_toolbar
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
