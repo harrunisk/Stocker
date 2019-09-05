@@ -11,10 +11,11 @@
             android:allowBackup="true"
             android:name=".StockerApp"
             android:icon="@mipmap/ic_launcher"
+            android:logo="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.Design.NoActionBar"
+            android:theme="@style/AppTheme">
             android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.MainActivity"
