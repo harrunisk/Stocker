@@ -10,4 +10,9 @@
     
     <string name="bottom_navigation_currencies_header">Döviz Kurları</string>
     <string name="bottom_navigation_portfolio_header">Portföyüm</string>
+    
+    <string name="recyclerview_bank_name_header">Banka</string>
+    <string name="recyclerview_buying_price_header">Alış</string>
+    <string name="recyclerview_selling_price_header">Satış</string>
+    <string name="recyclerview_diff_header">Fark</string>
 </resources>

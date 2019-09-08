@@ -10,6 +10,59 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_m"
+            android:orientation="vertical"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_m"
+                android:layout_marginBottom="@dimen/space_s"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/recyclerview_bank_name_header"
+                android:id="@+id/headerBankName"
+                />
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_m"
+                android:layout_marginBottom="@dimen/space_s"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/headerSellingPrice"
+                android:layout_marginEnd="@dimen/space_m"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/recyclerview_buying_price_header"
+                android:id="@+id/headerBuyingPrice"/>
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_m"
+                android:layout_marginBottom="@dimen/space_s"
+                android:layout_marginEnd="@dimen/space_m"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/headerDiff"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/recyclerview_selling_price_header"
+                android:id="@+id/headerSellingPrice"/>
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_m"
+                android:layout_marginBottom="@dimen/space_s"
+                android:layout_marginEnd="@dimen/space_m"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/recyclerview_diff_header"
+                android:id="@+id/headerDiff"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/currenciesRecyclerView"
             android:layout_width="match_parent"

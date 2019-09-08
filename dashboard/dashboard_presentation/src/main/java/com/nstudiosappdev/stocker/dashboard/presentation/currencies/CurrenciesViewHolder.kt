@@ -16,7 +16,7 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
 
     private val textViewBankName: TextView = itemView.findViewById(R.id.textViewBankName)
     private val textViewBuyingPrice: TextView = itemView.findViewById(R.id.textViewBuyingPrice)
-    private val textViewSellingPrice: TextView = itemView.findViewById(R.id.textSellingPrice)
+    private val textViewSellingPrice: TextView = itemView.findViewById(R.id.textViewSellingPrice)
 
     private fun bind(item: CurrenciesViewEntity) {
         textViewBankName.text = item.bankName
