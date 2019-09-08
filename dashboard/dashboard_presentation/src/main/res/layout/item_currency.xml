@@ -44,7 +44,7 @@
                     android:id="@+id/textViewSellingPrice"/>
 
                 <TextView
-                    android:layout_width="40dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
                     android:layout_marginBottom="@dimen/space_s"

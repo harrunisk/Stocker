@@ -8,6 +8,7 @@ import com.nstudiosappdev.core.presentation.livedata.observeApi
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_currencies.*
+import kotlinx.android.synthetic.main.item_currency.*
 import javax.inject.Inject
 
 class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
@@ -42,6 +43,18 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
     }
 
     private fun initListeners() {
+
+        headerBankName.setOnClickListener {
+            viewModel.orderCurrenciesByName()
+        }
+
+        headerBuyingPrice.setOnClickListener {
+            viewModel.orderCurrenciesByBuyingPrices()
+        }
+
+        headerSellingPrice.setOnClickListener {
+            viewModel.orderCurrenciesBySellingPrice()
+        }
     }
 
     private fun initObservers() {

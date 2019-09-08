@@ -52,7 +52,7 @@
                 android:text="@string/recyclerview_selling_price_header"
                 android:id="@+id/headerSellingPrice"/>
             <TextView
-                android:layout_width="40dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_m"
                 android:layout_marginBottom="@dimen/space_s"

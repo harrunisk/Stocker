@@ -22,6 +22,14 @@ class CurrenciesViewModel @Inject constructor(
     private val errorFactory: ErrorFactory
 ) : BaseViewModel(coroutineManager) {
 
+    private var items : List<Currency>? = null
+
+    private var orderByBankNameFlag = false
+
+    private var orderBySellingPriceFlag = false
+
+    private var orderByBuyingPriceFlag = false
+
     private val _currencies = MutableLiveData<DataHolder<List<DisplayItem>>>()
 
     val currencies: LiveData<DataHolder<List<DisplayItem>>>
@@ -42,8 +50,63 @@ class CurrenciesViewModel @Inject constructor(
         val currenciesResult = getCurrenciesInteractor.execute(currenciesParams).await()
         if(currenciesResult is DataHolder.Success) {
             _currencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
+            items = currenciesResult.data
         }
     }, error = {
         _currencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
     })
+
+    fun orderCurrenciesByName(){
+
+        when(orderByBankNameFlag) {
+            true -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
+                orderByBankNameFlag = false
+                orderByBuyingPriceFlag = true
+                orderBySellingPriceFlag = true
+            }
+            false -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
+                orderByBankNameFlag = true
+                orderByBuyingPriceFlag = false
+                orderBySellingPriceFlag = false
+            }
+        }
+    }
+
+    fun orderCurrenciesByBuyingPrices() {
+
+        when(orderByBuyingPriceFlag) {
+            true -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
+                orderByBuyingPriceFlag = false
+                orderBySellingPriceFlag = true
+                orderByBankNameFlag = false
+            }
+            false -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
+                orderByBuyingPriceFlag = true
+                orderBySellingPriceFlag = false
+                orderByBankNameFlag = true
+            }
+        }
+    }
+
+    fun orderCurrenciesBySellingPrice() {
+
+        when(orderBySellingPriceFlag) {
+            true -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
+                orderBySellingPriceFlag = false
+                orderByBuyingPriceFlag = true
+                orderByBankNameFlag = false
+            }
+            false -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
+                orderBySellingPriceFlag = true
+                orderByBuyingPriceFlag = false
+                orderByBankNameFlag = true
+            }
+        }
+    }
 }
