@@ -3,11 +3,11 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_like_black"
-        android:title="Döviz Kurları"/>
+        android:title="@string/bottom_navigation_currencies_header"/>
 
     <item
         android:id="@+id/navigation_albums"
         android:icon="@drawable/ic_like_trans"
-        android:title="Favorilerim"/>
+        android:title="@string/bottom_navigation_portfolio_header"/>
 
 </menu>

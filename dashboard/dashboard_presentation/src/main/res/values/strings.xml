@@ -7,4 +7,7 @@
         <item>EURO</item>
         <item>GOLD</item>
     </string-array>
+    
+    <string name="bottom_navigation_currencies_header">Döviz Kurları</string>
+    <string name="bottom_navigation_portfolio_header">Portföyüm</string>
 </resources>

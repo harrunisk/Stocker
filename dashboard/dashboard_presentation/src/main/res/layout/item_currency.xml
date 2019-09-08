@@ -13,8 +13,7 @@
             android:layout_marginBottom="@dimen/space_s"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textSize="@dimen/font_xxlarge"
-            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
             android:id="@+id/textViewBankName"/>
 
         <TextView
@@ -25,8 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textSellingPrice"
             android:layout_marginEnd="@dimen/space_m"
-            android:textSize="@dimen/font_xxlarge"
-            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
             android:id="@+id/textViewBuyingPrice"/>
 
         <TextView
@@ -37,8 +35,7 @@
             android:layout_marginEnd="@dimen/space_m"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="@dimen/font_xxlarge"
-            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
             android:id="@+id/textSellingPrice"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
