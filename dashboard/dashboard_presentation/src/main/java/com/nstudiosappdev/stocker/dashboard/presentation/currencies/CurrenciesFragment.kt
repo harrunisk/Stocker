@@ -55,6 +55,10 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
         headerSellingPrice.setOnClickListener {
             viewModel.orderCurrenciesBySellingPrice()
         }
+
+        headerDiff.setOnClickListener {
+            viewModel.orderCurrenciesByDiff()
+        }
     }
 
     private fun initObservers() {

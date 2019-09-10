@@ -7,6 +7,7 @@ import com.nstudiosappdev.core.domain.Interactor
 import com.nstudiosappdev.core.error.ErrorFactory
 import com.nstudiosappdev.core.injection.modules.CoroutineManagerModule
 import com.nstudiosappdev.core.model.DataHolder
+import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveFloat
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItemListMapper
 import com.nstudiosappdev.core.presentation.viewmodel.BaseViewModel
@@ -29,6 +30,8 @@ class CurrenciesViewModel @Inject constructor(
     private var orderBySellingPriceFlag = false
 
     private var orderByBuyingPriceFlag = false
+
+    private var orderByDiffFlag = false
 
     private val _currencies = MutableLiveData<DataHolder<List<DisplayItem>>>()
 
@@ -105,6 +108,32 @@ class CurrenciesViewModel @Inject constructor(
                 _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
                 orderBySellingPriceFlag = true
                 orderByBuyingPriceFlag = false
+                orderByBankNameFlag = true
+            }
+        }
+    }
+
+    fun orderCurrenciesByDiff() {
+
+        when(orderByDiffFlag) {
+            true -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy {
+                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
+                    )
+                )
+                orderByDiffFlag = false
+                orderByBuyingPriceFlag = true
+                orderBySellingPriceFlag = true
+                orderByBankNameFlag = false
+            }
+            false -> {
+                _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending {
+                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
+                )
+                )
+                orderByDiffFlag = true
+                orderByBuyingPriceFlag = false
+                orderBySellingPriceFlag = false
                 orderByBankNameFlag = true
             }
         }
