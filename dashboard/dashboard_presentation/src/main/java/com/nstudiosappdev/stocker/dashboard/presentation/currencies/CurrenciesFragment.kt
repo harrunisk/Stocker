@@ -45,7 +45,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
     private fun initListeners() {
 
-        headerBankName.setOnClickListener {
+        headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
             if (bankNameSortByDecreasingSign.currentTextColor != Color.GREEN) {
                 clearAllColor()
@@ -56,7 +56,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
             }
         }
 
-        headerBuyingPrice.setOnClickListener {
+        headerBuyingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByBuyingPrices()
             if (buyingPriceSortByDecreasingSign.currentTextColor != Color.GREEN) {
                 clearAllColor()
@@ -67,7 +67,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
             }
         }
 
-        headerSellingPrice.setOnClickListener {
+        headerSellingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesBySellingPrice()
             if (sellingPriceSortByIncreasingSign.currentTextColor != Color.GREEN) {
                 clearAllColor()
@@ -78,7 +78,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
             }
         }
 
-        headerDiff.setOnClickListener {
+        headerDiffLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByDiff()
             if (diffSortByIncreasingSign.currentTextColor != Color.GREEN) {
                 clearAllColor()
@@ -88,6 +88,8 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
                 diffSortByDecreasingSign.setTextColor(Color.GREEN)
             }
         }
+
+
     }
 
     private fun initObservers() {
