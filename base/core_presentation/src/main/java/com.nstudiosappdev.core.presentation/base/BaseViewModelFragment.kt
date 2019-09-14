@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.nstudiosappdev.core.presentation.viewmodel.BaseViewModel
+import com.nstudiosappdev.navigation.navigation.DefaultNavigationController
+import com.nstudiosappdev.navigation.navigation.NavigationController
+import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 abstract class BaseViewModelFragment<VM : ViewModel> : BaseInjectionFragment() {
@@ -16,11 +19,14 @@ abstract class BaseViewModelFragment<VM : ViewModel> : BaseInjectionFragment() {
 
     protected lateinit var viewModel: VM
 
+    protected lateinit var navigationController: NavigationController
+
     abstract fun getModelClass(): Class<VM>
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.navigationController = DefaultNavigationController(WeakReference(activity!!))
         viewModel = ViewModelProviders.of(this, vmFactory).get(getModelClass())
     }
 
