@@ -64,15 +64,14 @@ class CurrenciesViewModel @Inject constructor(
         when(orderByBankNameFlag) {
             true -> {
                 _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
+                clearAllFlags()
                 orderByBankNameFlag = false
-                orderByBuyingPriceFlag = true
-                orderBySellingPriceFlag = true
+
             }
             false -> {
                 _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
+                clearAllFlags()
                 orderByBankNameFlag = true
-                orderByBuyingPriceFlag = false
-                orderBySellingPriceFlag = false
             }
         }
     }
@@ -82,15 +81,13 @@ class CurrenciesViewModel @Inject constructor(
         when(orderByBuyingPriceFlag) {
             true -> {
                 _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
+                clearAllFlags()
                 orderByBuyingPriceFlag = false
-                orderBySellingPriceFlag = true
-                orderByBankNameFlag = false
             }
             false -> {
                 _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
+                clearAllFlags()
                 orderByBuyingPriceFlag = true
-                orderBySellingPriceFlag = false
-                orderByBankNameFlag = true
             }
         }
     }
@@ -100,15 +97,13 @@ class CurrenciesViewModel @Inject constructor(
         when(orderBySellingPriceFlag) {
             true -> {
                 _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
+                clearAllFlags()
                 orderBySellingPriceFlag = false
-                orderByBuyingPriceFlag = true
-                orderByBankNameFlag = false
             }
             false -> {
                 _currencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
+                clearAllFlags()
                 orderBySellingPriceFlag = true
-                orderByBuyingPriceFlag = false
-                orderByBankNameFlag = true
             }
         }
     }
@@ -122,8 +117,8 @@ class CurrenciesViewModel @Inject constructor(
                     )
                 )
                 orderByDiffFlag = false
-                orderByBuyingPriceFlag = true
-                orderBySellingPriceFlag = true
+                orderByBuyingPriceFlag = false
+                orderBySellingPriceFlag = false
                 orderByBankNameFlag = false
             }
             false -> {
@@ -134,8 +129,15 @@ class CurrenciesViewModel @Inject constructor(
                 orderByDiffFlag = true
                 orderByBuyingPriceFlag = false
                 orderBySellingPriceFlag = false
-                orderByBankNameFlag = true
+                orderByBankNameFlag = false
             }
         }
+    }
+
+    private fun clearAllFlags() {
+        orderByBankNameFlag = false
+        orderByBuyingPriceFlag = false
+        orderBySellingPriceFlag = false
+        orderByDiffFlag = false
     }
 }

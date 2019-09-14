@@ -2,4 +2,6 @@
 <resources>
     <color name="colorAppBackGround">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="green">#05F00E</color>
+
 </resources>

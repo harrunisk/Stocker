@@ -1,5 +1,6 @@
 package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
+import android.graphics.Color
 import android.os.Bundle
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
@@ -46,18 +47,46 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
         headerBankName.setOnClickListener {
             viewModel.orderCurrenciesByName()
+            if (bankNameSortByDecreasingSign.currentTextColor != Color.GREEN) {
+                clearAllColor()
+                bankNameSortByDecreasingSign.setTextColor(Color.GREEN)
+            } else {
+                clearAllColor()
+                bankNameSortByIncreasingSign.setTextColor(Color.GREEN)
+            }
         }
 
         headerBuyingPrice.setOnClickListener {
             viewModel.orderCurrenciesByBuyingPrices()
+            if (buyingPriceSortByDecreasingSign.currentTextColor != Color.GREEN) {
+                clearAllColor()
+                buyingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
+            } else {
+                clearAllColor()
+                buyingPriceSortByIncreasingSign.setTextColor(Color.GREEN)
+            }
         }
 
         headerSellingPrice.setOnClickListener {
             viewModel.orderCurrenciesBySellingPrice()
+            if (sellingPriceSortByIncreasingSign.currentTextColor != Color.GREEN) {
+                clearAllColor()
+                sellingPriceSortByIncreasingSign.setTextColor(Color.GREEN)
+            } else {
+                clearAllColor()
+                sellingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
+            }
         }
 
         headerDiff.setOnClickListener {
             viewModel.orderCurrenciesByDiff()
+            if (diffSortByIncreasingSign.currentTextColor != Color.GREEN) {
+                clearAllColor()
+                diffSortByIncreasingSign.setTextColor(Color.GREEN)
+            } else {
+                clearAllColor()
+                diffSortByDecreasingSign.setTextColor(Color.GREEN)
+            }
         }
     }
 
@@ -74,6 +103,17 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
             }
         }
+    }
+
+    private fun clearAllColor() {
+        bankNameSortByIncreasingSign.setTextColor(Color.GRAY)
+        bankNameSortByDecreasingSign.setTextColor(Color.GRAY)
+        buyingPriceSortByIncreasingSign.setTextColor(Color.GRAY)
+        buyingPriceSortByDecreasingSign.setTextColor(Color.GRAY)
+        sellingPriceSortByIncreasingSign.setTextColor(Color.GRAY)
+        sellingPriceSortByDecreasingSign.setTextColor(Color.GRAY)
+        diffSortByIncreasingSign.setTextColor(Color.GRAY)
+        diffSortByDecreasingSign.setTextColor(Color.GRAY)
     }
 
     companion object {
