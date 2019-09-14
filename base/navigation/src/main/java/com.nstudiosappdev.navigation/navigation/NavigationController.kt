@@ -29,6 +29,8 @@ interface NavigationController {
         }
     }
 
+    fun navigateToMain()
+
     fun navigateToCurrencies(@IdRes containerId: Int)
 
     fun navigateToDashoard(@IdRes containerId: Int)
