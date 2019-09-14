@@ -14,13 +14,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/space_m"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="120dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingTop="@dimen/space_m"
+                android:paddingBottom="@dimen/space_m"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/space_m"
@@ -47,10 +48,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_m"
-                android:layout_marginBottom="@dimen/space_s"
+                android:paddingTop="@dimen/space_m"
+                android:paddingBottom="@dimen/space_m"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/headerSellingPriceLinearLayout"
                 android:layout_marginEnd="@dimen/space_m"
@@ -79,10 +81,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_m"
-                android:layout_marginBottom="@dimen/space_s"
+                android:paddingTop="@dimen/space_m"
+                android:paddingBottom="@dimen/space_m"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/headerDiffLinearLayout"
                 android:layout_marginEnd="@dimen/space_m"
@@ -111,11 +114,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="50dp"
+                android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_m"
-                android:layout_marginBottom="@dimen/space_s"
                 android:layout_marginEnd="@dimen/space_m"
+                android:paddingTop="@dimen/space_m"
+                android:paddingBottom="@dimen/space_m"
                 android:id="@+id/headerDiffLinearLayout"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -142,15 +146,12 @@
 
             </LinearLayout>
 
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <View style="@style/MenuDivider"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/currenciesRecyclerView"
             android:layout_width="match_parent"
-            android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:clipToPadding="true"
             android:layout_height="0dp"

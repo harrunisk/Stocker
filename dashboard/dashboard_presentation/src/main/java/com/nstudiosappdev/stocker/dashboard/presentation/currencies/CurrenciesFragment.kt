@@ -34,7 +34,6 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
             currencyType = it.getInt(BUNDLE_CURRENCY_TYPE)
             viewModel.fetchCurrencies(currencyType!!)
         }
-
     }
 
 
@@ -58,12 +57,12 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
 
         headerBuyingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByBuyingPrices()
-            if (buyingPriceSortByDecreasingSign.currentTextColor != Color.GREEN) {
-                clearAllColor()
-                buyingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
-            } else {
+            if (buyingPriceSortByIncreasingSign.currentTextColor != Color.GREEN) {
                 clearAllColor()
                 buyingPriceSortByIncreasingSign.setTextColor(Color.GREEN)
+            } else {
+                clearAllColor()
+                buyingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
             }
         }
 
@@ -88,8 +87,6 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
                 diffSortByDecreasingSign.setTextColor(Color.GREEN)
             }
         }
-
-
     }
 
     private fun initObservers() {

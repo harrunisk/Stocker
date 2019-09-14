@@ -11,7 +11,7 @@
             android:orientation="vertical"
             xmlns:app="http://schemas.android.com/apk/res-auto">
                 <TextView
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
                     android:layout_marginBottom="@dimen/space_s"
@@ -21,7 +21,7 @@
                     android:id="@+id/textViewBankName"/>
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
                     android:layout_marginBottom="@dimen/space_s"
@@ -32,7 +32,7 @@
                     android:id="@+id/textViewBuyingPrice"/>
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
                     android:layout_marginBottom="@dimen/space_s"
@@ -43,7 +43,7 @@
                     android:id="@+id/textViewSellingPrice"/>
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
                     android:layout_marginBottom="@dimen/space_s"
@@ -51,10 +51,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="%0.12"
                     android:id="@+id/textViewDiff"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <View style="@style/Divider"/>
+        <View style="@style/ItemDivider"/>
 </LinearLayout>
 
 

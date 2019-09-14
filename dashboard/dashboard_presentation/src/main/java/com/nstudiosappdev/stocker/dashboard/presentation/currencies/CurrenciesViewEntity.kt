@@ -7,9 +7,9 @@ import com.nstudiosappdev.stocker.dashboard.domain.CurrencyStatus
 class CurrenciesViewEntity(
     val bankName: String?,
     val buyPrice: String?,
-    val buyStatus: CurrencyStatus?,
+    val buyStatus: String?,
     val sellPrice: String?,
-    val sellStatus: CurrencyStatus?
+    val sellStatus: String?
 ) : ViewEntity, DisplayItem{
 
     override fun type(): Int =
