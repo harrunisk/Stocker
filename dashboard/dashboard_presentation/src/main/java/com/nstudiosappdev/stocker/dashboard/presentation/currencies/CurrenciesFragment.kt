@@ -26,6 +26,12 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initObservers()
+
+        pullToRefresh.setOnRefreshListener {
+            viewModel.fetchCurrencies(currencyType!!)
+            pullToRefresh.isRefreshing = false
+            clearAllColor()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +41,6 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
             viewModel.fetchCurrencies(currencyType!!)
         }
     }
-
 
     override fun initView() {
         super.initView()
