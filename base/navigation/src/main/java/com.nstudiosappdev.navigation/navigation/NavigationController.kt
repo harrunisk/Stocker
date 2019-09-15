@@ -33,7 +33,5 @@ interface NavigationController {
 
     fun navigateToCurrencies(@IdRes containerId: Int)
 
-    fun navigateToDashoard(@IdRes containerId: Int)
-
     fun navigateToBottomNavigation(@IdRes containerId: Int)
 }

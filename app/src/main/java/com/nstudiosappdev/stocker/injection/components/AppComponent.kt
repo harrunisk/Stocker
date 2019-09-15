@@ -9,11 +9,13 @@ import com.nstudiosappdev.stocker.injection.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
+        AndroidSupportInjectionModule::class,
         AndroidInjectionModule::class,
         ApplicationModule::class,
         ActivityModule::class,

@@ -14,12 +14,6 @@ class DefaultNavigationController constructor(
     override fun navigateToMain() = start(Main.dynamicStart)
 
     override fun navigateToCurrencies(containerIdRes: Int) =
-        start(Currencies.dynamicStart,
-            containerIdRes, transaction = {
-                add(containerIdRes, Currencies.dynamicStart!!).addToBackStack(null)
-            })
-
-    override fun navigateToDashoard(containerIdRes: Int) =
         start(Dashboard.dynamicStart,
             containerIdRes, transaction = {
                 add(containerIdRes, Dashboard.dynamicStart!!).addToBackStack(null)

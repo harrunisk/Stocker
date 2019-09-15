@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation
+package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import android.os.Bundle
 import android.view.View
@@ -9,11 +9,11 @@ import com.nstudiosappdev.core.presentation.base.BaseFragment
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-class DashboardFragment : BaseFragment() {
+class CurrenciesMainFragment : BaseFragment() {
 
     private var lastItem: Int = 0
 
-    private lateinit var pagerAdapter: DashboardPagerAdapter
+    private lateinit var pagerAdapter: CurrenciesPagerAdapter
 
     override fun getLayoutRes(): Int = R.layout.fragment_dashboard
 
@@ -22,10 +22,11 @@ class DashboardFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pagerAdapter = DashboardPagerAdapter(
-            resources.getStringArray(R.array.main_items).toMutableList(),
-            childFragmentManager
-        )
+        pagerAdapter =
+            CurrenciesPagerAdapter(
+                resources.getStringArray(R.array.main_items).toMutableList(),
+                childFragmentManager
+            )
 
         viewPagerCurrencies.apply {
             adapter = pagerAdapter

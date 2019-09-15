@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation
+package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import android.util.Log
 import android.util.SparseArray
@@ -10,7 +10,7 @@ import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesFr
 import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesPresentationConstants
 import java.lang.IllegalArgumentException
 
-class DashboardPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class CurrenciesPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private val _fragments = SparseArray<Fragment>()
 

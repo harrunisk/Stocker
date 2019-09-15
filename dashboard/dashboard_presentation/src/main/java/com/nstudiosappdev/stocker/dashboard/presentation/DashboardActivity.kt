@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.ui
+package com.nstudiosappdev.stocker.dashboard.presentation
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
@@ -6,10 +6,10 @@ import com.nstudiosappdev.core.presentation.TabProvider
 import com.nstudiosappdev.core.presentation.base.BaseInjectionActivity
 import com.nstudiosappdev.navigation.navigation.DefaultNavigationController
 import com.nstudiosappdev.navigation.navigation.NavigationController
-import com.nstudiosappdev.stocker.R
+import com.nstudiosappdev.stocker.presentation.R
 import java.lang.ref.WeakReference
 
-class MainActivity : BaseInjectionActivity(), TabProvider {
+class DashboardActivity : BaseInjectionActivity(), TabProvider {
 
     private lateinit var tabs: TabLayout
 
@@ -23,7 +23,7 @@ class MainActivity : BaseInjectionActivity(), TabProvider {
 
         tabs = findViewById(R.id.tabs)
 
-        navigationController.navigateToDashoard(R.id.fl_main)
+        navigationController.navigateToCurrencies(R.id.fl_main)
         navigationController.navigateToBottomNavigation(R.id.fl_bottom_navigation)
 
     }

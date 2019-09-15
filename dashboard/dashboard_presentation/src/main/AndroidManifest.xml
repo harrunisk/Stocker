@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nstudiosappdev.stocker.presentation" />
+    package="com.nstudiosappdev.stocker.presentation">
+    <application>
+        <activity
+            android:name="com.nstudiosappdev.stocker.dashboard.presentation.DashboardActivity"
+            android:screenOrientation="portrait">
+        </activity>
+    </application>
+</manifest>
