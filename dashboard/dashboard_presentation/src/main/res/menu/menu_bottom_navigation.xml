@@ -2,12 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_like_black"
+        android:icon="@drawable/ic_dollar"
+        android:fontFamily="@font/roboto_regular"
         android:title="@string/bottom_navigation_currencies_header"/>
 
     <item
         android:id="@+id/navigation_albums"
-        android:icon="@drawable/ic_like_trans"
+        android:icon="@drawable/ic_portfolio"
+        android:fontFamily="@font/roboto_regular"
         android:title="@string/bottom_navigation_portfolio_header"/>
 
 </menu>
