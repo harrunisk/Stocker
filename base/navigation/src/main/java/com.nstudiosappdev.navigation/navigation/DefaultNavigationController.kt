@@ -3,8 +3,8 @@ package com.nstudiosappdev.navigation.navigation
 import androidx.fragment.app.FragmentActivity
 import com.nstudiosappdev.navigation.features.BottomNavigation
 import com.nstudiosappdev.navigation.features.Currencies
-import com.nstudiosappdev.navigation.features.Dashboard
 import com.nstudiosappdev.navigation.features.Main
+import com.nstudiosappdev.navigation.features.Portfolio
 import java.lang.ref.WeakReference
 
 class DefaultNavigationController constructor(
@@ -14,14 +14,20 @@ class DefaultNavigationController constructor(
     override fun navigateToMain() = start(Main.dynamicStart)
 
     override fun navigateToCurrencies(containerIdRes: Int) =
-        start(Dashboard.dynamicStart,
+        start(Currencies.dynamicStart,
             containerIdRes, transaction = {
-                add(containerIdRes, Dashboard.dynamicStart!!).addToBackStack(null)
+                replace(containerIdRes, Currencies.dynamicStart!!).addToBackStack(null)
             })
 
     override fun navigateToBottomNavigation(containerIdRes: Int) =
         start(BottomNavigation.dynamicStart,
             containerIdRes, transaction = {
-                add(containerIdRes, BottomNavigation.dynamicStart!!).addToBackStack(null)
+                replace(containerIdRes, BottomNavigation.dynamicStart!!).addToBackStack(null)
+            })
+
+    override fun navigateToPortfolio(containerIdRes: Int) =
+        start(Portfolio.dynamicStart,
+            containerIdRes, transaction = {
+                replace(containerIdRes, Portfolio.dynamicStart!!).addToBackStack(null)
             })
 }

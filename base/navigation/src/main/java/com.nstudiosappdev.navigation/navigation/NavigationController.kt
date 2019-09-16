@@ -34,4 +34,6 @@ interface NavigationController {
     fun navigateToCurrencies(@IdRes containerId: Int)
 
     fun navigateToBottomNavigation(@IdRes containerId: Int)
+
+    fun navigateToPortfolio(@IdRes containerId: Int)
 }

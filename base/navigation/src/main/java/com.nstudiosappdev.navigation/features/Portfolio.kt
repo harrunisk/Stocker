@@ -4,10 +4,9 @@ import androidx.fragment.app.Fragment
 import com.nstudiosappdev.navigation.PACKAGE_NAME
 import com.nstudiosappdev.navigation.loadFragmentOrReturnNull
 
-object Dashboard : Feature<Fragment> {
-    private const val DASHBOARD = "$PACKAGE_NAME.dashboard.presentation.currencies.CurrenciesMainFragment"
+object Portfolio : Feature<Fragment> {
+    private const val PORTFOLIO = "$PACKAGE_NAME.dashboard.presentation.portfolio.PortfolioFragment"
 
     override val dynamicStart: Fragment?
-        get() = DASHBOARD.loadFragmentOrReturnNull()
+        get() = PORTFOLIO.loadFragmentOrReturnNull()
 }
-

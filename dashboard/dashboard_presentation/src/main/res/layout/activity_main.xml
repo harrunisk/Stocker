@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/coordinatorlayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -15,19 +14,6 @@
 			layout="@layout/toolbar_default"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"/>
-
-			<com.google.android.material.tabs.TabLayout
-				android:id="@+id/tabs"
-				android:layout_width="match_parent"
-				android:layout_height="?attr/actionBarSize"
-				app:tabGravity="fill"
-				app:tabMaxWidth="0dp"
-				app:tabIndicatorHeight="4dp"
-				app:tabMode="fixed"
-				app:tabTextColor="@color/colorSecondaryText"
-				app:tabSelectedTextColor="@color/colorWhite"
-				app:tabIndicatorColor="@color/colorWhite"
-				android:background="@color/colorAppBackGround" />
 
 		<include layout="@layout/content_home"/>
 

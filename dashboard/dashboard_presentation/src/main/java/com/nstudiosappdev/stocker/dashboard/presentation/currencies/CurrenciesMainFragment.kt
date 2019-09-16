@@ -3,6 +3,7 @@ package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 import android.os.Bundle
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import com.nstudiosappdev.core.presentation.TabProvider
 import com.nstudiosappdev.core.presentation.base.ActionModeListener
 import com.nstudiosappdev.core.presentation.base.BaseFragment
@@ -12,6 +13,8 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
 class CurrenciesMainFragment : BaseFragment() {
 
     private var lastItem: Int = 0
+
+    private lateinit var tabs: TabLayout
 
     private lateinit var pagerAdapter: CurrenciesPagerAdapter
 

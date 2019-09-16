@@ -1,4 +1,12 @@
 package com.nstudiosappdev.stocker.dashboard.presentation.portfolio
 
-class PortfolioFragmentModule {
+import com.nstudiosappdev.core.injection.scope.FragmentScope
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
+
+@Module
+abstract class PortfolioFragmentModule {
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun contributePortfolioFragmentModule(): PortfolioFragment
 }

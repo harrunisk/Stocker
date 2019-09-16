@@ -2,6 +2,7 @@ package com.nstudiosappdev.stocker.dashboard.presentation.bottom
 
 import android.os.Bundle
 import android.view.View
+import com.google.android.material.tabs.TabLayout
 import com.nstudiosappdev.core.presentation.base.BaseFragment
 import com.nstudiosappdev.navigation.navigation.DefaultNavigationController
 import com.nstudiosappdev.stocker.presentation.R
@@ -20,10 +21,13 @@ class BottomNavigationFragment : BaseFragment() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigationCurrencies -> {
+                    activity!!.findViewById<TabLayout>(R.id.tabs).visibility = View.VISIBLE
                     navigationController.navigateToCurrencies(R.id.fl_main)
                    true
                 }
                 R.id.navigationPortfolio -> {
+                    activity!!.findViewById<TabLayout>(R.id.tabs).visibility = View.GONE
+                    navigationController.navigateToPortfolio(R.id.fl_main)
                     true
                 }
                 else -> {
