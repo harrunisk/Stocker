@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="materialAlertDialogTheme">
+        <item name="materialAlertDialogTitleIconStyle">@style/MaterialAlertDialog.MaterialComponents.Title.Icon</item>
+    </style>
+
+</resources>

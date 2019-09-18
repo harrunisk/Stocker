@@ -28,7 +28,7 @@ object Versions {
     const val retrofitCoroutineAdapterVersion = "0.9.2"
     const val viewModelVersion = "2.0.0"
     const val roomVersion = "2.1.0-alpha06"
-    const val supportDesignVersion = "1.0.0-rc01"
+    const val supportDesignVersion = "1.1.0-alpha06"
     const val beaverVersion = "1.0.0-alpha"
     const val picassoVersion = "2.71828"
     const val playServicesVersion = "11.8.0"

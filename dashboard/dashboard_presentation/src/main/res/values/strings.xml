@@ -17,4 +17,10 @@
     <string name="recyclerview_diff_header">Fark</string>
     <string name="decrease">↓</string>
     <string name="increase">↑</string>
+
+    <!--Alert Dialog -->
+    <string name="add">EKLE</string>
+    <string name="cancel">İptal Et</string>
+    <string name= "message">Favorilerinize eklemek ister misiniz?</string>
+    <string name="title">Bilgi</string>
 </resources>

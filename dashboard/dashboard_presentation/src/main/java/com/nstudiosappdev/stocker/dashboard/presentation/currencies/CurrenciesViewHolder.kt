@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveString
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveFloat
+import com.nstudiosappdev.core.presentation.extensions.showMessage
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.ViewHolder
 import com.nstudiosappdev.core.presentation.recyclerview.ViewHolderBinder
@@ -69,7 +70,13 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
 
         itemView.setOnClickListener {
             itemClickListener?.invoke(item)
-        }
+            itemView.context.showMessage(
+                message = itemView.context.getString(R.string.message),
+                title = itemView.context.getString(R.string.title),
+                positiveButtonText = itemView.context.getString(R.string.add),
+                negativeButtonText = itemView.context.getString(R.string.cancel)
+            )
+       }
 
         itemView.setOnLongClickListener {
             itemLongClickListener?.invoke(item)
