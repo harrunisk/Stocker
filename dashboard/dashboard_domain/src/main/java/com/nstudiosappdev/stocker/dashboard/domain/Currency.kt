@@ -7,5 +7,6 @@ data class Currency (
     @SerializedName("buyPrice") val buyPrice: String?,
     @SerializedName("buyStatus") val buyStatus: String?,
     @SerializedName("sellPrice") val sellPrice: String?,
-    @SerializedName("sellStatus") val sellStatus: String?
+    @SerializedName("sellStatus") val sellStatus: String?,
+    @SerializedName("currencyType") val currencyType: String?
 )

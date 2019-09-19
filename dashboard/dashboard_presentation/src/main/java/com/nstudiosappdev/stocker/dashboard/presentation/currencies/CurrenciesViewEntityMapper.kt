@@ -11,7 +11,8 @@ class CurrenciesViewEntityMapper : ViewEntityMapper<Currency, CurrenciesViewEnti
             value.buyPrice,
             value.buyStatus,
             value.sellPrice,
-            value.sellStatus
+            value.sellStatus,
+            value.currencyType
         )
     }
 }

@@ -15,12 +15,11 @@ class CurrenciesRemoteDataSource @Inject constructor(
 ) : DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest,List<Currency>> {
     override suspend fun getResult(request: CurrenciesRequest): DataHolder<List<Currency>> {
         val callAdapter = ApiCallAdapter<List<Currency>>(errorFactory)
-        when (request.currencyType){
-            0 -> return callAdapter.adapt(currenciesServices.getUsdCurrencies())
-            1 -> return callAdapter.adapt(currenciesServices.getEuroCurrencies())
-            2 -> return callAdapter.adapt(currenciesServices.getGoldCurrencies())
+        return when (request.currencyType){
+            0 -> callAdapter.adapt(currenciesServices.getUsdCurrencies())
+            1 -> callAdapter.adapt(currenciesServices.getEuroCurrencies())
+            2 -> callAdapter.adapt(currenciesServices.getGoldCurrencies())
             else -> throw IllegalArgumentException("Unknown position!")
-
         }
     }
 }

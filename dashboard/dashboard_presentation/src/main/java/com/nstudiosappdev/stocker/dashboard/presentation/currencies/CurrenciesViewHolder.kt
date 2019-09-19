@@ -70,9 +70,12 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
         itemView.setOnClickListener {
             itemClickListener?.invoke(item)
             itemView.context.createCustomAlertDialog(
-                message = item.bankName + " " + itemView.context.getString(R.string.message),
+                message = item.bankName + " " + item.currencyType?.toUpperCase() + " " + itemView.context.getString(R.string.message),
                 title = itemView.context.getString(R.string.title),
                 positiveButtonText = itemView.context.getString(R.string.add),
+                positiveButtonAction = {
+                    addToFavorites(item.bankName, item.currencyType)
+                },
                 negativeButtonText = itemView.context.getString(R.string.cancel),
                 imageView = null
             ).show()
@@ -101,5 +104,9 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
         override fun bind(holder: RecyclerView.ViewHolder, item: DisplayItem) {
             (holder as CurrenciesViewHolder).bind(item as CurrenciesViewEntity)
         }
+    }
+
+    private fun addToFavorites(bankName: String?, currencyType: String?) {
+
     }
 }

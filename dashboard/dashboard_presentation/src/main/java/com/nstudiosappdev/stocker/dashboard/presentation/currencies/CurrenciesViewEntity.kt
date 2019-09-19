@@ -8,7 +8,8 @@ class CurrenciesViewEntity(
     val buyPrice: String?,
     val buyStatus: String?,
     val sellPrice: String?,
-    val sellStatus: String?
+    val sellStatus: String?,
+    val currencyType: String?
 ) : ViewEntity, DisplayItem{
 
     override fun type(): Int =
