@@ -21,12 +21,10 @@ class BottomNavigationFragment : BaseFragment() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigationCurrencies -> {
-                    activity!!.findViewById<TabLayout>(R.id.tabs).visibility = View.VISIBLE
                     navigationController.navigateToCurrencies(R.id.fl_main)
                    true
                 }
                 R.id.navigationPortfolio -> {
-                    activity!!.findViewById<TabLayout>(R.id.tabs).visibility = View.GONE
                     navigationController.navigateToPortfolio(R.id.fl_main)
                     true
                 }
