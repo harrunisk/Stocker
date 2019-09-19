@@ -1,7 +1,6 @@
 package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveString
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveFloat
-import com.nstudiosappdev.core.presentation.extensions.showMessage
+import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.ViewHolder
 import com.nstudiosappdev.core.presentation.recyclerview.ViewHolderBinder
@@ -70,12 +69,13 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
 
         itemView.setOnClickListener {
             itemClickListener?.invoke(item)
-            itemView.context.showMessage(
-                message = itemView.context.getString(R.string.message),
+            itemView.context.createCustomAlertDialog(
+                message = item.bankName + " " + itemView.context.getString(R.string.message),
                 title = itemView.context.getString(R.string.title),
                 positiveButtonText = itemView.context.getString(R.string.add),
-                negativeButtonText = itemView.context.getString(R.string.cancel)
-            )
+                negativeButtonText = itemView.context.getString(R.string.cancel),
+                imageView = null
+            ).show()
        }
 
         itemView.setOnLongClickListener {

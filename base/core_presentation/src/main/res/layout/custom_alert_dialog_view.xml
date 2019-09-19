@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="13dp"
+        android:orientation="vertical"
+        android:focusable="false"
+        android:focusableInTouchMode="true">
+
+
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible"
+            android:layout_marginBottom="16dp"
+            tools:src="@drawable/ic_warning"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="#383838"
+            android:textSize="16sp"
+            tools:text="Title Text"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="14dp"
+            android:textSize="14sp"
+            android:textColor="#737171"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            tools:text="Message Text"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="14dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:hint="hint message"
+            android:maxLength="100"
+            android:textColorHint="#DEDEDE"
+            android:background="@drawable/edit_text_underline"
+            android:gravity="left"/>
+
+        <LinearLayout
+            android:id="@+id/alertDialogButtonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/negativeButton"
+                android:visibility="gone"
+                style="@style/ButtonPositiveStyle"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/positiveButton"
+                android:visibility="gone"
+                style="@style/ButtonNegativeStyle"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

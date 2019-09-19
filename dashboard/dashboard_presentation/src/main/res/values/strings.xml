@@ -21,6 +21,6 @@
     <!--Alert Dialog -->
     <string name="add">EKLE</string>
     <string name="cancel">İptal Et</string>
-    <string name= "message">Favorilerinize eklemek ister misiniz?</string>
+    <string name= "message">döviz kurunu favorilerinize eklemek ister misiniz?</string>
     <string name="title">Bilgi</string>
 </resources>

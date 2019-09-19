@@ -8,7 +8,7 @@ import dagger.android.support.HasSupportFragmentInjector
 abstract class BaseInjectionFragment : BaseFragment() {
 
     @CallSuper
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         if (activity is HasSupportFragmentInjector) {
             AndroidSupportInjection.inject(this)
             onInject()
