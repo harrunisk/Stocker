@@ -12,6 +12,7 @@ import javax.inject.Inject
 
 class CurrenciesRepositoryImpl @Inject constructor(
     private val currenciesRemoteDataSource: DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>>,
+    private val currenciesLocalDataSource: DataSource.LocalDataSource<Long, Currency>,
     asyncManager: AsyncManager
 ) : BaseDataSource(asyncManager), CurrenciesRepository {
 

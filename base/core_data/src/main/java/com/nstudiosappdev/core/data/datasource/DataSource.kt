@@ -12,23 +12,22 @@ interface DataSource {
             suspend fun fetch(): DataHolder<Res>
         }
     }
-    interface LocalSource : DataSource {
-        @Deprecated("Use Local Source")
-        interface LocalDataSource<K, V> : DataSource {
-            fun get(key: K): V?
-            fun get(page: Int): List<V>
-            fun getAll(): List<V>
-            fun put(key: K, data: V): Boolean
-            fun remove(value: V): Boolean
-            fun removeByKey(key: K): Boolean
-            fun clear()
-        }
-        interface ShrinkedLocalDataSource<KEY, VALUE> : DataSource {
-            fun get(key: KEY): VALUE?
-            fun put(key: KEY, value: VALUE): Boolean
-            fun remove(key: KEY): Boolean
-        }
+    interface LocalDataSource<K,V> : DataSource {
+        fun get(key: K): V?
+
+        fun get(page: Int): List<V>
+
+        fun getAll(): List<V>
+
+        fun put(key: K?, data: V): Boolean
+
+        fun remove(value: V): Boolean
+
+        fun removeByKey(key: K): Boolean
+
+        fun clear()
     }
+
     interface CacheDataSource<K, V> : DataSource {
         fun get(key: K): V?
         fun put(key: K, value: V): Boolean

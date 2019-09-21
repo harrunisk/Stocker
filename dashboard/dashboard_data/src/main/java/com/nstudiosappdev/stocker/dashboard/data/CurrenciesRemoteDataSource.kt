@@ -12,7 +12,7 @@ import javax.inject.Inject
 class CurrenciesRemoteDataSource @Inject constructor(
     private val currenciesServices: CurrenciesServices,
     private val errorFactory: ErrorFactory
-) : DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest,List<Currency>> {
+) : DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>> {
     override suspend fun getResult(request: CurrenciesRequest): DataHolder<List<Currency>> {
         val callAdapter = ApiCallAdapter<List<Currency>>(errorFactory)
         return when (request.currencyType){

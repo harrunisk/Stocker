@@ -9,7 +9,7 @@ import dagger.Provides
 import kotlinx.coroutines.Deferred
 import javax.inject.Singleton
 
-@Module(includes = [ApiModule::class])
+@Module(includes = [ApiModule::class, DbModule::class])
 class CoreDataModule {
     @Singleton
     @Provides
