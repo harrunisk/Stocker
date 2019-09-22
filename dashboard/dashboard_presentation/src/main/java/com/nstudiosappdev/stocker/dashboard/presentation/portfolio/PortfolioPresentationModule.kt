@@ -27,7 +27,7 @@ abstract class PortfolioPresentationModule {
 
         @JvmStatic
         @Provides
-        fun provideDisplayItemComparator(): DefaultDisplayItemComparator = DefaultDisplayItemComparator()
+        fun provideDisplayItemComparator(): DisplayItemComparator = DefaultDisplayItemComparator()
 
         @JvmStatic
         @Provides

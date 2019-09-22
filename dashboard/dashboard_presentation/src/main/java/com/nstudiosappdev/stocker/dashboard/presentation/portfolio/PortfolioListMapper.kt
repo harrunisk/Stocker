@@ -3,7 +3,7 @@ package com.nstudiosappdev.stocker.dashboard.presentation.portfolio
 import com.nstudiosappdev.core.presentation.entity.ViewEntityMapper
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItemListMapper
-import java.util.*
+import com.nstudiosappdev.stocker.dashboard.domain.Currency
 
 class PortfolioListMapper(
     private val portfolioViewEntityMapper: ViewEntityMapper<Currency, PortfolioViewEntity>
