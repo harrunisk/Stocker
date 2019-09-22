@@ -15,13 +15,53 @@ sealed class Error {
 
     data class ExceptionalError(val message: String?) : Error()
 
-    class ConnectionError : Error()
+    class ConnectionError : Error() {
+        override fun equals(other: Any?): Boolean {
+            return this === other
+        }
 
-    class EmptyCacheResult : Error()
+        override fun hashCode(): Int {
+            return System.identityHashCode(this)
+        }
+    }
 
-    class UnhandledStateError : Error()
+    class EmptyCacheResult : Error() {
+        override fun equals(other: Any?): Boolean {
+            return this === other
+        }
 
-    class AuthenticationError : Error()
+        override fun hashCode(): Int {
+            return System.identityHashCode(this)
+        }
+    }
 
-    class InvalidInteractorRequestError : Error()
+    class UnhandledStateError : Error() {
+        override fun equals(other: Any?): Boolean {
+            return this === other
+        }
+
+        override fun hashCode(): Int {
+            return System.identityHashCode(this)
+        }
+    }
+
+    class AuthenticationError : Error() {
+        override fun equals(other: Any?): Boolean {
+            return this === other
+        }
+
+        override fun hashCode(): Int {
+            return System.identityHashCode(this)
+        }
+    }
+
+    class InvalidInteractorRequestError : Error() {
+        override fun equals(other: Any?): Boolean {
+            return this === other
+        }
+
+        override fun hashCode(): Int {
+            return System.identityHashCode(this)
+        }
+    }
 }

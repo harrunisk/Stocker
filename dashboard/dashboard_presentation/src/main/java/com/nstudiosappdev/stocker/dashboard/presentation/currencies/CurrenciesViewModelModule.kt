@@ -9,7 +9,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
-import javax.inject.Named
 
 @Module
 abstract class CurrenciesViewModelModule {

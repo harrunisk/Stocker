@@ -16,7 +16,7 @@ class DeleteCurrencyInteractor @Inject constructor(
     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
 ) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<DeleteCurrencyInteractor.Params, Boolean> {
 
-    override suspend fun execute(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync {
+    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync {
         val currency = Currency(
             bankName = postParams.currency.bankName,
             buyPrice = postParams.currency.buyPrice,

@@ -45,12 +45,12 @@ class CurrenciesViewModel @Inject constructor(
     fun fetchCurrencies(
         currencyType: Int
     ) = handleLaunch(execution = {
-        _currencies.value = DataHolder.Loading()
+        _currencies.value = DataHolder.Loading
         val currenciesParams = GetCurrenciesInteractor.Params(
             currencyType = currencyType
         )
 
-        val currenciesResult = getCurrenciesInteractor.execute(currenciesParams).await()
+        val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
         if(currenciesResult is DataHolder.Success) {
             _currencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
             items = currenciesResult.data

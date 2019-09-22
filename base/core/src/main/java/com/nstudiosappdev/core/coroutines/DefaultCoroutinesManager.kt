@@ -7,7 +7,7 @@ import kotlin.coroutines.CoroutineContext
 
 class DefaultCoroutinesManager(override val coroutineContext: CoroutineContext) : CoroutineManager {
 
-    protected val coroutinesJobs: MutableList<Job> by lazy {
+    private val coroutinesJobs: MutableList<Job> by lazy {
         mutableListOf<Job>()
     }
 

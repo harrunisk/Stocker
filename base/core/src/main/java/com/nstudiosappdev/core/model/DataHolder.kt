@@ -8,5 +8,5 @@ sealed class DataHolder<out T : Any> {
 
     data class Fail(val e:Error) : DataHolder<Nothing>()
 
-    class Loading : DataHolder<Nothing>()
+    object Loading : DataHolder<Nothing>()
 }

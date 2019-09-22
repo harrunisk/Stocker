@@ -25,7 +25,7 @@ class VmFactory @Inject constructor(private val creators: Map<Class<out ViewMode
             }
         }
 
-        if (creator == null) throw IllegalArgumentException("Unknown model class$modelClass")
+        requireNotNull(creator) { "Unknown model class$modelClass" }
 
         try{
             return creator.get() as T
