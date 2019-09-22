@@ -117,7 +117,7 @@ class CustomAlertDialog(
     override fun create(): AlertDialog {
         val alertDialog = super.create()
 
-        alertDialog?.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        alertDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         if (alertType == DialogType.WARNING) {
             alertDialog.setCanceledOnTouchOutside(true)
         }

@@ -62,10 +62,10 @@ abstract class BaseFragment : Fragment(), BaseView {
         }
     }
 
-    override fun onError(error: Error) {
+    override fun onError(e: Error) {
         try {
             // Alert Dialog or Toast message show error,
-            val errorMessage = getErrorMessage(error)
+            val errorMessage = getErrorMessage(e)
             Toast.makeText(getApplicationContext(),errorMessage,Toast.LENGTH_LONG).show()
         } catch (e: WindowManager.BadTokenException) {
             // no-op

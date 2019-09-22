@@ -1,6 +1,6 @@
 package com.nstudiosappdev.core.presentation.recyclerview
 
-class DefaultDisplayItemComperator : DisplayItemComperator {
+class DefaultDisplayItemComparator : DisplayItemComparator {
 
     override fun areItemsSame(oldItem: DisplayItem, newItem: DisplayItem): Boolean {
         return oldItem == newItem

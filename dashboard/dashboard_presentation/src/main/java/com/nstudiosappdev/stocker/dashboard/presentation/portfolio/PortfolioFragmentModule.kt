@@ -7,6 +7,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class PortfolioFragmentModule {
     @FragmentScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [PortfolioPresentationModule::class])
     abstract fun contributePortfolioFragmentModule(): PortfolioFragment
 }

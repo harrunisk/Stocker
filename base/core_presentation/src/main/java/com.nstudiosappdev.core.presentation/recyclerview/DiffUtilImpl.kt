@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 class DiffUtilImpl(
     private val oldItems: List<DisplayItem>,
     private val newItems: List<DisplayItem>,
-    private val comparator: DisplayItemComperator
+    private val comparator: DisplayItemComparator
 ) : DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =

@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.currencies
+package com.nstudiosappdev.stocker.dashboard.presentation.portfolio
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveString
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveFloat
-import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
+import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveString
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.ViewHolder
 import com.nstudiosappdev.core.presentation.recyclerview.ViewHolderBinder
@@ -18,7 +17,7 @@ import com.nstudiosappdev.stocker.presentation.R
 import javax.inject.Inject
 import kotlin.math.abs
 
-class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(itemView) {
+class PortfolioViewHolder private constructor(itemView: View) : ViewHolder(itemView) {
 
     private val textViewBankName: TextView = itemView.findViewById(R.id.textViewBankName)
     private val textViewBuyingPrice: TextView = itemView.findViewById(R.id.textViewBuyingPrice)
@@ -28,8 +27,7 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
     lateinit var buyingPrice: String
     lateinit var sellingPrice: String
 
-    private fun bind(item: CurrenciesViewEntity) {
-
+    private fun bind(item: PortfolioViewEntity) {
         when (item.buyStatus) {
             CurrencyStatus.DECREASING.value -> {
                 buyingPrice = item.buyPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.DECREASING.value
@@ -66,30 +64,11 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
         textViewDiff.text = abs(
             item.sellPrice!!.adjustSensitivityGiveFloat(4) - item.buyPrice!!.adjustSensitivityGiveFloat(4)
         ).toString().adjustSensitivityGiveString(3)
-
-        itemView.setOnClickListener {
-            itemClickListener?.invoke(item)
-            itemView.context.createCustomAlertDialog(
-                message = item.bankName + " " + item.currencyType?.toUpperCase() + " " + itemView.context.getString(R.string.message),
-                title = itemView.context.getString(R.string.title),
-                positiveButtonText = itemView.context.getString(R.string.add),
-                positiveButtonAction = {
-                },
-                negativeButtonText = itemView.context.getString(R.string.cancel),
-                imageView = null
-            ).show()
-       }
-
-        itemView.setOnLongClickListener {
-            itemLongClickListener?.invoke(item)
-            true
-        }
     }
 
-    internal class CurrenciesViewHolderFactory @Inject constructor() : ViewHolderFactory {
-
+    internal class PortfolioViewHolderFactory @Inject constructor() : ViewHolderFactory {
         override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-            CurrenciesViewHolder(
+            PortfolioViewHolder(
                 LayoutInflater.from(parent.context).inflate(
                     R.layout.item_currency,
                     parent,
@@ -98,11 +77,10 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
             )
     }
 
-    internal class CurrenciesViewHolderBinder @Inject constructor() : ViewHolderBinder {
+    internal class PortfolioViewHolderBinder @Inject constructor() : ViewHolderBinder {
 
         override fun bind(holder: RecyclerView.ViewHolder, item: DisplayItem) {
-            (holder as CurrenciesViewHolder).bind(item as CurrenciesViewEntity)
+            (holder as PortfolioViewHolder).bind(item as PortfolioViewEntity)
         }
     }
-
 }

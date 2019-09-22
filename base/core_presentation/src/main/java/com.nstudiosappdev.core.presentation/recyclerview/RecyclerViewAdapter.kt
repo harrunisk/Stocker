@@ -14,7 +14,7 @@ import com.nstudiosappdev.core.preconditions.AndroidPreConditions
 class RecyclerViewAdapter constructor(
     val items: MutableList<DisplayItem> = ArrayList(),
     private val selectedItems: MutableList<DisplayItem> = ArrayList(),
-    private val itemComperator: DisplayItemComperator,
+    private val itemComparator: DisplayItemComparator,
     private val viewHolderFactoryMap: Map<Int, ViewHolderFactory>,
     private val viewBinderFactoryMap: Map<Int, ViewHolderBinder>,
     private val androidPreconditions: AndroidPreConditions
@@ -72,7 +72,7 @@ class RecyclerViewAdapter constructor(
             DiffUtilImpl(
                 items,
                 newItems,
-                itemComperator
+                itemComparator
             )
         )
 

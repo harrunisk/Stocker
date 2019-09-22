@@ -1,8 +1,8 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.currencies
+package com.nstudiosappdev.stocker.dashboard.presentation.portfolio
 
 import com.nstudiosappdev.core.preconditions.AndroidPreConditions
 import com.nstudiosappdev.core.presentation.recyclerview.*
-import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants.DisplayTypes.CURRENCIES
+import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants.DisplayTypes.PORTFOLIO
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -10,24 +10,24 @@ import dagger.multibindings.IntKey
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class CurrenciesPresentationModule {
+abstract class PortfolioPresentationModule {
 
     @Binds
     @IntoMap
-    @IntKey(CURRENCIES)
-    internal abstract fun provideCurrenciesViewModelFactory(factory: CurrenciesViewHolder.CurrenciesViewHolderFactory): ViewHolderFactory
+    @IntKey(PORTFOLIO)
+    internal abstract fun providePortfolioViewModelFactory(factory: PortfolioViewHolder.PortfolioViewHolderFactory): ViewHolderFactory
 
     @Binds
     @IntoMap
-    @IntKey(CURRENCIES)
-    internal abstract fun provideCurrenciesViewHolderFactory(binder: CurrenciesViewHolder.CurrenciesViewHolderBinder): ViewHolderBinder
+    @IntKey(PORTFOLIO)
+    internal abstract fun providePortfolioViewHolderFactory(binder: PortfolioViewHolder.PortfolioViewHolderBinder): ViewHolderBinder
 
     @Module
     companion object {
 
         @JvmStatic
         @Provides
-        fun provideDisplayItemComparator(): DisplayItemComparator = DefaultDisplayItemComparator()
+        fun provideDisplayItemComparator(): DefaultDisplayItemComparator = DefaultDisplayItemComparator()
 
         @JvmStatic
         @Provides
@@ -44,5 +44,6 @@ abstract class CurrenciesPresentationModule {
                 androidPreconditions = androidPreConditions
             )
         }
+
     }
 }
