@@ -17,6 +17,10 @@ interface DataSource {
 
         fun get(page: Int): List<V>
 
+        fun get(key: String): List<V>
+
+        fun get(bankName: String, currencyType: String): V
+
         fun getAll(): List<V>
 
         fun put(key: K?, data: V): Boolean
@@ -24,6 +28,8 @@ interface DataSource {
         fun remove(value: V): Boolean
 
         fun removeByKey(key: K): Boolean
+
+        fun remove(key1: String, key2: String): Boolean
 
         fun clear()
     }

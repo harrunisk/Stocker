@@ -20,4 +20,31 @@ class CurrenciesRepositoryImpl @Inject constructor(
         val result = currenciesRemoteDataSource.getResult(currenciesRequest)
         result
     }
+
+    override suspend fun getSavedCurrency(
+        bankName: String,
+        currencyType: String
+    ): Deferred<DataHolder<Currency>> = handleAsync {
+        val result = currenciesLocalDataSource.get(bankName, currencyType)
+        return@handleAsync DataHolder.Success(result)
+    }
+
+    override suspend fun getSavedCurrencies(currencyType: String): Deferred<DataHolder<List<Currency>>> = handleAsync {
+        val result = currenciesLocalDataSource.get(currencyType)
+        return@handleAsync DataHolder.Success(result)
+    }
+
+    override suspend fun saveCurrency(
+        currency: Currency
+    ): Deferred<DataHolder<Boolean>> = handleAsync {
+        val result = currenciesLocalDataSource.put(null, currency)
+        return@handleAsync DataHolder.Success(result)
+    }
+
+    override suspend fun deleteCurrency(
+        currency: Currency
+    ): Deferred<DataHolder<Boolean>> = handleAsync {
+        val result = currenciesLocalDataSource.remove(currency)
+        return@handleAsync DataHolder.Success(result)
+    }
 }

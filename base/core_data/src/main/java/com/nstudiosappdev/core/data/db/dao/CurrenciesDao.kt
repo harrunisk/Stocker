@@ -17,6 +17,6 @@ interface CurrenciesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addCurrency(currenciesEntity: CurrenciesEntity): Long
 
-    @Query("DELETE FROM currencies WHERE id = :id")
-    fun deleteCurrency(id: Long)
+    @Query("DELETE FROM currencies WHERE bankName = :bankName and currencyType = :currencyType")
+    fun deleteCurrency(bankName: String, currencyType: String)
 }
