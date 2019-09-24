@@ -13,6 +13,7 @@ import com.nstudiosappdev.core.presentation.recyclerview.DisplayItemListMapper
 import com.nstudiosappdev.core.presentation.viewmodel.BaseViewModel
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import com.nstudiosappdev.stocker.dashboard.domain.GetCurrenciesInteractor
+import com.nstudiosappdev.stocker.dashboard.domain.SaveCurrencyInteractor
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -20,6 +21,7 @@ class CurrenciesViewModel @Inject constructor(
     @Named(CoroutineManagerModule.CM_VIEWMODEL) coroutineManager: CoroutineManager,
     private val getCurrenciesInteractor: Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>>,
     private val currenciesListMapper: DisplayItemListMapper<Currency>,
+    private val saveCurrencyInteractor: Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean>,
     private val errorFactory: ErrorFactory
 ) : BaseViewModel(coroutineManager) {
 
@@ -35,8 +37,13 @@ class CurrenciesViewModel @Inject constructor(
 
     private val _currencies = MutableLiveData<DataHolder<List<DisplayItem>>>()
 
+    private val _saveFavorites = MutableLiveData<DataHolder<Boolean>>()
+
     val currencies: LiveData<DataHolder<List<DisplayItem>>>
         get() = _currencies
+
+    val saveCurrencies: LiveData<DataHolder<Boolean>>
+        get() = saveCurrencies
 
 /*    init {
         fetchCurrencies()
@@ -53,6 +60,7 @@ class CurrenciesViewModel @Inject constructor(
         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
         if(currenciesResult is DataHolder.Success) {
             _currencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
+            addToFavorites(currenciesResult.data.firstOrNull()!!)
             items = currenciesResult.data
         }
     }, error = {
@@ -133,6 +141,20 @@ class CurrenciesViewModel @Inject constructor(
             }
         }
     }
+
+    fun addToFavorites(
+        currency: Currency
+    ) = handleLaunch (execution = {
+        _saveFavorites.value = DataHolder.Loading
+        val saveCurrencyParams = SaveCurrencyInteractor.Params(
+            currency
+        )
+
+        val saveCurrencyResult = saveCurrencyInteractor.executeAsync(saveCurrencyParams).await()
+        if (saveCurrencyResult is DataHolder.Success) _saveFavorites.value = DataHolder.Success(saveCurrencyResult.data)
+    }, error = {
+        _saveFavorites.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
+    })
 
     private fun clearAllFlags() {
         orderByBankNameFlag = false
