@@ -14,7 +14,7 @@ interface CurrenciesDao {
     @Query("SELECT * FROM currencies WHERE currencyType = :currencyType")
     fun getSpecificCurrencyTypes(currencyType: String): List<CurrenciesEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     fun addCurrency(currenciesEntity: CurrenciesEntity): Long
 
     @Query("DELETE FROM currencies WHERE bankName = :bankName and currencyType = :currencyType")

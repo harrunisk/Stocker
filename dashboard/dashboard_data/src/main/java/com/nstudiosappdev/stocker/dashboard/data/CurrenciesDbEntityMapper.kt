@@ -8,13 +8,12 @@ class CurrenciesDbEntityMapper : DbEntityMapper<CurrenciesEntity, Currency> {
 
     override fun map(domainObject: Currency): CurrenciesEntity {
         return CurrenciesEntity(
-            currecyId = 0,
-            bankName = domainObject.bankName,
+            bankName = domainObject.bankName!!,
             buyPrice = domainObject.buyPrice,
             buyStatus = domainObject.buyStatus,
             sellPrice = domainObject.sellPrice,
             sellStatus = domainObject.sellStatus,
-            currencyType = domainObject.currencyType,
+            currencyType = domainObject.currencyType!!,
             createDate = null,
             updateDate = null
         )
