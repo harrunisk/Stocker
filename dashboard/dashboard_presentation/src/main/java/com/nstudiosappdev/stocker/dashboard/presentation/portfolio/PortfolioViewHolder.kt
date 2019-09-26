@@ -8,16 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveFloat
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveString
-import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
-import com.nstudiosappdev.core.presentation.recyclerview.ViewHolder
-import com.nstudiosappdev.core.presentation.recyclerview.ViewHolderBinder
-import com.nstudiosappdev.core.presentation.recyclerview.ViewHolderFactory
+import com.nstudiosappdev.core.presentation.recyclerview.*
 import com.nstudiosappdev.stocker.dashboard.domain.CurrencyStatus
 import com.nstudiosappdev.stocker.presentation.R
 import javax.inject.Inject
 import kotlin.math.abs
 
-class PortfolioViewHolder private constructor(itemView: View) : ViewHolder(itemView) {
+class PortfolioViewHolder private constructor(itemView: View, recyclerViewClickListener: RecyclerViewClickListener) : ViewHolder(itemView) {
 
     private val textViewBankName: TextView = itemView.findViewById(R.id.textViewBankName)
     private val textViewBuyingPrice: TextView = itemView.findViewById(R.id.textViewBuyingPrice)
@@ -26,6 +23,8 @@ class PortfolioViewHolder private constructor(itemView: View) : ViewHolder(itemV
 
     lateinit var buyingPrice: String
     lateinit var sellingPrice: String
+
+    private val recyclerViewClickListener: RecyclerViewClickListener? = recyclerViewClickListener
 
     private fun bind(item: PortfolioViewEntity) {
         when (item.buyStatus) {
@@ -67,13 +66,13 @@ class PortfolioViewHolder private constructor(itemView: View) : ViewHolder(itemV
     }
 
     internal class PortfolioViewHolderFactory @Inject constructor() : ViewHolderFactory {
-        override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
+        override fun createViewHolder(parent: ViewGroup, recyclerViewClickListener: RecyclerViewClickListener): RecyclerView.ViewHolder =
             PortfolioViewHolder(
                 LayoutInflater.from(parent.context).inflate(
                     R.layout.item_currency,
                     parent,
                     false
-                )
+                ), recyclerViewClickListener
             )
     }
 

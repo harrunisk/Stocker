@@ -2,17 +2,20 @@ package com.nstudiosappdev.stocker.dashboard.presentation.currencies
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
+import com.nstudiosappdev.core.presentation.entity.ViewEntity
+import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
 import com.nstudiosappdev.core.presentation.extensions.setup
 import com.nstudiosappdev.core.presentation.livedata.observeApi
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
+import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewClickListener
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_currencies.*
-import kotlinx.android.synthetic.main.item_currency.*
 import javax.inject.Inject
 
-class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
+class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), RecyclerViewClickListener {
 
     private var currencyType: Int? = null
 
@@ -42,9 +45,31 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        currenciesRecyclerView.setup(
+            adapter = currenciesAdapter,
+            context = context!!
+        )
+    }
+
     override fun initView() {
         super.initView()
         initListeners()
+    }
+
+    override fun recyclerViewListClicked(v: View, viewEntity: ViewEntity) {
+        val currenciesViewEntity = viewEntity as CurrenciesViewEntity
+
+        v.context.createCustomAlertDialog(
+            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message),
+            title = v.context.getString(R.string.title),
+            positiveButtonText = v.context.getString(R.string.add),
+            positiveButtonAction = {
+            },
+            negativeButtonText = v.context.getString(R.string.cancel),
+            imageView = null
+        ).show()
     }
 
     private fun initListeners() {
@@ -99,12 +124,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(){
             when (it) {
                 is DataHolder.Success -> {
                     currenciesAdapter.updateAllItems(it.data)
-                    currenciesRecyclerView.setup(
-                        adapter = currenciesAdapter,
-                        context = activity!!
-                    )
                 }
-
             }
         }
     }

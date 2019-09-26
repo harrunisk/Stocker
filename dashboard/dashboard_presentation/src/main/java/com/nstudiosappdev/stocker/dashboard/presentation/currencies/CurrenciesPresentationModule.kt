@@ -31,17 +31,23 @@ abstract class CurrenciesPresentationModule {
 
         @JvmStatic
         @Provides
+        fun provideRecyclerViewClickListener(): RecyclerViewClickListener = CurrenciesFragment()
+
+        @JvmStatic
+        @Provides
         fun provideRecyclerAdapter(
             itemComparator: DisplayItemComparator,
             factoryMap: Map<Int, @JvmSuppressWildcards ViewHolderFactory>,
             binderMap: Map<Int, @JvmSuppressWildcards ViewHolderBinder>,
-            androidPreConditions: AndroidPreConditions
+            androidPreConditions: AndroidPreConditions,
+            recyclerViewClickListener: RecyclerViewClickListener
         ): RecyclerViewAdapter {
             return RecyclerViewAdapter(
                 itemComparator = itemComparator,
                 viewHolderFactoryMap = factoryMap,
                 viewBinderFactoryMap = binderMap,
-                androidPreconditions = androidPreConditions
+                androidPreconditions = androidPreConditions,
+                recyclerViewClickListener = recyclerViewClickListener
             )
         }
     }
