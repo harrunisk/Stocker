@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.nstudiosappdev.core.presentation.TabProvider
-import com.nstudiosappdev.core.presentation.base.ActionModeListener
 import com.nstudiosappdev.core.presentation.base.BaseFragment
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -41,7 +40,6 @@ class PortfolioMainFragment : BaseFragment() {
                 }
 
                 override fun onPageSelected(position: Int) {
-                    (pagerAdapter.fragments[lastItem] as? ActionModeListener)?.stopActionMode()
                     lastItem = position
                 }
 

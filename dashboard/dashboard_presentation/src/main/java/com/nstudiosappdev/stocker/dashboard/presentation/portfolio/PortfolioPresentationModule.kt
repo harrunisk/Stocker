@@ -3,6 +3,7 @@ package com.nstudiosappdev.stocker.dashboard.presentation.portfolio
 import com.nstudiosappdev.core.preconditions.AndroidPreConditions
 import com.nstudiosappdev.core.presentation.recyclerview.*
 import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants.DisplayTypes.PORTFOLIO
+import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesFragment
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -31,17 +32,23 @@ abstract class PortfolioPresentationModule {
 
         @JvmStatic
         @Provides
+        fun provideRecyclerViewClickListener(): RecyclerViewClickListener = CurrenciesFragment()
+
+        @JvmStatic
+        @Provides
         fun provideRecyclerAdapter(
             itemComparator: DisplayItemComparator,
             factoryMap: Map<Int, @JvmSuppressWildcards ViewHolderFactory>,
             binderMap: Map<Int, @JvmSuppressWildcards ViewHolderBinder>,
-            androidPreConditions: AndroidPreConditions
+            androidPreConditions: AndroidPreConditions,
+            recyclerViewClickListener: RecyclerViewClickListener
         ): RecyclerViewAdapter {
             return RecyclerViewAdapter(
                 itemComparator = itemComparator,
                 viewHolderFactoryMap = factoryMap,
                 viewBinderFactoryMap = binderMap,
-                androidPreconditions = androidPreConditions
+                androidPreconditions = androidPreConditions,
+                recyclerViewClickListener = recyclerViewClickListener
             )
         }
 
