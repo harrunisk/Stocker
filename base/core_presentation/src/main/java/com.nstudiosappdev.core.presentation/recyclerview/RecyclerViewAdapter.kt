@@ -17,7 +17,8 @@ class RecyclerViewAdapter constructor(
     private val itemComparator: DisplayItemComparator,
     private val viewHolderFactoryMap: Map<Int, ViewHolderFactory>,
     private val viewBinderFactoryMap: Map<Int, ViewHolderBinder>,
-    private val androidPreconditions: AndroidPreConditions
+    private val androidPreconditions: AndroidPreConditions,
+    private val recyclerViewClickListener: RecyclerViewClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DiffAdapter, SelectionAdapter, CoroutineScope {
 
     var itemClickListener: ((item: DisplayItem) -> Unit)? = null
@@ -26,7 +27,7 @@ class RecyclerViewAdapter constructor(
     override var coroutineContext: CoroutineContext = Dispatchers.Main
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        viewHolderFactoryMap[viewType]?.createViewHolder(parent)!!
+        viewHolderFactoryMap[viewType]?.createViewHolder(parent, recyclerViewClickListener)!!
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         viewBinderFactoryMap[items[position].type()]?.bind(holder, items[position])
