@@ -12,17 +12,17 @@ class CurrenciesPagerAdapter(private val titles: MutableList<String>, fm: Fragme
 
     private val _fragments = SparseArray<Fragment>()
 
-    val fragments: SparseArray<Fragment>
+    private val fragments: SparseArray<Fragment>
         get() = _fragments
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
             DashboardPresentationConstants.TYPES.USD -> CurrenciesFragment.newInstance(
-                DashboardPresentationConstants.TYPES.USD)
+                DashboardPresentationConstants.TYPES_STRING.USD)
             DashboardPresentationConstants.TYPES.EURO -> CurrenciesFragment.newInstance(
-                DashboardPresentationConstants.TYPES.EURO)
+                DashboardPresentationConstants.TYPES_STRING.EURO)
             DashboardPresentationConstants.TYPES.GOLD -> CurrenciesFragment.newInstance(
-                DashboardPresentationConstants.TYPES.GOLD)
+                DashboardPresentationConstants.TYPES_STRING.GOLD)
             else -> throw IllegalArgumentException("Unknown position!")
         }
     }

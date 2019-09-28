@@ -65,6 +65,7 @@ class PortfolioViewHolder private constructor(itemView: View) : ViewHolder(itemV
     }
 
     internal class PortfolioViewHolderFactory @Inject constructor() : ViewHolderFactory {
+
         override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
             PortfolioViewHolder(
                 LayoutInflater.from(parent.context).inflate(

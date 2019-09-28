@@ -12,4 +12,10 @@ class DashboardPresentationConstants {
         const val EURO = 1
         const val GOLD = 2
     }
+
+    internal object TYPES_STRING {
+        const val USD = "usd"
+        const val EURO = "euro"
+        const val GOLD = "gold"
+    }
 }

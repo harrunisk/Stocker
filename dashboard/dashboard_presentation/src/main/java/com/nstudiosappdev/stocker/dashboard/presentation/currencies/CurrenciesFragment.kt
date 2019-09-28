@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
 
-    private var currencyType: Int? = null
+    private var currencyType: String? = null
 
     @Inject
     lateinit var currenciesAdapter: RecyclerViewAdapter
@@ -26,22 +26,28 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_currencies
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initObservers()
-
-        pullToRefresh.setOnRefreshListener {
-            viewModel.fetchCurrencies(currencyType!!)
-            pullToRefresh.isRefreshing = false
-            clearAllColor()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            currencyType = it.getInt(BUNDLE_CURRENCY_TYPE)
+            currencyType = it.getString(BUNDLE_CURRENCY_TYPE)
             viewModel.fetchCurrencies(currencyType!!)
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.currencies.observeApi(this) {
+            when (it) {
+                is DataHolder.Success -> {
+                    currenciesAdapter.updateDiffItemsOnly(it.data)
+                    currenciesAdapter.itemClickListener
+                }
+            }
+        }
+        pullToRefreshCurrencies.setOnRefreshListener {
+            viewModel.fetchCurrencies(currencyType!!)
+            pullToRefreshCurrencies.isRefreshing = false
+            clearAllColor()
         }
     }
 
@@ -111,7 +117,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
         viewModel.currencies.observeApi(this) {
             when (it) {
                 is DataHolder.Success -> {
-                    currenciesAdapter.updateAllItems(it.data)
+                    currenciesAdapter.updateDiffItemsOnly(it.data)
                     currenciesAdapter.itemClickListener
                 }
             }
@@ -155,9 +161,9 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
     companion object {
         private const val BUNDLE_CURRENCY_TYPE = "bundle_currency_type"
 
-        fun newInstance(currencyType: Int) = CurrenciesFragment().apply {
+        fun newInstance(currencyType: String) = CurrenciesFragment().apply {
             arguments = Bundle().apply {
-                putInt(BUNDLE_CURRENCY_TYPE, currencyType)
+                putString(BUNDLE_CURRENCY_TYPE, currencyType)
             }
         }
     }

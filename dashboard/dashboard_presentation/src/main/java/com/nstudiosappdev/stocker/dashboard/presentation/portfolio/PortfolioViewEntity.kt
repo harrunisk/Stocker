@@ -14,5 +14,5 @@ class PortfolioViewEntity(
 ) : ViewEntity, DisplayItem {
 
     override fun type(): Int =
-        DashboardPresentationConstants.TYPES.USD
+        DashboardPresentationConstants.TYPES.EURO
 }

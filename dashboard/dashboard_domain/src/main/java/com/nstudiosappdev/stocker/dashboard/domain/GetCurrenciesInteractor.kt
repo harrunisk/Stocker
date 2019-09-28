@@ -27,6 +27,6 @@ class GetCurrenciesInteractor  @Inject constructor(
     }
 
     class Params(
-        val currencyType: Int
+        val currencyType: String
     ) : Interactor.Params()
 }

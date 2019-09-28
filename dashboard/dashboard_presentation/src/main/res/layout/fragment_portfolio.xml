@@ -1,6 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainPortfolio"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pullToRefreshPortfolio">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/space_m"
+                    android:paddingBottom="@dimen/space_m"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="@dimen/space_m"
+                    android:layout_marginBottom="@dimen/space_s"
+                    android:id="@+id/headerBankNameLinearLayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_xs"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/recyclerview_bank_name_header"
+                        android:id="@+id/headerBankName"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bankNameSortByIncreasingSign"
+                        android:text="@string/increase"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bankNameSortByDecreasingSign"
+                        android:text="@string/decrease"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_m"
+                    android:paddingTop="@dimen/space_m"
+                    android:paddingBottom="@dimen/space_m"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/headerSellingPriceLinearLayout"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:id="@+id/headerBuyingPriceLinearLayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_xs"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/recyclerview_buying_price_header"
+                        android:id="@+id/headerBuyingPrice"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/buyingPriceSortByIncreasingSign"
+                        android:text="@string/increase"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/buyingPriceSortByDecreasingSign"
+                        android:text="@string/decrease"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_m"
+                    android:paddingTop="@dimen/space_m"
+                    android:paddingBottom="@dimen/space_m"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/headerDiffLinearLayout"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:id="@+id/headerSellingPriceLinearLayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_xs"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/recyclerview_selling_price_header"
+                        android:id="@+id/headerSellingPrice"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sellingPriceSortByIncreasingSign"
+                        android:text="@string/increase"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sellingPriceSortByDecreasingSign"
+                        android:text="@string/decrease"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_m"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:paddingTop="@dimen/space_m"
+                    android:paddingBottom="@dimen/space_m"
+                    android:id="@+id/headerDiffLinearLayout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_xs"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/recyclerview_diff_header"
+                        android:id="@+id/headerDiff"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/diffSortByIncreasingSign"
+                        android:text="@string/increase"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/diffSortByDecreasingSign"
+                        android:text="@string/decrease"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View style="@style/MenuDivider"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/portfolioRecyclerView"
+                android:layout_width="match_parent"
+                android:paddingBottom="4dp"
+                android:clipToPadding="true"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

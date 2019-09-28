@@ -47,11 +47,11 @@ class CurrenciesViewModel @Inject constructor(
         get() = _saveFavorites
 
 /*    init {
-        fetchCurrencies()
+        fetchLiveCurrencies()
     }*/
 
     fun fetchCurrencies(
-        currencyType: Int
+        currencyType: String
     ) = handleLaunch(execution = {
         _currencies.value = DataHolder.Loading
         val currenciesParams = GetCurrenciesInteractor.Params(
@@ -61,9 +61,6 @@ class CurrenciesViewModel @Inject constructor(
         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
         if(currenciesResult is DataHolder.Success) {
             _currencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
-/*
-            addToFavorites(currenciesResult.data.firstOrNull()!!)
-*/
             items = currenciesResult.data
         }
     }, error = {

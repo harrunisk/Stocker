@@ -11,17 +11,17 @@ class PortfolioPagerAdapter(private val titles: MutableList<String>, fm: Fragmen
 
     private val _fragments = SparseArray<Fragment>()
 
-    val fragments: SparseArray<Fragment>
+    private val fragments: SparseArray<Fragment>
         get() = _fragments
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
             DashboardPresentationConstants.TYPES.USD -> PortfolioFragment.newInstance(
-                DashboardPresentationConstants.TYPES.USD)
+                DashboardPresentationConstants.TYPES_STRING.USD)
             DashboardPresentationConstants.TYPES.EURO -> PortfolioFragment.newInstance(
-                DashboardPresentationConstants.TYPES.EURO)
+                DashboardPresentationConstants.TYPES_STRING.EURO)
             DashboardPresentationConstants.TYPES.GOLD -> PortfolioFragment.newInstance(
-                DashboardPresentationConstants.TYPES.GOLD)
+                DashboardPresentationConstants.TYPES_STRING.GOLD)
             else -> throw IllegalArgumentException("Unknown position!")
         }
     }
