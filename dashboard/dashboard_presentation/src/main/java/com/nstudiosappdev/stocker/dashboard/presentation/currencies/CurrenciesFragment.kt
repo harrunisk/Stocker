@@ -5,19 +5,19 @@ import android.os.Bundle
 import android.view.View
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
-import com.nstudiosappdev.core.presentation.entity.ViewEntity
 import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
 import com.nstudiosappdev.core.presentation.extensions.setup
 import com.nstudiosappdev.core.presentation.livedata.observeApi
+import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
-import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewClickListener
+import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_currencies.*
 import javax.inject.Inject
 
-class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), RecyclerViewClickListener {
+class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
 
-    private var currencyType: Int? = null
+    private var currencyType: String? = null
 
     @Inject
     lateinit var currenciesAdapter: RecyclerViewAdapter
@@ -26,22 +26,28 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), Recycle
 
     override fun getLayoutRes(): Int = R.layout.fragment_currencies
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initObservers()
-
-        pullToRefresh.setOnRefreshListener {
-            viewModel.fetchCurrencies(currencyType!!)
-            pullToRefresh.isRefreshing = false
-            clearAllColor()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            currencyType = it.getInt(BUNDLE_CURRENCY_TYPE)
+            currencyType = it.getString(BUNDLE_CURRENCY_TYPE)
             viewModel.fetchCurrencies(currencyType!!)
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.currencies.observeApi(this) {
+            when (it) {
+                is DataHolder.Success -> {
+                    currenciesAdapter.updateDiffItemsOnly(it.data)
+                    currenciesAdapter.itemClickListener
+                }
+            }
+        }
+        pullToRefreshCurrencies.setOnRefreshListener {
+            viewModel.fetchCurrencies(currencyType!!)
+            pullToRefreshCurrencies.isRefreshing = false
+            clearAllColor()
         }
     }
 
@@ -58,21 +64,9 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), Recycle
         initListeners()
     }
 
-    override fun recyclerViewListClicked(v: View, viewEntity: ViewEntity) {
-        val currenciesViewEntity = viewEntity as CurrenciesViewEntity
-
-        v.context.createCustomAlertDialog(
-            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message),
-            title = v.context.getString(R.string.title),
-            positiveButtonText = v.context.getString(R.string.add),
-            positiveButtonAction = {
-            },
-            negativeButtonText = v.context.getString(R.string.cancel),
-            imageView = null
-        ).show()
-    }
-
     private fun initListeners() {
+
+        currenciesAdapter.itemClickListener = this.itemClickListener
 
         headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
@@ -123,10 +117,34 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), Recycle
         viewModel.currencies.observeApi(this) {
             when (it) {
                 is DataHolder.Success -> {
-                    currenciesAdapter.updateAllItems(it.data)
+                    currenciesAdapter.updateDiffItemsOnly(it.data)
+                    currenciesAdapter.itemClickListener
                 }
             }
         }
+    }
+
+    private val itemClickListener = { v: View, item: DisplayItem ->
+        val currenciesViewEntity = item as CurrenciesViewEntity
+
+        v.context.createCustomAlertDialog(
+            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message),
+            title = v.context.getString(R.string.title),
+            positiveButtonText = v.context.getString(R.string.add),
+            positiveButtonAction = {
+                viewModel.addToFavorites(
+                    Currency(
+                        bankName = currenciesViewEntity.bankName,
+                        buyPrice  = currenciesViewEntity.buyPrice,
+                        buyStatus = currenciesViewEntity.buyStatus,
+                        sellPrice = currenciesViewEntity.sellPrice,
+                        sellStatus = currenciesViewEntity.sellStatus,
+                        currencyType = currenciesViewEntity.currencyType
+                    ))
+            },
+            negativeButtonText = v.context.getString(R.string.cancel),
+            imageView = null
+        ).show()
     }
 
     private fun clearAllColor() {
@@ -143,9 +161,9 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), Recycle
     companion object {
         private const val BUNDLE_CURRENCY_TYPE = "bundle_currency_type"
 
-        fun newInstance(currencyType: Int) = CurrenciesFragment().apply {
+        fun newInstance(currencyType: String) = CurrenciesFragment().apply {
             arguments = Bundle().apply {
-                putInt(BUNDLE_CURRENCY_TYPE, currencyType)
+                putString(BUNDLE_CURRENCY_TYPE, currencyType)
             }
         }
     }

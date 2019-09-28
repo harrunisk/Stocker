@@ -19,7 +19,7 @@ import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewClickListen
 import com.nstudiosappdev.stocker.presentation.R
 
 
-class CurrenciesViewHolder private constructor(itemView: View, recyclerViewClickListener: RecyclerViewClickListener) : ViewHolder(itemView) {
+class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(itemView) {
 
     private val textViewBankName: TextView = itemView.findViewById(R.id.textViewBankName)
     private val textViewBuyingPrice: TextView = itemView.findViewById(R.id.textViewBuyingPrice)
@@ -28,8 +28,6 @@ class CurrenciesViewHolder private constructor(itemView: View, recyclerViewClick
 
     lateinit var buyingPrice: String
     lateinit var sellingPrice: String
-
-    private val recyclerViewClickListener: RecyclerViewClickListener? = recyclerViewClickListener
 
 
     private fun bind(item: CurrenciesViewEntity) {
@@ -72,25 +70,24 @@ class CurrenciesViewHolder private constructor(itemView: View, recyclerViewClick
         ).toString().adjustSensitivityGiveString(3)
 
         itemView.setOnClickListener {
-            itemClickListener?.invoke(item)
+            itemClickListener?.invoke(itemView, item)
         }
 
         itemView.setOnLongClickListener {
             itemLongClickListener?.invoke(item)
-            recyclerViewClickListener!!.recyclerViewListClicked(itemView, item)
             true
         }
     }
 
     internal class CurrenciesViewHolderFactory @Inject constructor() : ViewHolderFactory {
 
-        override fun createViewHolder(parent: ViewGroup, recyclerViewClickListener: RecyclerViewClickListener): RecyclerView.ViewHolder =
+        override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
             CurrenciesViewHolder(
                 LayoutInflater.from(parent.context).inflate(
                     R.layout.item_currency,
                     parent,
                     false
-                ), recyclerViewClickListener
+                )
             )
     }
 
