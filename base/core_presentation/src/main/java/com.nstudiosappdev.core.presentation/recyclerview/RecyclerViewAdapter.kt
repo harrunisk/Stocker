@@ -4,6 +4,7 @@
 
 package com.nstudiosappdev.core.presentation.recyclerview
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,17 +18,16 @@ class RecyclerViewAdapter constructor(
     private val itemComparator: DisplayItemComparator,
     private val viewHolderFactoryMap: Map<Int, ViewHolderFactory>,
     private val viewBinderFactoryMap: Map<Int, ViewHolderBinder>,
-    private val androidPreconditions: AndroidPreConditions,
-    private val recyclerViewClickListener: RecyclerViewClickListener
+    private val androidPreconditions: AndroidPreConditions
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DiffAdapter, SelectionAdapter, CoroutineScope {
 
-    var itemClickListener: ((item: DisplayItem) -> Unit)? = null
+    var itemClickListener: ((view: View, item: DisplayItem) -> Unit)? = null
     var itemLongClickListener: ((item: DisplayItem) -> Boolean)? = null
 
     override var coroutineContext: CoroutineContext = Dispatchers.Main
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        viewHolderFactoryMap[viewType]?.createViewHolder(parent, recyclerViewClickListener)!!
+        viewHolderFactoryMap[viewType]?.createViewHolder(parent)!!
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         viewBinderFactoryMap[items[position].type()]?.bind(holder, items[position])

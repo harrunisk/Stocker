@@ -5,17 +5,17 @@ import android.os.Bundle
 import android.view.View
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
-import com.nstudiosappdev.core.presentation.entity.ViewEntity
 import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
 import com.nstudiosappdev.core.presentation.extensions.setup
 import com.nstudiosappdev.core.presentation.livedata.observeApi
+import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
-import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewClickListener
+import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_currencies.*
 import javax.inject.Inject
 
-class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), RecyclerViewClickListener {
+class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
 
     private var currencyType: Int? = null
 
@@ -58,21 +58,9 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), Recycle
         initListeners()
     }
 
-    override fun recyclerViewListClicked(v: View, viewEntity: ViewEntity) {
-        val currenciesViewEntity = viewEntity as CurrenciesViewEntity
-
-        v.context.createCustomAlertDialog(
-            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message),
-            title = v.context.getString(R.string.title),
-            positiveButtonText = v.context.getString(R.string.add),
-            positiveButtonAction = {
-            },
-            negativeButtonText = v.context.getString(R.string.cancel),
-            imageView = null
-        ).show()
-    }
-
     private fun initListeners() {
+
+        currenciesAdapter.itemClickListener = this.itemClickListener
 
         headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
@@ -124,9 +112,33 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>(), Recycle
             when (it) {
                 is DataHolder.Success -> {
                     currenciesAdapter.updateAllItems(it.data)
+                    currenciesAdapter.itemClickListener
                 }
             }
         }
+    }
+
+    private val itemClickListener = { v: View, item: DisplayItem ->
+        val currenciesViewEntity = item as CurrenciesViewEntity
+
+        v.context.createCustomAlertDialog(
+            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message),
+            title = v.context.getString(R.string.title),
+            positiveButtonText = v.context.getString(R.string.add),
+            positiveButtonAction = {
+                viewModel.addToFavorites(
+                    Currency(
+                        bankName = currenciesViewEntity.bankName,
+                        buyPrice  = currenciesViewEntity.buyPrice,
+                        buyStatus = currenciesViewEntity.buyStatus,
+                        sellPrice = currenciesViewEntity.sellPrice,
+                        sellStatus = currenciesViewEntity.sellStatus,
+                        currencyType = currenciesViewEntity.currencyType
+                    ))
+            },
+            negativeButtonText = v.context.getString(R.string.cancel),
+            imageView = null
+        ).show()
     }
 
     private fun clearAllColor() {
