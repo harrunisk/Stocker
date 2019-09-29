@@ -11,5 +11,6 @@ dependencies {
     api SupportLibraries.constraintLayout
     api Libraries.lifecycleExtensions
     api Libraries.picasso
+    api Libraries.lottie
 
 }

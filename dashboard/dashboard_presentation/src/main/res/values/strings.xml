@@ -25,4 +25,6 @@
     <string name="message_add">döviz kurunu favorilerinize eklemek ister misiniz?</string>
     <string name="message_remove">döviz kurunu favorilerinizden kaldırmak ister misiniz?</string>
     <string name="title">Bilgi</string>
+    <string name="message_favorite_currency_not_available">Favori döviz kurunuz bulunmamaktadır.</string>
+    <string name="message_connection_error_or">Bağlantı hatası yaşanıyor olabilir.</string>
 </resources>
