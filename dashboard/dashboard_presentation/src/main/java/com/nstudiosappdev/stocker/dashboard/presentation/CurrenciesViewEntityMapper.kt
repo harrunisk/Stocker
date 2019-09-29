@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.currencies
+package com.nstudiosappdev.stocker.dashboard.presentation
 
 import com.nstudiosappdev.core.presentation.entity.ViewEntityMapper
 import com.nstudiosappdev.stocker.dashboard.domain.Currency

@@ -1,9 +1,8 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.portfolio
+package com.nstudiosappdev.stocker.dashboard.presentation
 
 import com.nstudiosappdev.core.preconditions.AndroidPreConditions
 import com.nstudiosappdev.core.presentation.recyclerview.*
-import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants.DisplayTypes.PORTFOLIO
-import com.nstudiosappdev.stocker.dashboard.presentation.currencies.CurrenciesFragment
+import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants.DisplayTypes.CURRENCIES
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -11,17 +10,17 @@ import dagger.multibindings.IntKey
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class PortfolioPresentationModule {
+abstract class CurrenciesPresentationModule {
 
     @Binds
     @IntoMap
-    @IntKey(PORTFOLIO)
-    internal abstract fun providePortfolioViewModelFactory(factory: PortfolioViewHolder.PortfolioViewHolderFactory): ViewHolderFactory
+    @IntKey(CURRENCIES)
+    internal abstract fun provideCurrenciesViewModelFactory(factory: CurrenciesViewHolder.CurrenciesViewHolderFactory): ViewHolderFactory
 
     @Binds
     @IntoMap
-    @IntKey(PORTFOLIO)
-    internal abstract fun providePortfolioViewHolderFactory(binder: PortfolioViewHolder.PortfolioViewHolderBinder): ViewHolderBinder
+    @IntKey(CURRENCIES)
+    internal abstract fun provideCurrenciesViewHolderFactory(binder: CurrenciesViewHolder.CurrenciesViewHolderBinder): ViewHolderBinder
 
     @Module
     companion object {
@@ -45,6 +44,5 @@ abstract class PortfolioPresentationModule {
                 androidPreconditions = androidPreConditions
             )
         }
-
     }
 }

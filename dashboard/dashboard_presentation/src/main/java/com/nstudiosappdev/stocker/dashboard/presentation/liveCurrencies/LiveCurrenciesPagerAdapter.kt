@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.currencies
+package com.nstudiosappdev.stocker.dashboard.presentation.liveCurrencies
 
 import android.util.SparseArray
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants
 import java.lang.IllegalArgumentException
 
-class CurrenciesPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class LiveCurrenciesPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private val _fragments = SparseArray<Fragment>()
 
@@ -17,11 +17,11 @@ class CurrenciesPagerAdapter(private val titles: MutableList<String>, fm: Fragme
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            DashboardPresentationConstants.TYPES.USD -> CurrenciesFragment.newInstance(
+            DashboardPresentationConstants.TYPES.USD -> LiveCurrenciesFragment.newInstance(
                 DashboardPresentationConstants.TYPES_STRING.USD)
-            DashboardPresentationConstants.TYPES.EURO -> CurrenciesFragment.newInstance(
+            DashboardPresentationConstants.TYPES.EURO -> LiveCurrenciesFragment.newInstance(
                 DashboardPresentationConstants.TYPES_STRING.EURO)
-            DashboardPresentationConstants.TYPES.GOLD -> CurrenciesFragment.newInstance(
+            DashboardPresentationConstants.TYPES.GOLD -> LiveCurrenciesFragment.newInstance(
                 DashboardPresentationConstants.TYPES_STRING.GOLD)
             else -> throw IllegalArgumentException("Unknown position!")
         }
