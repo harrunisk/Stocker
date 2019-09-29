@@ -45,21 +45,19 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
 
         pullToRefreshPortfolio.setOnRefreshListener {
             viewModel.fetchLiveCurrencies(currencyType!!)
-            viewModel.fetchLiveCurrencies(currencyType!!)
+            viewModel.fetchSavedCurrencies(currencyType!!)
             pullToRefreshPortfolio.isRefreshing = false
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         portfolioRecyclerView.setup(
             adapter = portfolioAdapter,
             context = context!!
         )
-    }
 
-    override fun initView() {
-        super.initView()
     }
 
     companion object {

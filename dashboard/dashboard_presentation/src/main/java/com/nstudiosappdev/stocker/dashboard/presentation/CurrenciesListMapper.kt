@@ -1,9 +1,10 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.currencies
+package com.nstudiosappdev.stocker.dashboard.presentation
 
 import com.nstudiosappdev.core.presentation.entity.ViewEntityMapper
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItemListMapper
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
+import com.nstudiosappdev.stocker.dashboard.presentation.CurrenciesViewEntity
 
 class CurrenciesListMapper(
     private val currenciesViewEntityMapper: ViewEntityMapper<Currency, CurrenciesViewEntity>
