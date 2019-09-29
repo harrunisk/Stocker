@@ -18,17 +18,13 @@ import javax.inject.Named
 class PortfolioViewModel @Inject constructor(
     @Named(CoroutineManagerModule.CM_VIEWMODEL) coroutineManager: CoroutineManager,
     private val getCurrenciesInteractor: Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>>,
-    private val getSavedCurrencyInteractor: Interactor.DeferredInteractor<GetSavedCurrencyInteractor.Params, Currency>,
     private val getSavedCurrenciesInteractor: Interactor.DeferredInteractor<GetSavedCurrenciesInteractor.Params, List<Currency>>,
-    private val saveCurrencyInteractor: Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean>,
     private val deleteCurrencyInteractor: Interactor.DeferredInteractor<DeleteCurrencyInteractor.Params, Boolean>,
     private val currenciesListMapper: DisplayItemListMapper<Currency>,
     private val errorFactory: ErrorFactory
 ) : BaseViewModel(coroutineManager) {
 
     private val selectedItems = ArrayList<Currency>()
-
-    private val items: List<Currency>? = null
 
     private var savedCurrenciesList : List<Currency>? = null
 
@@ -50,13 +46,6 @@ class PortfolioViewModel @Inject constructor(
 
     private val _deleteCurrency = MutableLiveData<DataHolder<Boolean>>()
 
-
-    val savedCurrencies: LiveData<DataHolder<List<DisplayItem>>>
-        get() = _savedCurrencies
-
-    val liveCurrencies: LiveData<DataHolder<List<DisplayItem>>>
-        get() = _liveCurrencies
-
     val filteredCurrencies: LiveData<DataHolder<List<DisplayItem>>>
         get() = _filteredCurrencies
 
@@ -74,7 +63,6 @@ class PortfolioViewModel @Inject constructor(
 
         val savedCurrenciesResult = getSavedCurrenciesInteractor.executeAsync(savedCurrenciesParams).await()
         if(savedCurrenciesResult is DataHolder.Success) {
-//            _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(savedCurrenciesResult.data))
             savedCurrenciesList = savedCurrenciesResult.data
             if(!liveCurrenciesList.isNullOrEmpty()) filterElements()
 
@@ -102,6 +90,8 @@ class PortfolioViewModel @Inject constructor(
     })
 
     private fun filterElements(){
+        selectedItems.clear()
+
         savedCurrenciesList!!.forEach { savedCurrency ->
             liveCurrenciesList!!.forEach { liveCurrency ->
                 if (savedCurrency.bankName == liveCurrency.bankName && savedCurrency.currencyType == liveCurrency.currencyType)
@@ -110,20 +100,19 @@ class PortfolioViewModel @Inject constructor(
         }
 
         _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems))
-        selectedItems.clear()
     }
 
     fun orderCurrenciesByName(){
 
         when(orderByBankNameFlag) {
             true -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.bankName }))
                 clearAllFlags()
                 orderByBankNameFlag = false
 
             }
             false -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.bankName }))
                 clearAllFlags()
                 orderByBankNameFlag = true
             }
@@ -134,12 +123,12 @@ class PortfolioViewModel @Inject constructor(
 
         when(orderByBuyingPriceFlag) {
             true -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.buyPrice }))
                 clearAllFlags()
                 orderByBuyingPriceFlag = false
             }
             false -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.buyPrice }))
                 clearAllFlags()
                 orderByBuyingPriceFlag = true
             }
@@ -150,12 +139,12 @@ class PortfolioViewModel @Inject constructor(
 
         when(orderBySellingPriceFlag) {
             true -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.sellPrice }))
                 clearAllFlags()
                 orderBySellingPriceFlag = false
             }
             false -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.sellPrice }))
                 clearAllFlags()
                 orderBySellingPriceFlag = true
             }
@@ -166,7 +155,7 @@ class PortfolioViewModel @Inject constructor(
 
         when(orderByDiffFlag) {
             true -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy {
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy {
                     it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
                 )
                 )
@@ -176,7 +165,7 @@ class PortfolioViewModel @Inject constructor(
                 orderByBankNameFlag = false
             }
             false -> {
-                _savedCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending {
+                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending {
                     it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
                 )
                 )
@@ -187,6 +176,21 @@ class PortfolioViewModel @Inject constructor(
             }
         }
     }
+
+    fun removeFromFavorites(
+        bankName: String,
+        currencyType: String
+    ) = handleLaunch(execution = {
+        _deleteCurrency.value = DataHolder.Loading
+        val deleteCurrencyParams = DeleteCurrencyInteractor.Params(
+            bankName,
+            currencyType
+        )
+        val deleteCurrencyResult = deleteCurrencyInteractor.executeAsync(deleteCurrencyParams).await()
+        if(deleteCurrencyResult is DataHolder.Success) _deleteCurrency.value = DataHolder.Success(deleteCurrencyResult.data)
+    }, error = {
+        _deleteCurrency.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
+    })
 
     private fun clearAllFlags() {
         orderByBankNameFlag = false

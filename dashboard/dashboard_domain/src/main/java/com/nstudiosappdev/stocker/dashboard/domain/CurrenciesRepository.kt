@@ -12,5 +12,5 @@ interface CurrenciesRepository {
 
     suspend fun saveCurrency(currency: Currency): Deferred<DataHolder<Boolean>>
 
-    suspend fun deleteCurrency(currency: Currency): Deferred<DataHolder<Boolean>>
+    suspend fun deleteCurrency(bankName: String, currencyType: String): Deferred<DataHolder<Boolean>>
 }

@@ -5,5 +5,5 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var itemClickListener: ((view: View, item: DisplayItem) -> Unit)? = null
-    var itemLongClickListener: ((item: DisplayItem) -> Boolean)? = null
+    var itemLongClickListener: ((view: View, item: DisplayItem) -> Unit)? = null
 }

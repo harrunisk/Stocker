@@ -20,7 +20,9 @@
 
     <!--Alert Dialog -->
     <string name="add">EKLE</string>
+    <string name="remove">KALDIR</string>
     <string name="cancel">İptal Et</string>
-    <string name= "message">döviz kurunu favorilerinize eklemek ister misiniz?</string>
+    <string name="message_add">döviz kurunu favorilerinize eklemek ister misiniz?</string>
+    <string name="message_remove">döviz kurunu favorilerinizden kaldırmak ister misiniz?</string>
     <string name="title">Bilgi</string>
 </resources>
