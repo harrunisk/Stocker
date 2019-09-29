@@ -60,8 +60,13 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
         viewModel.filteredCurrencies.observeApi(this) {
             when (it) {
                 is DataHolder.Success -> {
+                    favoritesLinearLayout.visibility = View.VISIBLE
                     portfolioAdapter.updateDiffItemsOnly(it.data)
                     portfolioAdapter.itemClickListener
+                }
+                is DataHolder.Fail -> {
+                    favoritesLinearLayout.visibility = View.GONE
+                    notFoundAnimation.visibility = View.VISIBLE
                 }
             }
         }

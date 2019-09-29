@@ -59,12 +59,14 @@ class LiveCurrenciesViewModel @Inject constructor(
         )
 
         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
-        if(currenciesResult is DataHolder.Success) {
+        if(currenciesResult is DataHolder.Success && !currenciesResult.data.isNullOrEmpty()) {
             _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
             items = currenciesResult.data
+        } else {
+            _liveCurrencies.value = DataHolder.Fail(errorFactory.createConnectionError())
         }
     }, error = {
-        _liveCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
+        _liveCurrencies.value = DataHolder.Fail(errorFactory.createConnectionError())
     })
 
     fun orderCurrenciesByName(){
@@ -153,7 +155,7 @@ class LiveCurrenciesViewModel @Inject constructor(
         val saveCurrencyResult = saveCurrencyInteractor.executeAsync(saveCurrencyParams).await()
         if (saveCurrencyResult is DataHolder.Success) _saveFavorites.value = DataHolder.Success(saveCurrencyResult.data)
     }, error = {
-        _saveFavorites.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
+        _saveFavorites.value = DataHolder.Fail(errorFactory.createConnectionError())
     })
 
     private fun clearAllFlags() {

@@ -66,7 +66,6 @@ abstract class BaseFragment : Fragment(), BaseView {
         try {
             // Alert Dialog or Toast message show error,
             val errorMessage = getErrorMessage(e)
-            Toast.makeText(getApplicationContext(),errorMessage,Toast.LENGTH_LONG).show()
         } catch (e: WindowManager.BadTokenException) {
             // no-op
         }

@@ -64,7 +64,10 @@ class PortfolioViewModel @Inject constructor(
         val savedCurrenciesResult = getSavedCurrenciesInteractor.executeAsync(savedCurrenciesParams).await()
         if(savedCurrenciesResult is DataHolder.Success) {
             savedCurrenciesList = savedCurrenciesResult.data
-            if(!liveCurrenciesList.isNullOrEmpty()) filterElements()
+
+            if(savedCurrenciesResult.data.isNullOrEmpty()){
+                _filteredCurrencies.value = DataHolder.Fail(errorFactory.createBusinessError())
+            } else if (!liveCurrenciesList.isNullOrEmpty()) filterElements()
 
         }
     }, error = {
@@ -83,7 +86,9 @@ class PortfolioViewModel @Inject constructor(
         if(currenciesResult is DataHolder.Success) {
             liveCurrenciesList = currenciesResult.data
 
-            if(!savedCurrenciesList.isNullOrEmpty()) filterElements()
+            if(currenciesResult.data.isNullOrEmpty()) {
+                _filteredCurrencies.value = DataHolder.Fail(errorFactory.createBusinessError())
+            } else if (!savedCurrenciesList.isNullOrEmpty()) filterElements()
         }
     }, error = {
         _filteredCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))

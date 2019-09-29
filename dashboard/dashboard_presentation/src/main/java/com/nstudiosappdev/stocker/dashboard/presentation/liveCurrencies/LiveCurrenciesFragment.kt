@@ -38,6 +38,7 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initObservers()
+        pullToRefreshCurrencies.isRefreshing = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,8 +108,14 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
         viewModel.liveCurrencies.observeApi(this) {
             when (it) {
                 is DataHolder.Success -> {
+                    liveCurrenciesLinearLayout.visibility = View.VISIBLE
                     liveCurrenciesAdapter.updateDiffItemsOnly(it.data)
                     liveCurrenciesAdapter.itemClickListener
+                    pullToRefreshCurrencies.isRefreshing = false
+                }
+                is DataHolder.Fail -> {
+                    liveCurrenciesLinearLayout.visibility = View.GONE
+                    notFoundLiveCurrenciesAnimation.visibility = View.VISIBLE
                 }
             }
         }
