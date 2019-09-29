@@ -37,19 +37,7 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.liveCurrencies.observeApi(this) {
-            when (it) {
-                is DataHolder.Success -> {
-                    liveCurrenciesAdapter.updateDiffItemsOnly(it.data)
-                    liveCurrenciesAdapter.itemClickListener
-                }
-            }
-        }
-        pullToRefreshCurrencies.setOnRefreshListener {
-            viewModel.fetchCurrencies(currencyType!!)
-            pullToRefreshCurrencies.isRefreshing = false
-            clearAllColor()
-        }
+        initObservers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,6 +56,7 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
     private fun initListeners() {
 
         liveCurrenciesAdapter.itemClickListener = this.itemClickListener
+        liveCurrenciesAdapter.itemLongClickListener = this.itemClickListener
 
         headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
@@ -123,13 +112,19 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
                 }
             }
         }
+
+        pullToRefreshCurrencies.setOnRefreshListener {
+            viewModel.fetchCurrencies(currencyType!!)
+            pullToRefreshCurrencies.isRefreshing = false
+            clearAllColor()
+        }
     }
 
     private val itemClickListener = { v: View, item: DisplayItem ->
         val currenciesViewEntity = item as CurrenciesViewEntity
 
         v.context.createCustomAlertDialog(
-            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message),
+            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message_add),
             title = v.context.getString(R.string.title),
             positiveButtonText = v.context.getString(R.string.add),
             positiveButtonAction = {

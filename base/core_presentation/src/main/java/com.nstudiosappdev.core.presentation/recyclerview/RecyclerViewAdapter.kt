@@ -22,7 +22,7 @@ class RecyclerViewAdapter constructor(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DiffAdapter, SelectionAdapter, CoroutineScope {
 
     var itemClickListener: ((view: View, item: DisplayItem) -> Unit)? = null
-    var itemLongClickListener: ((item: DisplayItem) -> Boolean)? = null
+    var itemLongClickListener: ((view: View, item: DisplayItem) -> Unit)? = null
 
     override var coroutineContext: CoroutineContext = Dispatchers.Main
 
