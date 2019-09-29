@@ -26,9 +26,7 @@ class PortfolioViewModel @Inject constructor(
     private val errorFactory: ErrorFactory
 ) : BaseViewModel(coroutineManager) {
 
-    private val selectedItems by lazy {
-        ArrayList<Currency>()
-    }
+    private val selectedItems = ArrayList<Currency>()
 
     private val items: List<Currency>? = null
 
@@ -66,12 +64,12 @@ class PortfolioViewModel @Inject constructor(
         get() = _deleteCurrency
 
     fun fetchSavedCurrencies(
-        currecyType: String
+        currencyType: String
     ) = handleLaunch(execution = {
         _savedCurrencies.value = DataHolder.Loading
 
         val savedCurrenciesParams = GetSavedCurrenciesInteractor.Params(
-            currencyType = currecyType
+            currencyType = currencyType
         )
 
         val savedCurrenciesResult = getSavedCurrenciesInteractor.executeAsync(savedCurrenciesParams).await()
@@ -82,7 +80,7 @@ class PortfolioViewModel @Inject constructor(
 
         }
     }, error = {
-        _savedCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
+        _filteredCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
     })
 
     fun fetchLiveCurrencies(
@@ -95,13 +93,12 @@ class PortfolioViewModel @Inject constructor(
 
         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
         if(currenciesResult is DataHolder.Success) {
-//            _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
             liveCurrenciesList = currenciesResult.data
 
             if(!savedCurrenciesList.isNullOrEmpty()) filterElements()
         }
     }, error = {
-        _liveCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
+        _filteredCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
     })
 
     private fun filterElements(){
@@ -111,7 +108,9 @@ class PortfolioViewModel @Inject constructor(
                     selectedItems.add(liveCurrency)
             }
         }
+
         _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems))
+        selectedItems.clear()
     }
 
     fun orderCurrenciesByName(){

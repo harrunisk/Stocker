@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.currencies
+package com.nstudiosappdev.stocker.dashboard.presentation.liveCurrencies
 
 import android.graphics.Color
 import android.os.Bundle
@@ -11,18 +11,19 @@ import com.nstudiosappdev.core.presentation.livedata.observeApi
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
+import com.nstudiosappdev.stocker.dashboard.presentation.CurrenciesViewEntity
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_currencies.*
 import javax.inject.Inject
 
-class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
+class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() {
 
     private var currencyType: String? = null
 
     @Inject
-    lateinit var currenciesAdapter: RecyclerViewAdapter
+    lateinit var liveCurrenciesAdapter: RecyclerViewAdapter
 
-    override fun getModelClass() = CurrenciesViewModel::class.java
+    override fun getModelClass() = LiveCurrenciesViewModel::class.java
 
     override fun getLayoutRes(): Int = R.layout.fragment_currencies
 
@@ -36,11 +37,11 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.currencies.observeApi(this) {
+        viewModel.liveCurrencies.observeApi(this) {
             when (it) {
                 is DataHolder.Success -> {
-                    currenciesAdapter.updateDiffItemsOnly(it.data)
-                    currenciesAdapter.itemClickListener
+                    liveCurrenciesAdapter.updateDiffItemsOnly(it.data)
+                    liveCurrenciesAdapter.itemClickListener
                 }
             }
         }
@@ -54,7 +55,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         currenciesRecyclerView.setup(
-            adapter = currenciesAdapter,
+            adapter = liveCurrenciesAdapter,
             context = context!!
         )
     }
@@ -66,7 +67,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
 
     private fun initListeners() {
 
-        currenciesAdapter.itemClickListener = this.itemClickListener
+        liveCurrenciesAdapter.itemClickListener = this.itemClickListener
 
         headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
@@ -114,11 +115,11 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
     }
 
     private fun initObservers() {
-        viewModel.currencies.observeApi(this) {
+        viewModel.liveCurrencies.observeApi(this) {
             when (it) {
                 is DataHolder.Success -> {
-                    currenciesAdapter.updateDiffItemsOnly(it.data)
-                    currenciesAdapter.itemClickListener
+                    liveCurrenciesAdapter.updateDiffItemsOnly(it.data)
+                    liveCurrenciesAdapter.itemClickListener
                 }
             }
         }
@@ -161,7 +162,7 @@ class CurrenciesFragment : BaseViewModelFragment<CurrenciesViewModel>() {
     companion object {
         private const val BUNDLE_CURRENCY_TYPE = "bundle_currency_type"
 
-        fun newInstance(currencyType: String) = CurrenciesFragment().apply {
+        fun newInstance(currencyType: String) = LiveCurrenciesFragment().apply {
             arguments = Bundle().apply {
                 putString(BUNDLE_CURRENCY_TYPE, currencyType)
             }

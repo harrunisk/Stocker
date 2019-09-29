@@ -1,4 +1,4 @@
-package com.nstudiosappdev.stocker.dashboard.presentation.currencies
+package com.nstudiosappdev.stocker.dashboard.presentation.liveCurrencies
 
 import android.os.Bundle
 import android.view.View
@@ -8,11 +8,11 @@ import com.nstudiosappdev.core.presentation.base.BaseFragment
 import com.nstudiosappdev.stocker.presentation.R
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-class CurrenciesMainFragment : BaseFragment() {
+class LiveCurrenciesMainFragment : BaseFragment() {
 
     private var lastItem: Int = 0
 
-    private lateinit var pagerAdapter: CurrenciesPagerAdapter
+    private lateinit var pagerAdapterLive: LiveCurrenciesPagerAdapter
 
     override fun getLayoutRes(): Int = R.layout.fragment_dashboard
 
@@ -21,14 +21,14 @@ class CurrenciesMainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pagerAdapter =
-            CurrenciesPagerAdapter(
+        pagerAdapterLive =
+            LiveCurrenciesPagerAdapter(
                 resources.getStringArray(R.array.main_items).toMutableList(),
                 childFragmentManager
             )
 
         viewPagerDashboard.apply {
-            adapter = pagerAdapter
+            adapter = pagerAdapterLive
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
                 override fun onPageScrollStateChanged(state: Int) {
