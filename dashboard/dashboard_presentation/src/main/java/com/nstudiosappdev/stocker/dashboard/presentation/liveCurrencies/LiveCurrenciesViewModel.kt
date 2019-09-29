@@ -14,6 +14,8 @@ import com.nstudiosappdev.core.presentation.viewmodel.BaseViewModel
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import com.nstudiosappdev.stocker.dashboard.domain.GetCurrenciesInteractor
 import com.nstudiosappdev.stocker.dashboard.domain.SaveCurrencyInteractor
+import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants
+import com.nstudiosappdev.stocker.dashboard.presentation.OrderingStyle
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -39,6 +41,8 @@ class LiveCurrenciesViewModel @Inject constructor(
 
     private val _saveFavorites = MutableLiveData<DataHolder<Boolean>>()
 
+    private var orderingStyle : Int = 0
+
 
     val liveCurrencies: LiveData<DataHolder<List<DisplayItem>>>
         get() = _liveCurrencies
@@ -46,9 +50,6 @@ class LiveCurrenciesViewModel @Inject constructor(
     val saveFavorites: LiveData<DataHolder<Boolean>>
         get() = _saveFavorites
 
-/*    init {
-        fetchLiveCurrencies()
-    }*/
 
     fun fetchCurrencies(
         currencyType: String
@@ -60,7 +61,19 @@ class LiveCurrenciesViewModel @Inject constructor(
 
         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
         if(currenciesResult is DataHolder.Success && !currenciesResult.data.isNullOrEmpty()) {
-            _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
+            _liveCurrencies.value = when(orderingStyle) {
+                OrderingStyle.BY_NAME.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.bankName }))
+                OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.bankName }))
+                OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.buyPrice }))
+                OrderingStyle.BY_BUYING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.buyPrice }))
+                OrderingStyle.BY_SELLING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.sellPrice }))
+                OrderingStyle.BY_SELLING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.sellPrice }))
+                OrderingStyle.BY_DIFF.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy {
+                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
+                OrderingStyle.BY_DIFF_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending {
+                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
+                else -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
+            }
             items = currenciesResult.data
         } else {
             _liveCurrencies.value = DataHolder.Fail(errorFactory.createConnectionError())
@@ -75,13 +88,13 @@ class LiveCurrenciesViewModel @Inject constructor(
             true -> {
                 _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
                 clearAllFlags()
-                orderByBankNameFlag = false
-
+                orderingStyle = OrderingStyle.BY_NAME.code
             }
             false -> {
                 _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
                 clearAllFlags()
                 orderByBankNameFlag = true
+                orderingStyle = OrderingStyle.BY_NAME_DESC.code
             }
         }
     }
@@ -92,12 +105,13 @@ class LiveCurrenciesViewModel @Inject constructor(
             true -> {
                 _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
                 clearAllFlags()
-                orderByBuyingPriceFlag = false
+                orderingStyle = OrderingStyle.BY_BUYING_PRICE.code
             }
             false -> {
                 _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
                 clearAllFlags()
                 orderByBuyingPriceFlag = true
+                orderingStyle = OrderingStyle.BY_BUYING_PRICE_DESC.code
             }
         }
     }
@@ -108,12 +122,13 @@ class LiveCurrenciesViewModel @Inject constructor(
             true -> {
                 _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
                 clearAllFlags()
-                orderBySellingPriceFlag = false
+                orderingStyle = OrderingStyle.BY_SELLING_PRICE.code
             }
             false -> {
                 _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
                 clearAllFlags()
                 orderBySellingPriceFlag = true
+                orderingStyle = OrderingStyle.BY_SELLING_PRICE_DESC.code
             }
         }
     }
@@ -130,6 +145,7 @@ class LiveCurrenciesViewModel @Inject constructor(
                 orderByBuyingPriceFlag = false
                 orderBySellingPriceFlag = false
                 orderByBankNameFlag = false
+                orderingStyle = OrderingStyle.BY_DIFF.code
             }
             false -> {
                 _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending {
@@ -140,6 +156,7 @@ class LiveCurrenciesViewModel @Inject constructor(
                 orderByBuyingPriceFlag = false
                 orderBySellingPriceFlag = false
                 orderByBankNameFlag = false
+                orderingStyle = OrderingStyle.BY_DIFF_DESC.code
             }
         }
     }
@@ -164,4 +181,5 @@ class LiveCurrenciesViewModel @Inject constructor(
         orderBySellingPriceFlag = false
         orderByDiffFlag = false
     }
+
 }

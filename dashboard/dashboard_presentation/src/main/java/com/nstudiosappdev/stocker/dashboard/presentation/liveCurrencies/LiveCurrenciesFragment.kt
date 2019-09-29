@@ -123,7 +123,6 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
         pullToRefreshCurrencies.setOnRefreshListener {
             viewModel.fetchCurrencies(currencyType!!)
             pullToRefreshCurrencies.isRefreshing = false
-            clearAllColor()
         }
     }
 
