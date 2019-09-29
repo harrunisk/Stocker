@@ -42,9 +42,10 @@ class CurrenciesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteCurrency(
-        currency: Currency
+        bankName: String,
+        currencyType: String
     ): Deferred<DataHolder<Boolean>> = handleAsync {
-        val result = currenciesLocalDataSource.remove(currency)
+        val result = currenciesLocalDataSource.remove(bankName, currencyType)
         return@handleAsync DataHolder.Success(result)
     }
 }

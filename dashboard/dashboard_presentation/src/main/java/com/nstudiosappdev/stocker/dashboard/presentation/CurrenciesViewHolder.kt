@@ -70,7 +70,7 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
         }
 
         itemView.setOnLongClickListener {
-            itemLongClickListener?.invoke(item)
+            itemLongClickListener?.invoke(itemView, item)
             true
         }
     }

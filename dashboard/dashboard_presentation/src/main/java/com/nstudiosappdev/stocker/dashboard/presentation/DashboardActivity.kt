@@ -28,4 +28,8 @@ class DashboardActivity : BaseInjectionActivity(), TabProvider {
     }
 
     override fun provideTabLayout(): TabLayout = tabs
+
+    override fun onBackPressed() {
+        // no-op
+    }
 }

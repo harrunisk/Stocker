@@ -41,11 +41,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/bankNameSortByIncreasingSign"
                         android:text="@string/increase"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/bankNameSortByDecreasingSign"
                         android:text="@string/decrease"/>
                 </LinearLayout>
@@ -72,12 +76,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/buyingPriceSortByIncreasingSign"
                         android:text="@string/increase"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/buyingPriceSortByDecreasingSign"
                         android:text="@string/decrease"/>
 
@@ -105,12 +113,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/sellingPriceSortByIncreasingSign"
                         android:text="@string/increase"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/sellingPriceSortByDecreasingSign"
                         android:text="@string/decrease"/>
 
@@ -138,12 +150,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/diffSortByIncreasingSign"
                         android:text="@string/increase"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/diffSortByDecreasingSign"
                         android:text="@string/decrease"/>
 
