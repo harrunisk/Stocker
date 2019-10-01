@@ -1,5 +1,6 @@
 package com.nstudiosappdev.core.presentation.extensions
 
+import android.graphics.Color
 import java.net.MalformedURLException
 import java.net.URL
 import java.text.ParseException
@@ -53,3 +54,5 @@ fun String.adjustSensitivityGiveString(sensitivity: Int): String {
 fun String.adjustSensitivityGiveFloat(sensitivity: Int): Float {
     return String.format("%.${sensitivity}f", this.replace(",", ".").toFloat()).toFloat()
 }
+
+fun String.toColor(): Int = Color.parseColor(this)

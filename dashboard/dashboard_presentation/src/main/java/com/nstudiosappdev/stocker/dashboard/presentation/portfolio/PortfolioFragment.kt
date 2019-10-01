@@ -3,6 +3,7 @@ package com.nstudiosappdev.stocker.dashboard.presentation.portfolio
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
 import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
@@ -61,6 +62,7 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
             when (it) {
                 is DataHolder.Success -> {
                     favoritesLinearLayout.visibility = View.VISIBLE
+                    notFoundAnimation.visibility = View.GONE
                     portfolioAdapter.updateDiffItemsOnly(it.data)
                     portfolioAdapter.itemClickListener
                 }
@@ -94,45 +96,45 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
 
         headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
-            if (bankNameSortByDecreasingSign.currentTextColor != Color.GREEN) {
+            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                bankNameSortByDecreasingSign.setTextColor(Color.GREEN)
+                bankNameSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                bankNameSortByIncreasingSign.setTextColor(Color.GREEN)
+                bankNameSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
 
         headerBuyingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByBuyingPrices()
-            if (buyingPriceSortByIncreasingSign.currentTextColor != Color.GREEN) {
+            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                buyingPriceSortByIncreasingSign.setTextColor(Color.GREEN)
+                buyingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                buyingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
+                buyingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
 
         headerSellingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesBySellingPrice()
-            if (sellingPriceSortByIncreasingSign.currentTextColor != Color.GREEN) {
+            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                sellingPriceSortByIncreasingSign.setTextColor(Color.GREEN)
+                sellingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                sellingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
+                sellingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
 
         headerDiffLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByDiff()
-            if (diffSortByIncreasingSign.currentTextColor != Color.GREEN) {
+            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                diffSortByIncreasingSign.setTextColor(Color.GREEN)
+                diffSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                diffSortByDecreasingSign.setTextColor(Color.GREEN)
+                diffSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
     }
@@ -141,16 +143,16 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
         val currenciesViewEntity = item as CurrenciesViewEntity
 
         v.context.createCustomAlertDialog(
-            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message_remove),
-            title = v.context.getString(R.string.title),
-            positiveButtonText = v.context.getString(R.string.remove),
+            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.text_remove_currency),
+            title = v.context.getString(R.string.text_info),
+            positiveButtonText = v.context.getString(R.string.text_remove),
             positiveButtonAction = {
                 viewModel.removeFromFavorites(
                     currenciesViewEntity.bankName!!,
                     currenciesViewEntity.currencyType!!
                 )
             },
-            negativeButtonText = v.context.getString(R.string.cancel),
+            negativeButtonText = v.context.getString(R.string.text_cancel),
             imageView = null
         ).show()
     }
