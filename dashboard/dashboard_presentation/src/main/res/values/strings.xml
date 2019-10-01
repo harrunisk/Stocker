@@ -3,9 +3,9 @@
 
     <!-- Main ViewPager Items -->
     <string-array name="main_items">
-        <item>USD</item>
+        <item>DOLAR</item>
         <item>EURO</item>
-        <item>GOLD</item>
+        <item>ALTIN</item>
     </string-array>
     
     <string name="bottom_navigation_currencies_header">Döviz Kurları</string>

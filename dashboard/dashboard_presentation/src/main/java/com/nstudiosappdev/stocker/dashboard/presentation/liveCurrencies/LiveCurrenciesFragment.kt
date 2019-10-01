@@ -9,7 +9,6 @@ import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
 import com.nstudiosappdev.core.presentation.enums.DialogType
 import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
 import com.nstudiosappdev.core.presentation.extensions.setup
-import com.nstudiosappdev.core.presentation.extensions.toColor
 import com.nstudiosappdev.core.presentation.livedata.observeApi
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter

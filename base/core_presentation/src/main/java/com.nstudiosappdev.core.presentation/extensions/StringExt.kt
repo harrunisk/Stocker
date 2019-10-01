@@ -1,6 +1,5 @@
 package com.nstudiosappdev.core.presentation.extensions
 
-import android.graphics.Color
 import java.net.MalformedURLException
 import java.net.URL
 import java.text.ParseException
@@ -48,11 +47,9 @@ fun String?.capitalize(): String {
 }
 
 fun String.adjustSensitivityGiveString(sensitivity: Int): String {
-    return String.format("%.${sensitivity}f", this.replace(",", ".").toFloat())
+    return String.format(Locale.US,"%.${sensitivity}f", this.replace(",", ".").toFloat())
 }
 
 fun String.adjustSensitivityGiveFloat(sensitivity: Int): Float {
-    return String.format("%.${sensitivity}f", this.replace(",", ".").toFloat()).toFloat()
+    return String.format(Locale.US,"%.${sensitivity}f", this.replace(",", ".").toFloat()).toFloat()
 }
-
-fun String.toColor(): Int = Color.parseColor(this)
