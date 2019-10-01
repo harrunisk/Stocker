@@ -191,7 +191,9 @@
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/font_xxxlarge"
+            android:layout_marginTop="@dimen/space_xl"
+            android:layout_marginRight="@dimen/space_xxxxl"
+            android:layout_marginLeft="@dimen/space_xxxxl"
             app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -205,18 +207,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/font_xlarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.8"
+            app:layout_constraintVertical_bias="0.6"
             android:fontFamily="@font/roboto_bold"
             android:textSize="@dimen/font_xxlarge"
             android:textAlignment="center"
             android:id="@+id/appNameSplashScreen"
-            android:text="@string/message_favorite_currency_not_available">
+            android:text="@string/text_favorite_currency_not_available">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

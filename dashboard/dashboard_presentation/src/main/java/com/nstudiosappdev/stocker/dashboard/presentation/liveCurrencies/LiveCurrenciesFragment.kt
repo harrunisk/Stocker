@@ -3,10 +3,13 @@ package com.nstudiosappdev.stocker.dashboard.presentation.liveCurrencies
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.core.presentation.base.BaseViewModelFragment
+import com.nstudiosappdev.core.presentation.enums.DialogType
 import com.nstudiosappdev.core.presentation.extensions.createCustomAlertDialog
 import com.nstudiosappdev.core.presentation.extensions.setup
+import com.nstudiosappdev.core.presentation.extensions.toColor
 import com.nstudiosappdev.core.presentation.livedata.observeApi
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
@@ -19,6 +22,7 @@ import javax.inject.Inject
 class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() {
 
     private var currencyType: String? = null
+
 
     @Inject
     lateinit var liveCurrenciesAdapter: RecyclerViewAdapter
@@ -61,45 +65,45 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
 
         headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
-            if (bankNameSortByDecreasingSign.currentTextColor != Color.GREEN) {
+            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                bankNameSortByDecreasingSign.setTextColor(Color.GREEN)
+                bankNameSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                bankNameSortByIncreasingSign.setTextColor(Color.GREEN)
+                bankNameSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
 
         headerBuyingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByBuyingPrices()
-            if (buyingPriceSortByIncreasingSign.currentTextColor != Color.GREEN) {
+            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                buyingPriceSortByIncreasingSign.setTextColor(Color.GREEN)
+                buyingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                buyingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
+                buyingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
 
         headerSellingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesBySellingPrice()
-            if (sellingPriceSortByIncreasingSign.currentTextColor != Color.GREEN) {
+            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                sellingPriceSortByIncreasingSign.setTextColor(Color.GREEN)
+                sellingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                sellingPriceSortByDecreasingSign.setTextColor(Color.GREEN)
+                sellingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
 
         headerDiffLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByDiff()
-            if (diffSortByIncreasingSign.currentTextColor != Color.GREEN) {
+            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
                 clearAllColor()
-                diffSortByIncreasingSign.setTextColor(Color.GREEN)
+                diffSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             } else {
                 clearAllColor()
-                diffSortByDecreasingSign.setTextColor(Color.GREEN)
+                diffSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
             }
         }
     }
@@ -116,6 +120,18 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
                 is DataHolder.Fail -> {
                     liveCurrenciesLinearLayout.visibility = View.GONE
                     notFoundLiveCurrenciesAnimation.visibility = View.VISIBLE
+                    pullToRefreshCurrencies.isRefreshing = false
+                }
+            }
+        }
+
+        viewModel.saveFavorites.observeApi(this) {
+            when (it) {
+                is DataHolder.Success -> {
+                    createInfoAlertDialogWithMessage(activity!!.getString(R.string.text_adding_favorites_is_successfull))
+                }
+                is DataHolder.Fail -> {
+                    createInfoAlertDialogWithMessage(activity!!.getString(R.string.text_already_have))
                 }
             }
         }
@@ -130,9 +146,9 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
         val currenciesViewEntity = item as CurrenciesViewEntity
 
         v.context.createCustomAlertDialog(
-            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.message_add),
-            title = v.context.getString(R.string.title),
-            positiveButtonText = v.context.getString(R.string.add),
+            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.text_add_currency),
+            title = v.context.getString(R.string.text_info),
+            positiveButtonText = v.context.getString(R.string.text_add),
             positiveButtonAction = {
                 viewModel.addToFavorites(
                     Currency(
@@ -144,8 +160,18 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
                         currencyType = currenciesViewEntity.currencyType
                     ))
             },
-            negativeButtonText = v.context.getString(R.string.cancel),
+            negativeButtonText = v.context.getString(R.string.text_cancel),
             imageView = null
+        ).show()
+    }
+
+    private fun createInfoAlertDialogWithMessage(message: String) {
+        context!!.createCustomAlertDialog(
+            message = message,
+            title = activity!!.getString(R.string.text_info),
+            positiveButtonText = activity!!.getString(R.string.text_ok),
+            imageView = null,
+            alertType = DialogType.INFO
         ).show()
     }
 
