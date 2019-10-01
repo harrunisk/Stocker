@@ -93,6 +93,11 @@ class CustomAlertDialog(
                 inputEditText.visibility = View.VISIBLE
                 imageView.visibility = View.GONE
             }
+            DialogType.INFO -> {
+                alertDialogButtonContainer.visibility = View.VISIBLE
+                positiveButton.visibility = View.VISIBLE
+                negativeButton.visibility = View.GONE
+            }
         }
     }
 
