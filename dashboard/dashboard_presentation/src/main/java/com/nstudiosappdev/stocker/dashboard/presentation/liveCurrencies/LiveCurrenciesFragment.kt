@@ -112,6 +112,7 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
             when (it) {
                 is DataHolder.Success -> {
                     liveCurrenciesLinearLayout.visibility = View.VISIBLE
+                    notFoundLiveCurrenciesAnimation.visibility = View.GONE
                     liveCurrenciesAdapter.updateDiffItemsOnly(it.data)
                     liveCurrenciesAdapter.itemClickListener
                     pullToRefreshCurrencies.isRefreshing = false
@@ -145,7 +146,7 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
         val currenciesViewEntity = item as CurrenciesViewEntity
 
         v.context.createCustomAlertDialog(
-            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.text_add_currency),
+            message = v.context.getString(R.string.text_add_currency),
             title = v.context.getString(R.string.text_info),
             positiveButtonText = v.context.getString(R.string.text_add),
             positiveButtonAction = {

@@ -3,31 +3,31 @@
 
     <!-- Main ViewPager Items -->
     <string-array name="main_items">
-        <item>DOLAR</item>
+        <item>USD</item>
         <item>EURO</item>
-        <item>ALTIN</item>
+        <item>GOLD</item>
     </string-array>
     
-    <string name="bottom_navigation_currencies_header">Döviz Kurları</string>
-    <string name="bottom_navigation_portfolio_header">Portföyüm</string>
+    <string name="bottom_navigation_currencies_header">Exchange Rates</string>
+    <string name="bottom_navigation_portfolio_header">Portfolio</string>
     
-    <string name="recyclerview_bank_name_header">Banka </string>
-    <string name="recyclerview_buying_price_header">Alış</string>
-    <string name="recyclerview_selling_price_header">Satış</string>
-    <string name="recyclerview_diff_header">Fark</string>
+    <string name="recyclerview_bank_name_header">Bank</string>
+    <string name="recyclerview_buying_price_header">Buying</string>
+    <string name="recyclerview_selling_price_header">Sale</string>
+    <string name="recyclerview_diff_header">Diff</string>
     <string name="decrease">↓</string>
     <string name="increase">↑</string>
 
     <!--Alert Dialog -->
-    <string name="text_add">EKLE</string>
-    <string name="text_remove">KALDIR</string>
-    <string name="text_cancel">İptal Et</string>
-    <string name="text_add_currency">döviz kurunu favorilerinize eklemek ister misiniz?</string>
-    <string name="text_remove_currency">döviz kurunu favorilerinizden kaldırmak ister misiniz?</string>
-    <string name="text_ok">Tamam</string>
-    <string name="text_info">Bilgi</string>
-    <string name="text_favorite_currency_not_available">Favori döviz kurunuz bulunmamaktadır.</string>
-    <string name="text_connection_error_or">Bağlantı hatası yaşanıyor olabilir.</string>
-    <string name="text_adding_favorites_is_successfull">İşleminiz başarıyla gerçekleştirilmiştir.</string>
-    <string name="text_already_have">Döviz kuru daha önce portföye eklenmiş.</string>
+    <string name="text_add">ADD</string>
+    <string name="text_remove">REMOVE</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_add_currency">Would you like to add the exchange rate to your favorites?</string>
+    <string name="text_remove_currency">" Would you like to remove the exchange rate from your favorites?"</string>
+    <string name="text_ok">Okay</string>
+    <string name="text_info">Info</string>
+    <string name="text_favorite_currency_not_available">You do not have any favorite exchange rate.</string>
+    <string name="text_connection_error_or">Please check your network connection status.</string>
+    <string name="text_adding_favorites_is_successfull">Transaction was successfully completed.</string>
+    <string name="text_already_have">The exchange rate has already been added to the portfolio.</string>
 </resources>

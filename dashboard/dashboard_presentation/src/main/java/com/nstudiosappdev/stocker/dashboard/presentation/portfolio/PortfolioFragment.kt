@@ -143,7 +143,7 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
         val currenciesViewEntity = item as CurrenciesViewEntity
 
         v.context.createCustomAlertDialog(
-            message = currenciesViewEntity.bankName + " " + currenciesViewEntity.currencyType?.toUpperCase() + " " + v.context.getString(R.string.text_remove_currency),
+            message = v.context.getString(R.string.text_remove_currency),
             title = v.context.getString(R.string.text_info),
             positiveButtonText = v.context.getString(R.string.text_remove),
             positiveButtonAction = {
