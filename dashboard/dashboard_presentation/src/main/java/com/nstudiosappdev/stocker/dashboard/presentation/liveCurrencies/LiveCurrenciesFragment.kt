@@ -160,8 +160,7 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
                         currencyType = currenciesViewEntity.currencyType
                     ))
             },
-            negativeButtonText = v.context.getString(R.string.text_cancel),
-            imageView = null
+            negativeButtonText = v.context.getString(R.string.text_cancel)
         ).show()
     }
 
@@ -170,7 +169,6 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
             message = message,
             title = activity!!.getString(R.string.text_info),
             positiveButtonText = activity!!.getString(R.string.text_ok),
-            imageView = null,
             alertType = DialogType.INFO
         ).show()
     }

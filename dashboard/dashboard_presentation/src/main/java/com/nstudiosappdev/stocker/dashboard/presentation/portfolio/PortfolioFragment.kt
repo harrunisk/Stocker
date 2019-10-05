@@ -152,8 +152,7 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
                     currenciesViewEntity.currencyType!!
                 )
             },
-            negativeButtonText = v.context.getString(R.string.text_cancel),
-            imageView = null
+            negativeButtonText = v.context.getString(R.string.text_cancel)
         ).show()
     }
 

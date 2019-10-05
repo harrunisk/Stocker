@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Stocker</string>
+    <string name="text_error">An error occurred.</string>
+    <string name="text_invalid_response">Invalid response.</string>
 </resources>

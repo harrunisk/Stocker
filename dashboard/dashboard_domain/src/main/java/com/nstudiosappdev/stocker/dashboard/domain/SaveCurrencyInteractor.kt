@@ -1,7 +1,6 @@
 package com.nstudiosappdev.stocker.dashboard.domain
 
 import com.nstudiosappdev.core.coroutines.AsyncManager
-import com.nstudiosappdev.core.date.DateTimeConverter
 import com.nstudiosappdev.core.domain.BaseInteractor
 import com.nstudiosappdev.core.domain.Interactor
 import com.nstudiosappdev.core.error.ErrorFactory

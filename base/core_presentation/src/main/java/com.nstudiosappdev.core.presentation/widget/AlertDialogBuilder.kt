@@ -18,7 +18,6 @@ class CustomAlertDialog(
     context: Context
 ) : AlertDialog.Builder(context){
 
-    private var imageView: ImageView
     private var titleText: AppCompatTextView
     private var messageText: AppCompatTextView
     private var inputEditText: AppCompatEditText
@@ -32,7 +31,6 @@ class CustomAlertDialog(
     init {
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.custom_alert_dialog_view, null)
         setView(mDialogView)
-        imageView = mDialogView.findViewById(R.id.imgView) as ImageView
         titleText = mDialogView.findViewById(R.id.textViewTitle) as AppCompatTextView
         messageText = mDialogView.findViewById(R.id.textViewMessage) as AppCompatTextView
         inputEditText = mDialogView.findViewById(R.id.editTextMessage) as AppCompatEditText
@@ -91,20 +89,12 @@ class CustomAlertDialog(
                 negativeButton.visibility = View.VISIBLE
                 messageText.visibility = View.GONE
                 inputEditText.visibility = View.VISIBLE
-                imageView.visibility = View.GONE
             }
             DialogType.INFO -> {
                 alertDialogButtonContainer.visibility = View.VISIBLE
                 positiveButton.visibility = View.VISIBLE
                 negativeButton.visibility = View.GONE
             }
-        }
-    }
-
-    fun setImageResource(context: Context, @DrawableRes res: Int) {
-        imageView.apply {
-            visibility = View.VISIBLE
-            setImageDrawable(ContextCompat.getDrawable(context, res))
         }
     }
 

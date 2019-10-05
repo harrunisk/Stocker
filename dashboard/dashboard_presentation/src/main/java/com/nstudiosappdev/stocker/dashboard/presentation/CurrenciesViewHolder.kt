@@ -14,7 +14,6 @@ import javax.inject.Inject
 import kotlin.math.abs
 import com.nstudiosappdev.stocker.presentation.R
 
-
 class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(itemView) {
 
     private val textViewBankName: TextView = itemView.findViewById(R.id.textViewBankName)

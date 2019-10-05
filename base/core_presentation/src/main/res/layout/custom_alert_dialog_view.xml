@@ -16,16 +16,6 @@
         android:focusable="false"
         android:focusableInTouchMode="true">
 
-
-        <ImageView
-            android:id="@+id/imgView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:visibility="visible"
-            android:layout_marginBottom="16dp"
-            tools:src="@drawable/ic_warning"/>
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"

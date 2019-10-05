@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Banka Döviz Kurları</string>
+    <string name="text_empty_cache">Cache boş.</string>
+    <string name="text_business_error">İşletme Hatası.</string>
+    <string name="text_authentication_error">Yetki hatası.</string>
 </resources>

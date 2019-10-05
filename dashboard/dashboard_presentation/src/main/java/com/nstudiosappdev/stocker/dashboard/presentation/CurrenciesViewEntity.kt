@@ -2,7 +2,6 @@ package com.nstudiosappdev.stocker.dashboard.presentation
 
 import com.nstudiosappdev.core.presentation.entity.ViewEntity
 import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
-import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants
 
 class CurrenciesViewEntity(
     val bankName: String?,
