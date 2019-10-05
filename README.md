@@ -3,7 +3,7 @@
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![Android Studio](https://img.shields.io/badge/android%20studio-3.5-brightgreen)](https://developer.android.com/studio)
 
-<p align="left">Stocker is a currency monitoring app. It offers instant currency rates of banks.</p>
+<p align="left">Stocker is a currency monitoring app. It offers instant exchange rates of banks.</p>
 
 <p align="center">
 <img src="https://github.com/harrunisk/Stocker/blob/master/art/App0.jpg" width="200">
