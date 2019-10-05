@@ -3,6 +3,16 @@
 <p align="center"><img src="https://github.com/harrunisk/Stocker/blob/master/app/src/main/ic_launcher-web.png" alt="Stocker" height="200px"></p>
 
 ***Stocker*** is a currency monitoring app. It offers instant currency rates of banks. 
+### Art
+<p float="left">
+<img src="https://github.com/harrunisk/Stocker/blob/master/art/App0.jpg" width="200">
+<img src="https://github.com/harrunisk/Stocker/blob/master/art/App1.jpg" width="200">
+<img src="https://github.com/harrunisk/Stocker/blob/master/art/App2.jpg" width="200">
+<img src="https://github.com/harrunisk/Stocker/blob/master/art/App3.jpg" width="200">
+</p>
+
+<p align="center"><img src="https://github.com/harrunisk/Stocker/blob/master/art/AppGif.gif" alt="Scenic Hiking" width="200"></p>  
+
 ### Architecture
 * [Clean Architecture](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
 * [MVVM](https://www.raywenderlich.com/8984-mvvm-on-android)
@@ -35,12 +45,3 @@
 * Domain  (The layer is responsible for data migration between Data and Presentation layers. It can be used every kind of kotlin project. It is not only for android)
 * Presentation (UI staff such as displaying data, user interaction)
 
-### Art
-<p float="left">
-<img src="https://github.com/harrunisk/Stocker/blob/master/art/App0.jpg" width="200">
-<img src="https://github.com/harrunisk/Stocker/blob/master/art/App1.jpg" width="200">
-<img src="https://github.com/harrunisk/Stocker/blob/master/art/App2.jpg" width="200">
-<img src="https://github.com/harrunisk/Stocker/blob/master/art/App3.jpg" width="200">
-</p>
-
-<p align="center"><img src="https://github.com/harrunisk/Stocker/blob/master/art/AppGif.gif" alt="Scenic Hiking" width="200"></p>
