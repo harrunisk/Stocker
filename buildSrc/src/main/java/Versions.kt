@@ -34,5 +34,6 @@ object Versions {
     const val playServicesVersion = "11.8.0"
     const val constraintLayoutVersion = "1.1.2"
     const val lottieVersion = "3.0.1"
+    const val fabricVersion = "2.10.1"
 }
 

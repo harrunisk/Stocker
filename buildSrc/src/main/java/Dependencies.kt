@@ -44,4 +44,5 @@ object Libraries {
     const val roomCompiler = "androidx.room:room-compiler:${Versions.roomVersion}"
     const val picasso = "com.squareup.picasso:picasso:${Versions.picassoVersion}"
     const val lottie = "com.airbnb.android:lottie:${Versions.lottieVersion}"
+    const val fabric = "com.crashlytics.sdk.android:crashlytics:${Versions.fabricVersion}@aar"
 }
