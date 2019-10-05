@@ -1,6 +1,7 @@
 apply plugin: Plugins.kotlinAndroid
 apply plugin: Plugins.kotlinAndroidExtensions
 apply plugin: Plugins.kotlinKapt
+apply plugin: Plugins.fabric
 
 android {
     compileSdkVersion Config.compileSdkVersion
@@ -57,6 +58,10 @@ dependencies {
     compileOnly Libraries.javaxAnnotation
 
     implementation 'androidx.multidex:multidex:2.0.0'
+
+    implementation(Libraries.fabric) {
+        transitive = true
+    }
 }
 
 configurations.all {
