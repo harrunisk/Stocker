@@ -14,7 +14,6 @@ import com.nstudiosappdev.core.presentation.viewmodel.BaseViewModel
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import com.nstudiosappdev.stocker.dashboard.domain.GetCurrenciesInteractor
 import com.nstudiosappdev.stocker.dashboard.domain.SaveCurrencyInteractor
-import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants
 import com.nstudiosappdev.stocker.dashboard.presentation.OrderingStyle
 import javax.inject.Inject
 import javax.inject.Named

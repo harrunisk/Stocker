@@ -19,7 +19,7 @@ interface DataSource {
 
         fun get(key: String): List<V>
 
-        fun get(bankName: String, currencyType: String): V
+        fun get(key1: String, key2: String): V
 
         fun getAll(): List<V>
 

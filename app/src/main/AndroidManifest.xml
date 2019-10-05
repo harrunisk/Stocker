@@ -25,7 +25,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -33,11 +32,5 @@
                 <data android:scheme="currency"/>
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="6e5fcdb8423e2edef042653349f5c3df00d34cf5"
-            />
-
     </application>
-
 </manifest>

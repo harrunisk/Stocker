@@ -2,7 +2,6 @@ package com.nstudiosappdev.core.presentation.base
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
@@ -11,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.nstudiosappdev.core.error.Error
 import com.nstudiosappdev.core.presentation.Constants
+import com.nstudiosappdev.core.presentation.R
 import com.nstudiosappdev.core.presentation.navigation.UiNavigation
 
 abstract class BaseFragment : Fragment(), BaseView {
@@ -72,7 +72,7 @@ abstract class BaseFragment : Fragment(), BaseView {
     }
 
 
-    protected fun setActivityTitle(title: String) {
+    private fun setActivityTitle(title: String) {
         if (activity is BaseActivity) {
             (activity as BaseActivity).setScreenTitle(title)
         }
@@ -100,18 +100,18 @@ abstract class BaseFragment : Fragment(), BaseView {
                 message.toString()
             }
             is Error.EmptyCacheResult -> {
-                "Empty Cache"
+                getString(R.string.text_empty_cache)
             }
             is Error.InvalidResponseError ->{
-                "Invalid Response"
+                getString(R.string.text_invalid_response)
             }
             is Error.BusinessError ->{
                 "Business Error -> error code ${e.code} error message ${e.message}"
             }
             is Error.AuthenticationError ->{
-                "Your Authentication is fail"
+                getString(R.string.text_authentication_error)
             }
-            else -> "UnKnown Error"
+            else -> getString(R.string.text_error)
         }
     }
 

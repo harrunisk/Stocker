@@ -19,7 +19,7 @@ abstract class BaseViewModelFragment<VM : ViewModel> : BaseInjectionFragment() {
 
     protected lateinit var viewModel: VM
 
-    protected lateinit var navigationController: NavigationController
+    private lateinit var navigationController: NavigationController
 
     abstract fun getModelClass(): Class<VM>
 
