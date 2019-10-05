@@ -44,7 +44,9 @@
 ### Layers
 * Data (This layer responsible for all kind of data calls and holding the data.)  
 * Domain  (The layer is responsible for data migration between Data and Presentation layers. It can be used every kind of kotlin project. It is not only for android)
-* Presentation (UI staff such as displaying data, user interaction)  
+* Presentation (UI stuff such as displaying data, user interaction)  
+### Acknowledgement
+Stocker's architecture is mostly based on [Taylan Sabırcan's](https://github.com/savepopulation) [modular-app-core](https://github.com/savepopulation/modular-app-core). Special thanks to him.  
 ### License
 ```
 MIT License
