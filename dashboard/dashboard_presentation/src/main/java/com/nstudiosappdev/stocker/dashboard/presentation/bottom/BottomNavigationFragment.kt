@@ -2,7 +2,6 @@ package com.nstudiosappdev.stocker.dashboard.presentation.bottom
 
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.tabs.TabLayout
 import com.nstudiosappdev.core.presentation.base.BaseFragment
 import com.nstudiosappdev.navigation.navigation.DefaultNavigationController
 import com.nstudiosappdev.stocker.presentation.R

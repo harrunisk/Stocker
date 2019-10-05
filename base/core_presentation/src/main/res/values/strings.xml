@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Stocker</string>
+    <string name="text_empty_cache">Empty Cache</string>
+    <string name="text_business_error">Business Error</string>
+    <string name="text_authentication_error">Your Authentication is fail.</string>
 </resources>

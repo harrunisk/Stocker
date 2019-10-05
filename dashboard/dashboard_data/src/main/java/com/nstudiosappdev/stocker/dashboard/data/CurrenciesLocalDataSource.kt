@@ -30,7 +30,7 @@ class CurrenciesLocalDataSource @Inject constructor(
         return currencies
     }
 
-    override fun get(bankName: String, currencyType: String): Currency {
+    override fun get(key1: String, key2: String): Currency {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

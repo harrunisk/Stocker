@@ -2,7 +2,6 @@ package com.nstudiosappdev.core.presentation.extensions
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
-import com.nstudiosappdev.core.presentation.R
 import com.nstudiosappdev.core.presentation.enums.DialogType
 import com.nstudiosappdev.core.presentation.widget.CustomAlertDialog
 
@@ -10,7 +9,6 @@ import com.nstudiosappdev.core.presentation.widget.CustomAlertDialog
  * Creates custom alert dialog
  */
 fun Context.createCustomAlertDialog(
-    imageView: Int? = R.drawable.ic_warning,
     title: CharSequence? = null,
     message: CharSequence? = null,
     positiveButtonText: CharSequence? = null,
@@ -20,7 +18,6 @@ fun Context.createCustomAlertDialog(
     alertType: DialogType? = DialogType.WARNING,
     isAllCaps: Boolean = false
 ): AlertDialog = createCustomAlertDialogBuilder(
-    imageView,
     title,
     message,
     positiveButtonText,
@@ -35,7 +32,6 @@ fun Context.createCustomAlertDialog(
  * Creates custom alert dialog builder
  */
 fun Context.createCustomAlertDialogBuilder(
-    imageView: Int? = null,
     title: CharSequence? = null,
     message: CharSequence? = null,
     positiveButtonText: CharSequence? = null,
@@ -48,10 +44,6 @@ fun Context.createCustomAlertDialogBuilder(
     return CustomAlertDialog(this).apply {
 
         setIsAllCaps(isAllCaps)
-
-        imageView?.let {
-            setImageResource(this@createCustomAlertDialogBuilder, imageView)
-        }
 
         title?.let {
             setTitle(title)

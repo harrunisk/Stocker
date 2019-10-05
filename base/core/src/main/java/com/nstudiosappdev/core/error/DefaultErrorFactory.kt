@@ -1,9 +1,13 @@
 package com.nstudiosappdev.core.error
 
+import android.content.Context
+import com.nstudiosappdev.core.R
 import javax.inject.Inject
 
 
-class DefaultErrorFactory @Inject constructor() : ErrorFactory {
+class DefaultErrorFactory @Inject constructor(
+    override val context: Context
+) : ErrorFactory {
 
     override fun createApiError(code: String, messages: String) =
         Error.ApiError(code, messages)
@@ -13,7 +17,7 @@ class DefaultErrorFactory @Inject constructor() : ErrorFactory {
             return createUnknownError()
         }
 
-        val message = statusError.message ?: "Hata oluştu."
+        val message = statusError.message ?: context.getString(R.string.text_error)
         return createApiError(statusError.code, message)
     }
 
@@ -29,11 +33,11 @@ class DefaultErrorFactory @Inject constructor() : ErrorFactory {
         return Error.ApiErrors(safeErrorList)
     }
 
-    override fun createUnknownError(): Error = Error.UnknownError("Bilinmeyen Hata Oluştu.")
+    override fun createUnknownError(): Error = Error.UnknownError(context.getString(R.string.text_error))
 
     override fun createErrorFromThrowable(t: Throwable) = Error.ExceptionalError(message = t.localizedMessage)
 
-    override fun createInvalidResponseError() = Error.InvalidResponseError("Invalid Response!")
+    override fun createInvalidResponseError() = Error.InvalidResponseError(context.getString(R.string.text_invalid_response))
 
     override fun createUnHandledStateError() = Error.UnhandledStateError()
 

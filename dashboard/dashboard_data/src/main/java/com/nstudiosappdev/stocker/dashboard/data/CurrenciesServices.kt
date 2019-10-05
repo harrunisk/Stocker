@@ -1,8 +1,6 @@
 package com.nstudiosappdev.stocker.dashboard.data
 
 import com.nstudiosappdev.core.data.api.response.ApiResponse
-import com.nstudiosappdev.core.model.DataHolder
-import com.nstudiosappdev.stocker.dashboard.domain.Currencies
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET

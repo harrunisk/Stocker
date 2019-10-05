@@ -1,6 +1,10 @@
 package com.nstudiosappdev.core.error
 
+import android.content.Context
+
 interface ErrorFactory {
+
+    val context: Context
 
     fun createUnknownError(): Error
 
