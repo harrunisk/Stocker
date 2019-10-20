@@ -21,7 +21,7 @@ class PortfolioMainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pagerAdapter=
+        pagerAdapter =
             PortfolioPagerAdapter(
                 resources.getStringArray(R.array.main_items).toMutableList(),
                 childFragmentManager
@@ -42,13 +42,11 @@ class PortfolioMainFragment : BaseFragment() {
                 override fun onPageSelected(position: Int) {
                     lastItem = position
                 }
-
             })
             offscreenPageLimit = 3
 
             (activity as TabProvider).provideTabLayout().setupWithViewPager(viewPagerDashboard)
             lastItem = viewPagerDashboard.currentItem
-
         }
     }
 }

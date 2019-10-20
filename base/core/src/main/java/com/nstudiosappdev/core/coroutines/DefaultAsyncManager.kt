@@ -1,14 +1,14 @@
 package com.nstudiosappdev.core.coroutines
 
 import androidx.annotation.CallSuper
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
-import kotlin.coroutines.CoroutineContext
 
 class DefaultAsyncManager(
     override val coroutineContext: CoroutineContext
-) : AsyncManager{
+) : AsyncManager {
 
     private val deferredObjects: MutableList<Deferred<*>> by lazy {
         mutableListOf<Deferred<*>>()
@@ -34,7 +34,7 @@ class DefaultAsyncManager(
     override fun cancelAllAsync() {
         val deferredObjectsSize = deferredObjects.size
         if (deferredObjectsSize > 0) {
-            for (i in deferredObjectsSize- 1 downTo 0) {
+            for (i in deferredObjectsSize - 1 downTo 0) {
                 deferredObjects[i].cancel()
             }
         }

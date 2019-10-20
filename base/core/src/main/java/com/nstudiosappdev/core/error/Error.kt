@@ -1,6 +1,5 @@
 package com.nstudiosappdev.core.error
 
-
 sealed class Error {
 
     data class UnknownError(val message: String) : Error()

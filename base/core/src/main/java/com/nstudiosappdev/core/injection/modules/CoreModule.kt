@@ -8,7 +8,6 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-
 @Module(
     includes = [CoroutineManagerModule::class,
         CoroutineDispatcherModule::class,
@@ -23,5 +22,4 @@ class CoreModule {
     @Provides
     @Singleton
     fun provideDateTimeConverter(): DateTimeConverter = DefaultDateTimeConverter()
-
 }

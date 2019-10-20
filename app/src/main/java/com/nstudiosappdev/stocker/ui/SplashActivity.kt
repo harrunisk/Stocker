@@ -21,11 +21,10 @@ class SplashActivity : BaseInjectionActivity() {
         Handler().postDelayed({
 
             navigationController.navigateToMain()
-
         }, SPLASH_TIME_OUT)
     }
 
-    companion object{
+    companion object {
         const val SPLASH_TIME_OUT = 1000L
     }
 }

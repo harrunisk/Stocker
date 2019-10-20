@@ -1,6 +1,6 @@
 package com.nstudiosappdev.core.application
 
-import dagger.android.HasActivityInjector
 import com.nstudiosappdev.core.injection.Injectable
+import dagger.android.HasActivityInjector
 
 interface CoreApplication : Injectable, HasActivityInjector

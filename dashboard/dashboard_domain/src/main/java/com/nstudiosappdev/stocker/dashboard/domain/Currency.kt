@@ -2,7 +2,7 @@ package com.nstudiosappdev.stocker.dashboard.domain
 
 import com.google.gson.annotations.SerializedName
 
-data class Currency (
+data class Currency(
     @SerializedName("bankName") val bankName: String?,
     @SerializedName("buyPrice") val buyPrice: String?,
     @SerializedName("buyStatus") val buyStatus: String?,

@@ -5,8 +5,8 @@ import android.view.View
 import com.nstudiosappdev.core.presentation.base.BaseFragment
 import com.nstudiosappdev.navigation.navigation.DefaultNavigationController
 import com.nstudiosappdev.stocker.presentation.R
-import kotlinx.android.synthetic.main.fragment_bottom_navigation.*
 import java.lang.ref.WeakReference
+import kotlinx.android.synthetic.main.fragment_bottom_navigation.*
 
 class BottomNavigationFragment : BaseFragment() {
 

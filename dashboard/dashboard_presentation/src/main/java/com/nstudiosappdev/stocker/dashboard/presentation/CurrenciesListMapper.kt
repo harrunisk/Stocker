@@ -11,7 +11,7 @@ class CurrenciesListMapper(
 
     override fun map(items: List<Currency>): List<DisplayItem> {
         val mappedItems = arrayListOf<DisplayItem>()
-        for ( item in items) {
+        for (item in items) {
             mappedItems.add(currenciesViewEntityMapper.map(item))
         }
 
