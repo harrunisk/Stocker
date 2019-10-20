@@ -12,5 +12,4 @@ class DefaultAndroidPreConditions : AndroidPreConditions {
     override fun assertWorkerThread() {
         check(!Thread.currentThread().isMainThread()) { "This code must be executed in ui thread!" }
     }
-
 }

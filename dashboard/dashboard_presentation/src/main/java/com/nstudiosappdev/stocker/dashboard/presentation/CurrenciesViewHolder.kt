@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveString
 import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveFloat
-import com.nstudiosappdev.core.presentation.recyclerview.*
+import com.nstudiosappdev.core.presentation.extensions.adjustSensitivityGiveString
+import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
+import com.nstudiosappdev.core.presentation.recyclerview.ViewHolder
+import com.nstudiosappdev.core.presentation.recyclerview.ViewHolderBinder
+import com.nstudiosappdev.core.presentation.recyclerview.ViewHolderFactory
 import com.nstudiosappdev.stocker.dashboard.domain.CurrencyStatus
+import com.nstudiosappdev.stocker.presentation.R
 import javax.inject.Inject
 import kotlin.math.abs
-import com.nstudiosappdev.stocker.presentation.R
 
 class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(itemView) {
 
@@ -23,7 +26,6 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
 
     private lateinit var buyingPrice: String
     private lateinit var sellingPrice: String
-
 
     private fun bind(item: CurrenciesViewEntity) {
 
@@ -43,7 +45,7 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
             }
         }
 
-        when (item.sellStatus){
+        when (item.sellStatus) {
             CurrencyStatus.DECREASING.value -> {
                 sellingPrice = item.sellPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.DECREASING.value
                 textViewBuyingPrice.text = sellingPrice
@@ -92,5 +94,4 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
             (holder as CurrenciesViewHolder).bind(item as CurrenciesViewEntity)
         }
     }
-
 }

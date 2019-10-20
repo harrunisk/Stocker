@@ -7,8 +7,8 @@ import com.nstudiosappdev.core.model.DataHolder
 import com.nstudiosappdev.stocker.dashboard.domain.CurrenciesRepository
 import com.nstudiosappdev.stocker.dashboard.domain.CurrenciesRequest
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
-import kotlinx.coroutines.Deferred
 import javax.inject.Inject
+import kotlinx.coroutines.Deferred
 
 class CurrenciesRepositoryImpl @Inject constructor(
     private val currenciesRemoteDataSource: DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>>,

@@ -42,14 +42,11 @@ class LiveCurrenciesMainFragment : BaseFragment() {
                 override fun onPageSelected(position: Int) {
                     lastItem = position
                 }
-
             })
             offscreenPageLimit = 3
 
             (activity as TabProvider).provideTabLayout().setupWithViewPager(viewPagerDashboard)
             lastItem = viewPagerDashboard.currentItem
-
         }
-
     }
 }

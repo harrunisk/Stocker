@@ -4,7 +4,6 @@ import android.content.Context
 import com.nstudiosappdev.core.R
 import javax.inject.Inject
 
-
 class DefaultErrorFactory @Inject constructor(
     override val context: Context
 ) : ErrorFactory {
@@ -50,5 +49,4 @@ class DefaultErrorFactory @Inject constructor(
     override fun createConnectionError() = Error.ConnectionError()
 
     override fun createBusinessError(code: Int, message: String?) = Error.BusinessError()
-
 }

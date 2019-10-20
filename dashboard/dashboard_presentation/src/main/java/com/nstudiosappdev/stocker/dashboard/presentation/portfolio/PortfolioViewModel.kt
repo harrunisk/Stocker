@@ -27,9 +27,9 @@ class PortfolioViewModel @Inject constructor(
 
     private val selectedItems = ArrayList<Currency>()
 
-    private var savedCurrenciesList : List<Currency>? = null
+    private var savedCurrenciesList: List<Currency>? = null
 
-    private var liveCurrenciesList : List<Currency>? = null
+    private var liveCurrenciesList: List<Currency>? = null
 
     private var orderByBankNameFlag = false
 
@@ -47,7 +47,7 @@ class PortfolioViewModel @Inject constructor(
 
     private val _deleteCurrency = MutableLiveData<DataHolder<Boolean>>()
 
-    private var orderingStyle : Int = 0
+    private var orderingStyle: Int = 0
 
     val filteredCurrencies: LiveData<DataHolder<List<DisplayItem>>>
         get() = _filteredCurrencies
@@ -65,13 +65,12 @@ class PortfolioViewModel @Inject constructor(
         )
 
         val savedCurrenciesResult = getSavedCurrenciesInteractor.executeAsync(savedCurrenciesParams).await()
-        if(savedCurrenciesResult is DataHolder.Success) {
+        if (savedCurrenciesResult is DataHolder.Success) {
             savedCurrenciesList = savedCurrenciesResult.data
 
-            if(savedCurrenciesResult.data.isNullOrEmpty()){
+            if (savedCurrenciesResult.data.isNullOrEmpty()) {
                 _filteredCurrencies.value = DataHolder.Fail(errorFactory.createBusinessError())
             } else if (!liveCurrenciesList.isNullOrEmpty()) filterElements()
-
         }
     }, error = {
         _filteredCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
@@ -86,10 +85,10 @@ class PortfolioViewModel @Inject constructor(
         )
 
         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
-        if(currenciesResult is DataHolder.Success) {
+        if (currenciesResult is DataHolder.Success) {
             liveCurrenciesList = currenciesResult.data
 
-            if(currenciesResult.data.isNullOrEmpty()) {
+            if (currenciesResult.data.isNullOrEmpty()) {
                 _filteredCurrencies.value = DataHolder.Fail(errorFactory.createBusinessError())
             } else if (!savedCurrenciesList.isNullOrEmpty()) filterElements()
         }
@@ -97,7 +96,7 @@ class PortfolioViewModel @Inject constructor(
         _filteredCurrencies.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
     })
 
-    private fun filterElements(){
+    private fun filterElements() {
         selectedItems.clear()
 
         savedCurrenciesList!!.forEach { savedCurrency ->
@@ -107,7 +106,7 @@ class PortfolioViewModel @Inject constructor(
             }
         }
 
-        _filteredCurrencies.value = when(orderingStyle) {
+        _filteredCurrencies.value = when (orderingStyle) {
             OrderingStyle.BY_NAME.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedBy { it.bankName }))
             OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedByDescending { it.bankName }))
             OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedBy { it.buyPrice }))
@@ -122,14 +121,13 @@ class PortfolioViewModel @Inject constructor(
         }
     }
 
-    fun orderCurrenciesByName(){
+    fun orderCurrenciesByName() {
 
-        when(orderByBankNameFlag) {
+        when (orderByBankNameFlag) {
             true -> {
                 _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.bankName }))
                 clearAllFlags()
                 orderingStyle = OrderingStyle.BY_NAME.code
-
             }
             false -> {
                 _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.bankName }))
@@ -142,7 +140,7 @@ class PortfolioViewModel @Inject constructor(
 
     fun orderCurrenciesByBuyingPrices() {
 
-        when(orderByBuyingPriceFlag) {
+        when (orderByBuyingPriceFlag) {
             true -> {
                 _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.buyPrice }))
                 clearAllFlags()
@@ -159,7 +157,7 @@ class PortfolioViewModel @Inject constructor(
 
     fun orderCurrenciesBySellingPrice() {
 
-        when(orderBySellingPriceFlag) {
+        when (orderBySellingPriceFlag) {
             true -> {
                 _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.sellPrice }))
                 clearAllFlags()
@@ -175,7 +173,7 @@ class PortfolioViewModel @Inject constructor(
 
     fun orderCurrenciesByDiff() {
 
-        when(orderByDiffFlag) {
+        when (orderByDiffFlag) {
             true -> {
                 _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy {
                     it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
@@ -211,7 +209,7 @@ class PortfolioViewModel @Inject constructor(
             currencyType
         )
         val deleteCurrencyResult = deleteCurrencyInteractor.executeAsync(deleteCurrencyParams).await()
-        if(deleteCurrencyResult is DataHolder.Success) _deleteCurrency.value = DataHolder.Success(deleteCurrencyResult.data)
+        if (deleteCurrencyResult is DataHolder.Success) _deleteCurrency.value = DataHolder.Success(deleteCurrencyResult.data)
     }, error = {
         _deleteCurrency.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
     })

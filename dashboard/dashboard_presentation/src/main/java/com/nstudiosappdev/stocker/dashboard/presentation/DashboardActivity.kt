@@ -24,7 +24,6 @@ class DashboardActivity : BaseInjectionActivity(), TabProvider {
         tabs = findViewById(R.id.tabs)
         navigationController.navigateToCurrencies(R.id.fl_main)
         navigationController.navigateToBottomNavigation(R.id.fl_bottom_navigation)
-
     }
 
     override fun provideTabLayout(): TabLayout = tabs

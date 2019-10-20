@@ -13,8 +13,8 @@ import com.nstudiosappdev.core.presentation.recyclerview.DisplayItem
 import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
 import com.nstudiosappdev.stocker.dashboard.presentation.CurrenciesViewEntity
 import com.nstudiosappdev.stocker.presentation.R
-import kotlinx.android.synthetic.main.fragment_portfolio.*
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.fragment_portfolio.*
 
 class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
 
@@ -48,7 +48,6 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
             adapter = portfolioAdapter,
             context = context!!
         )
-
     }
 
     override fun initView() {
@@ -166,7 +165,6 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
         diffSortByIncreasingSign.setTextColor(Color.GRAY)
         diffSortByDecreasingSign.setTextColor(Color.GRAY)
     }
-
 
     companion object {
         private const val BUNDLE_CURRENCY_TYPE = "bundle_currency_type"

@@ -6,16 +6,16 @@ import com.nstudiosappdev.core.domain.Interactor
 import com.nstudiosappdev.core.error.ErrorFactory
 import com.nstudiosappdev.core.injection.modules.CoroutineManagerModule
 import com.nstudiosappdev.core.model.DataHolder
-import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 import javax.inject.Named
+import kotlinx.coroutines.Deferred
 
 class SaveCurrencyInteractor @Inject constructor(
     private val currenciesRepository: CurrenciesRepository,
     private val errorFactory: ErrorFactory,
     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean>  {
-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync{
+) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean> {
+    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync {
         val currency = Currency(
             bankName = postParams.currency.bankName,
             buyPrice = postParams.currency.buyPrice,

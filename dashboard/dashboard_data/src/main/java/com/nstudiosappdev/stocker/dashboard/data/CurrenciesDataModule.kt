@@ -12,16 +12,16 @@ import com.nstudiosappdev.stocker.dashboard.domain.CurrenciesRequest
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
 import javax.inject.Named
 import javax.inject.Singleton
+import retrofit2.Retrofit
 
 @Module
 class CurrenciesDataModule {
 
     @Provides
     @Singleton
-    fun provideCurrenciesServices(retrofit: Retrofit) : CurrenciesServices=
+    fun provideCurrenciesServices(retrofit: Retrofit): CurrenciesServices =
         retrofit.create(CurrenciesServices::class.java)
 
     @Provides
@@ -31,7 +31,6 @@ class CurrenciesDataModule {
         errorFactory: ErrorFactory
     ): DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>> =
         CurrenciesRemoteDataSource(currenciesServices, errorFactory)
-
 
     @Provides
     internal fun provideCurrenciesDbEntityMapper(): DbEntityMapper<CurrenciesEntity, Currency> = CurrenciesDbEntityMapper()

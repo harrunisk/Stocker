@@ -55,4 +55,3 @@ object SharedPrefUtil {
         getSharedPref(context).edit().remove(key).apply()
     }
 }
-

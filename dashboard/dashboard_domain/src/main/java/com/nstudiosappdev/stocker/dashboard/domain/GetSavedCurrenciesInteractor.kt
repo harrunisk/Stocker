@@ -6,9 +6,9 @@ import com.nstudiosappdev.core.domain.Interactor
 import com.nstudiosappdev.core.error.ErrorFactory
 import com.nstudiosappdev.core.injection.modules.CoroutineManagerModule
 import com.nstudiosappdev.core.model.DataHolder
-import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 import javax.inject.Named
+import kotlinx.coroutines.Deferred
 
 class GetSavedCurrenciesInteractor @Inject constructor(
     private val currenciesRepository: CurrenciesRepository,

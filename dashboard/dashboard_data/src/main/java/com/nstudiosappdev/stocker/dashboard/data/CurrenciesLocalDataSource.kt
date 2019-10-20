@@ -11,14 +11,13 @@ import javax.inject.Inject
 class CurrenciesLocalDataSource @Inject constructor(
     private val db: StockerDb,
     private val mapper: DbEntityMapper<CurrenciesEntity, Currency>
-) : DataSource.LocalDataSource<Long, Currency>
-{
+) : DataSource.LocalDataSource<Long, Currency> {
     override fun get(key: Long): Currency? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun get(page: Int): List<Currency> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun get(key: String): List<Currency> {
@@ -31,11 +30,11 @@ class CurrenciesLocalDataSource @Inject constructor(
     }
 
     override fun get(key1: String, key2: String): Currency {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getAll(): List<Currency> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun put(key: Long?, data: Currency): Boolean {
@@ -57,14 +56,14 @@ class CurrenciesLocalDataSource @Inject constructor(
     }
 
     override fun remove(value: Currency): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun removeByKey(key: Long): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun clear() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 }
