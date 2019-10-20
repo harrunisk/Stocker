@@ -6,8 +6,8 @@ import com.nstudiosappdev.core.data.api.response.ApiResponse
 import com.nstudiosappdev.core.error.ErrorFactory
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.Deferred
 import javax.inject.Singleton
+import kotlinx.coroutines.Deferred
 
 @Module(includes = [ApiModule::class, DbModule::class])
 class CoreDataModule {

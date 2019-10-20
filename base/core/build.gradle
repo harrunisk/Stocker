@@ -8,4 +8,10 @@ dependencies {
 
     // Gson
     api Libraries.gson
+
+    // Test
+    api TestLibraries.jUnit
+    api TestLibraries.espressoCore
+    api TestLibraries.runner
+    api TestLibraries.androidTestImplementation
 }

@@ -8,7 +8,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-abstract class BaseInjectionActivity: BaseActivity(), HasSupportFragmentInjector {
+abstract class BaseInjectionActivity : BaseActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var dispatchAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -21,6 +21,6 @@ abstract class BaseInjectionActivity: BaseActivity(), HasSupportFragmentInjector
     }
 
     open fun onInject() {
-        //can be overriden
+        // can be overriden
     }
 }

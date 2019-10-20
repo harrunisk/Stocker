@@ -12,6 +12,6 @@ import javax.inject.Singleton
     version = Db.Config.DB_VERSION,
     exportSchema = true
 )
-abstract class StockerDb: RoomDatabase() {
+abstract class StockerDb : RoomDatabase() {
     abstract fun currenciesDao(): CurrenciesDao
 }

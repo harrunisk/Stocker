@@ -1,7 +1,6 @@
 package com.nstudiosappdev.core.data.datasource
 
 import com.nstudiosappdev.core.model.DataHolder
-import kotlinx.coroutines.Deferred
 
 interface DataSource {
     interface RemoteDataSource : DataSource {
@@ -12,7 +11,7 @@ interface DataSource {
             suspend fun fetch(): DataHolder<Res>
         }
     }
-    interface LocalDataSource<K,V> : DataSource {
+    interface LocalDataSource<K, V> : DataSource {
         fun get(key: K): V?
 
         fun get(page: Int): List<V>

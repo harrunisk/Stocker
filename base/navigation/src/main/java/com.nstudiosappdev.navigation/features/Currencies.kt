@@ -10,4 +10,3 @@ object Currencies : Feature<Fragment> {
     override val dynamicStart: Fragment?
         get() = CURRENCIES.loadFragmentOrReturnNull()
 }
-

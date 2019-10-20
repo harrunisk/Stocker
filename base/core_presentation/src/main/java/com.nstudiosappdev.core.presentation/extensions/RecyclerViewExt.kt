@@ -32,4 +32,3 @@ fun RecyclerView.scrollToBottom() {
         scrollToPosition(adapter!!.itemCount - 1)
     }
 }
-

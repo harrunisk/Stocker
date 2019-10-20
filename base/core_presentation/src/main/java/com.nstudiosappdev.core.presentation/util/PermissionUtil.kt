@@ -35,7 +35,7 @@ class PermissionUtil {
         fun isStoragePermissionGranted(context: Context) = storagePermissions.isPermissionsGranted(context)
 
         fun isPermissionResultsGranted(grantResult: IntArray) =
-            grantResult.none {it != PackageManager.PERMISSION_GRANTED}
+            grantResult.none { it != PackageManager.PERMISSION_GRANTED }
     }
 }
 /**
