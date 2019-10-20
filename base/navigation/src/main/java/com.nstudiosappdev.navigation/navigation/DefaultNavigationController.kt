@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference
 
 class DefaultNavigationController constructor(
     override val activity: WeakReference<FragmentActivity>
-): NavigationController  {
+) : NavigationController {
 
     override fun navigateToMain() = start(Main.dynamicStart)
 

@@ -6,9 +6,9 @@ import androidx.room.Entity
 import com.nstudiosappdev.core.data.db.Db
 
 @Entity(tableName = Db.TABLES.CURRENCIES.NAME,
-        primaryKeys = ["bankName","currencyType"])
+        primaryKeys = ["bankName", "currencyType"])
 class CurrenciesEntity constructor(
-    @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BANK_NAME) @NonNull  val bankName: String,
+    @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BANK_NAME) @NonNull val bankName: String,
     @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BUY_PRICE) val buyPrice: String?,
     @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BUY_STATUS) val buyStatus: String?,
     @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.SELL_PRICE) val sellPrice: String?,

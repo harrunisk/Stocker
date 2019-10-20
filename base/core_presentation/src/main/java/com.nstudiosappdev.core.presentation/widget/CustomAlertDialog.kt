@@ -3,20 +3,17 @@ package com.nstudiosappdev.core.presentation.widget
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContextCompat
 import com.nstudiosappdev.core.presentation.R
 import com.nstudiosappdev.core.presentation.enums.DialogType
 
 class CustomAlertDialog(
     context: Context
-) : AlertDialog.Builder(context){
+) : AlertDialog.Builder(context) {
 
     private var titleText: AppCompatTextView
     private var messageText: AppCompatTextView
@@ -45,7 +42,7 @@ class CustomAlertDialog(
     }
 
     override fun setMessage(message: CharSequence?): AlertDialog.Builder {
-        if (titleText.text.isNullOrBlank()){
+        if (titleText.text.isNullOrBlank()) {
             titleText.visibility = View.GONE
         }
         messageText.text = message?.toString()
@@ -106,8 +103,6 @@ class CustomAlertDialog(
             negativeButton.isAllCaps = isAllCapsArg
         }
     }
-
-    fun getInputEditText() = inputEditText
 
     override fun create(): AlertDialog {
         val alertDialog = super.create()

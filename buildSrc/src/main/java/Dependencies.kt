@@ -20,6 +20,7 @@ object SupportLibraries {
 object TestLibraries {
     const val jUnit = "junit:junit:${Versions.jUnitVersion}"
     const val runner = "androidx.test:runner:${Versions.testRunnerVersion}"
+    const val androidTestImplementation = "androidx.test.ext:junit:${Versions.testImplementationVersion}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCoreVersion}"
 }
 

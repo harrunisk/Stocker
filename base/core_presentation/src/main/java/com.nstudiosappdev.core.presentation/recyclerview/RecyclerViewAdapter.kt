@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 import com.nstudiosappdev.core.preconditions.AndroidPreConditions
+import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
 
 class RecyclerViewAdapter constructor(
     val items: MutableList<DisplayItem> = ArrayList(),

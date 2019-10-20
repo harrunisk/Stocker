@@ -21,5 +21,4 @@ class DiffUtilImpl(
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
         comparator.areContentsSame(oldItems[oldItemPosition], newItems[newItemPosition])
-
 }

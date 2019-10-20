@@ -33,4 +33,5 @@ dependencies {
     testImplementation TestLibraries.jUnit
     androidTestImplementation TestLibraries.runner
     androidTestImplementation TestLibraries.espressoCore
+    androidTestImplementation TestLibraries.androidTestImplementation
 }

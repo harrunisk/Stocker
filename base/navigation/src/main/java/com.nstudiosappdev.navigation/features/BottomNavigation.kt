@@ -10,4 +10,3 @@ object BottomNavigation : Feature<Fragment> {
     override val dynamicStart: Fragment?
         get() = BOTTOM_NAVIGATION.loadFragmentOrReturnNull()
 }
-
