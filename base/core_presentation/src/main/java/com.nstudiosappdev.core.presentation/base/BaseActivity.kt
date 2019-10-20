@@ -31,7 +31,6 @@ abstract class BaseActivity : AppCompatActivity() {
     @IdRes
     open val toolbarId = Constants.NO_RES
 
-
     open val shouldOnBackPressedWork = true
 
     @CallSuper
@@ -47,7 +46,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if(menuRes != Constants.NO_RES) {
+        if (menuRes != Constants.NO_RES) {
             menuInflater.inflate(menuRes, menu)
             return true
         }
@@ -66,7 +65,7 @@ abstract class BaseActivity : AppCompatActivity() {
         try {
             title = getString(titleRes)
         } catch (e: Resources.NotFoundException) {
-            //ignored
+            // ignored
         }
         setScreenTitle(title)
     }
@@ -77,7 +76,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     @SuppressLint("RestrictedApi")
     fun initNavigation(uiNavigation: UiNavigation) {
-        when(uiNavigation) {
+        when (uiNavigation) {
             UiNavigation.BACK -> supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
             UiNavigation.ROOT -> supportActionBar?.setDefaultDisplayHomeAsUpEnabled(false)
             else -> {}

@@ -33,7 +33,7 @@ abstract class BaseViewModelFragment<VM : ViewModel> : BaseInjectionFragment() {
     @CallSuper
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(viewModel is BaseViewModel) {
+        if (viewModel is BaseViewModel) {
             (viewModel as BaseViewModel).errorLiveData.observe(this, Observer {
                 onError(it.e)
             })

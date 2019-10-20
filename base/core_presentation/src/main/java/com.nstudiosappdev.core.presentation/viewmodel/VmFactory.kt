@@ -16,7 +16,7 @@ class VmFactory @Inject constructor(private val creators: Map<Class<out ViewMode
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         var creator = creators[modelClass]
 
-        if(creator == null) {
+        if (creator == null) {
             for (entry in creators) {
                 if (modelClass.isAssignableFrom(entry.key)) {
                     creator = entry.value
@@ -27,7 +27,7 @@ class VmFactory @Inject constructor(private val creators: Map<Class<out ViewMode
 
         requireNotNull(creator) { "Unknown model class$modelClass" }
 
-        try{
+        try {
             return creator.get() as T
         } catch (e: Exception) {
             throw RuntimeException(e)

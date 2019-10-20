@@ -8,7 +8,7 @@ private fun intentTo(className: String): Intent =
 
 internal fun String.loadIntentOrReturnNull(): Intent? =
     try {
-        Class.forName(this).run { intentTo((this@loadIntentOrReturnNull))}
+        Class.forName(this).run { intentTo((this@loadIntentOrReturnNull)) }
     } catch (e: ClassNotFoundException) {
         null
     }

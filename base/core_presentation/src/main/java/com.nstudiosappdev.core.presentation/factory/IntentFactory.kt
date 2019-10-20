@@ -11,5 +11,4 @@ interface IntentFactory {
     fun createShareIntent(packageName: String): Intent?
 
     fun createShareTextIntent(shareBody: String, title: String): Intent
-
 }

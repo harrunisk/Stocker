@@ -71,7 +71,6 @@ abstract class BaseFragment : Fragment(), BaseView {
         }
     }
 
-
     private fun setActivityTitle(title: String) {
         if (activity is BaseActivity) {
             (activity as BaseActivity).setScreenTitle(title)
@@ -88,7 +87,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     private fun getErrorMessage(e: Error): String {
         return when (e) {
-            is Error.ApiError ->{
+            is Error.ApiError -> {
                 e.message
             }
             is Error.ApiErrors -> {
@@ -102,13 +101,13 @@ abstract class BaseFragment : Fragment(), BaseView {
             is Error.EmptyCacheResult -> {
                 getString(R.string.text_empty_cache)
             }
-            is Error.InvalidResponseError ->{
+            is Error.InvalidResponseError -> {
                 getString(R.string.text_invalid_response)
             }
-            is Error.BusinessError ->{
+            is Error.BusinessError -> {
                 "Business Error -> error code ${e.code} error message ${e.message}"
             }
-            is Error.AuthenticationError ->{
+            is Error.AuthenticationError -> {
                 getString(R.string.text_authentication_error)
             }
             else -> getString(R.string.text_error)
