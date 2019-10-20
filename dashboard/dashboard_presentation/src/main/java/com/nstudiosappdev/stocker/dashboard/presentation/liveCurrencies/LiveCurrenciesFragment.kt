@@ -15,13 +15,12 @@ import com.nstudiosappdev.core.presentation.recyclerview.RecyclerViewAdapter
 import com.nstudiosappdev.stocker.dashboard.domain.Currency
 import com.nstudiosappdev.stocker.dashboard.presentation.CurrenciesViewEntity
 import com.nstudiosappdev.stocker.presentation.R
-import kotlinx.android.synthetic.main.fragment_currencies.*
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.fragment_currencies.*
 
 class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() {
 
     private var currencyType: String? = null
-
 
     @Inject
     lateinit var liveCurrenciesAdapter: RecyclerViewAdapter
@@ -153,7 +152,7 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>() 
                 viewModel.addToFavorites(
                     Currency(
                         bankName = currenciesViewEntity.bankName,
-                        buyPrice  = currenciesViewEntity.buyPrice,
+                        buyPrice = currenciesViewEntity.buyPrice,
                         buyStatus = currenciesViewEntity.buyStatus,
                         sellPrice = currenciesViewEntity.sellPrice,
                         sellStatus = currenciesViewEntity.sellStatus,

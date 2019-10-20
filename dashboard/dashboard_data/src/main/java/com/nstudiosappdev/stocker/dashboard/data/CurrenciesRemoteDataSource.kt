@@ -15,7 +15,7 @@ class CurrenciesRemoteDataSource @Inject constructor(
 ) : DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>> {
     override suspend fun getResult(request: CurrenciesRequest): DataHolder<List<Currency>> {
         val callAdapter = ApiCallAdapter<List<Currency>>(errorFactory)
-        return when (request.currencyType){
+        return when (request.currencyType) {
             USD -> callAdapter.adapt(currenciesServices.getUsdCurrencies())
             EURO -> callAdapter.adapt(currenciesServices.getEuroCurrencies())
             GOLD -> callAdapter.adapt(currenciesServices.getGoldCurrencies())

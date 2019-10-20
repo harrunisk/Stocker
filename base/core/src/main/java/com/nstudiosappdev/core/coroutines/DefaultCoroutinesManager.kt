@@ -1,9 +1,9 @@
 package com.nstudiosappdev.core.coroutines
 
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class DefaultCoroutinesManager(override val coroutineContext: CoroutineContext) : CoroutineManager {
 
@@ -12,7 +12,7 @@ class DefaultCoroutinesManager(override val coroutineContext: CoroutineContext) 
     }
 
     override fun handleLaunch(execution: suspend CoroutineScope.() -> Unit) {
-        val job: Job = launch { execution()}
+        val job: Job = launch { execution() }
         coroutinesJobs.add(job)
         job.invokeOnCompletion { coroutinesJobs.remove(job) }
     }
@@ -33,7 +33,7 @@ class DefaultCoroutinesManager(override val coroutineContext: CoroutineContext) 
         final: suspend CoroutineScope.() -> Unit,
         handleCancellationExceptionManually: Boolean
     ) {
-        launch { tryCatchFinally(execution, error, final, handleCancellationExceptionManually)}
+        launch { tryCatchFinally(execution, error, final, handleCancellationExceptionManually) }
     }
 
     @Synchronized
@@ -42,7 +42,7 @@ class DefaultCoroutinesManager(override val coroutineContext: CoroutineContext) 
         final: suspend CoroutineScope.() -> Unit,
         supressCancellationException: Boolean
     ) {
-        launch { tryFinally(execution, final, supressCancellationException)}
+        launch { tryFinally(execution, final, supressCancellationException) }
     }
 
     @Synchronized

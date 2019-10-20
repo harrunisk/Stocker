@@ -29,5 +29,4 @@ interface ErrorFactory {
     fun createConnectionError(): Error
 
     fun createBusinessError(code: Int = 1, message: String? = null): Error
-
 }
