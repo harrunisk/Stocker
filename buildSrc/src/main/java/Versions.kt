@@ -34,5 +34,12 @@ object Versions {
     const val constraintLayoutVersion = "1.1.2"
     const val lottieVersion = "3.0.1"
     const val fabricVersion = "2.10.1"
+
+    /**
+     * Static code analysis
+     **/
+    const val detekt = "1.0.1"
+    const val ben_manes = "0.25.0"
+    const val ktlint = "8.2.0"
 }
 
