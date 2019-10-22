@@ -1,3 +1,4 @@
 apply from: "$rootDir/ktlint.gradle"
+apply from: "$rootDir/detekt.gradle"
 apply plugin: Plugins.androidLibrary
 apply from: "$rootDir/common.gradle"
