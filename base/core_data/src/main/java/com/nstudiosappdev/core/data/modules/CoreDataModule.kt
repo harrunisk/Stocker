@@ -14,5 +14,5 @@ class CoreDataModule {
     @Singleton
     @Provides
     fun provideApiCallAdapter(errorFactory: ErrorFactory): CallAdapter<Deferred<ApiResponse<out Any?>>> =
-            ApiCallAdapter(errorFactory)
+        ApiCallAdapter(errorFactory)
 }

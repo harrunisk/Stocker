@@ -21,7 +21,7 @@ class BottomNavigationFragment : BaseFragment() {
             when (it.itemId) {
                 R.id.navigationCurrencies -> {
                     navigationController.navigateToCurrencies(R.id.fl_main)
-                   true
+                    true
                 }
                 R.id.navigationPortfolio -> {
                     navigationController.navigateToPortfolio(R.id.fl_main)

@@ -2,18 +2,20 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainPortfolio"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:orientation="vertical">
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefreshPortfolio"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pullToRefreshPortfolio">
+        android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/favoritesLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/favoritesLinearLayout"
+            android:orientation="vertical"
             android:visibility="gone">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,161 +24,164 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/headerBankNameLinearLayout"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_m"
+                    android:layout_marginBottom="@dimen/space_s"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/space_m"
                     android:paddingBottom="@dimen/space_m"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="@dimen/space_m"
-                    android:layout_marginBottom="@dimen/space_s"
-                    android:id="@+id/headerBankNameLinearLayout">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:id="@+id/headerBankName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/space_xs"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@string/recyclerview_bank_name_header"
-                        android:id="@+id/headerBankName"/>
+                        android:text="@string/recyclerview_bank_name_header" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/bankNameSortByIncreasingSign"
-                        android:text="@string/increase"/>
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
+                        android:text="@string/increase"
+                        android:textSize="@dimen/font_xxlarge" />
+
+                    <TextView
                         android:id="@+id/bankNameSortByDecreasingSign"
-                        android:text="@string/decrease"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/decrease"
+                        android:textSize="@dimen/font_xxlarge" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/headerBuyingPriceLinearLayout"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
+                    android:layout_marginEnd="@dimen/space_m"
                     android:paddingTop="@dimen/space_m"
                     android:paddingBottom="@dimen/space_m"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/headerSellingPriceLinearLayout"
-                    android:layout_marginEnd="@dimen/space_m"
-                    android:id="@+id/headerBuyingPriceLinearLayout">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:id="@+id/headerBuyingPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/space_xs"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@string/recyclerview_buying_price_header"
-                        android:id="@+id/headerBuyingPrice"/>
+                        android:text="@string/recyclerview_buying_price_header" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/buyingPriceSortByIncreasingSign"
-                        android:text="@string/increase"/>
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
+                        android:text="@string/increase"
+                        android:textSize="@dimen/font_xxlarge" />
+
+                    <TextView
                         android:id="@+id/buyingPriceSortByDecreasingSign"
-                        android:text="@string/decrease"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/decrease"
+                        android:textSize="@dimen/font_xxlarge" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/headerSellingPriceLinearLayout"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
+                    android:layout_marginEnd="@dimen/space_m"
                     android:paddingTop="@dimen/space_m"
                     android:paddingBottom="@dimen/space_m"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/headerDiffLinearLayout"
-                    android:layout_marginEnd="@dimen/space_m"
-                    android:id="@+id/headerSellingPriceLinearLayout">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:id="@+id/headerSellingPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/space_xs"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@string/recyclerview_selling_price_header"
-                        android:id="@+id/headerSellingPrice"/>
+                        android:text="@string/recyclerview_selling_price_header" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/sellingPriceSortByIncreasingSign"
-                        android:text="@string/increase"/>
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
+                        android:text="@string/increase"
+                        android:textSize="@dimen/font_xxlarge" />
+
+                    <TextView
                         android:id="@+id/sellingPriceSortByDecreasingSign"
-                        android:text="@string/decrease"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/decrease"
+                        android:textSize="@dimen/font_xxlarge" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/headerDiffLinearLayout"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_m"
                     android:layout_marginEnd="@dimen/space_m"
                     android:paddingTop="@dimen/space_m"
                     android:paddingBottom="@dimen/space_m"
-                    android:id="@+id/headerDiffLinearLayout"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:id="@+id/headerDiff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/space_xs"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@string/recyclerview_diff_header"
-                        android:id="@+id/headerDiff"/>
+                        android:text="@string/recyclerview_diff_header" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
                         android:id="@+id/diffSortByIncreasingSign"
-                        android:text="@string/increase"/>
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
-                        android:textSize="@dimen/font_xxlarge"
+                        android:text="@string/increase"
+                        android:textSize="@dimen/font_xxlarge" />
+
+                    <TextView
                         android:id="@+id/diffSortByDecreasingSign"
-                        android:text="@string/decrease"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/decrease"
+                        android:textSize="@dimen/font_xxlarge" />
 
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <View style="@style/MenuDivider"/>
+
+            <View style="@style/MenuDivider" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/portfolioRecyclerView"
                 android:layout_width="match_parent"
-                android:paddingBottom="4dp"
-                android:clipToPadding="true"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:clipToPadding="true"
+                android:paddingBottom="4dp" />
 
         </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -191,34 +196,33 @@
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/space_xxxxl"
             android:layout_marginTop="@dimen/space_xl"
             android:layout_marginRight="@dimen/space_xxxxl"
-            android:layout_marginLeft="@dimen/space_xxxxl"
-            app:layout_constraintDimensionRatio="H, 1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
-            app:lottie_loop= "true"
-            app:lottie_rawRes="@raw/not_found"/>
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/not_found" />
 
         <TextView
+            android:id="@+id/appNameSplashScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/text_favorite_currency_not_available"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_xxlarge"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.6"
-            android:fontFamily="@font/roboto_bold"
-            android:textSize="@dimen/font_xxlarge"
-            android:textAlignment="center"
-            android:id="@+id/appNameSplashScreen"
-            android:text="@string/text_favorite_currency_not_available">
-        </TextView>
+            app:layout_constraintVertical_bias="0.6"></TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

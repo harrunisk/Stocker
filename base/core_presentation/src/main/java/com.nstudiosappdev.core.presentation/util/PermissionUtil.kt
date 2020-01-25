@@ -24,26 +24,36 @@ class PermissionUtil {
          * Permission check methods
          */
 
-        fun isCameraPermissionsGranted(context: Context) = cameraPermissions.isPermissionsGranted(context)
+        fun isCameraPermissionsGranted(context: Context) =
+            cameraPermissions.isPermissionsGranted(context)
 
-        fun isGalleryPermissionsGranted(context: Context) = galleryPermissions.isPermissionsGranted(context)
+        fun isGalleryPermissionsGranted(context: Context) =
+            galleryPermissions.isPermissionsGranted(context)
 
-        fun isLocationPermissionsGranted(context: Context) = locationPermissions.isPermissionsGranted(context)
+        fun isLocationPermissionsGranted(context: Context) =
+            locationPermissions.isPermissionsGranted(context)
 
-        fun isConnectionPermissionsGranted(context: Context) = connectionPermissions.isPermissionsGranted(context)
+        fun isConnectionPermissionsGranted(context: Context) =
+            connectionPermissions.isPermissionsGranted(context)
 
-        fun isStoragePermissionGranted(context: Context) = storagePermissions.isPermissionsGranted(context)
+        fun isStoragePermissionGranted(context: Context) =
+            storagePermissions.isPermissionsGranted(context)
 
         fun isPermissionResultsGranted(grantResult: IntArray) =
             grantResult.none { it != PackageManager.PERMISSION_GRANTED }
     }
 }
+
 /**
  * Permission check extension
  */
 private fun Array<String>.isPermissionsGranted(context: Context): Boolean {
     for (i in this.indices) {
-        if (ActivityCompat.checkSelfPermission(context, this[i]) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                this[i]
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return false
         }
     }

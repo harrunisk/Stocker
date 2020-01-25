@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import java.lang.ref.WeakReference
 import javax.inject.Singleton
+
 @Module(
     includes = [CoreModule::class]
 )
@@ -21,5 +22,6 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideIntentFactory(context: Context): IntentFactory = DefaultIntentFactory(WeakReference(context))
+    fun provideIntentFactory(context: Context): IntentFactory =
+        DefaultIntentFactory(WeakReference(context))
 }

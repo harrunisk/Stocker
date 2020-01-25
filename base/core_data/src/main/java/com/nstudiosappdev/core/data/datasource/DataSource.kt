@@ -7,10 +7,12 @@ interface DataSource {
         interface RequestDataSource<Req, Res : Any> : DataSource {
             suspend fun getResult(request: Req): DataHolder<Res>
         }
+
         interface FetchDataSource<Res : Any> : DataSource {
             suspend fun fetch(): DataHolder<Res>
         }
     }
+
     interface LocalDataSource<K, V> : DataSource {
         fun get(key: K): V?
 

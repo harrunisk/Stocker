@@ -59,16 +59,46 @@ class LiveCurrenciesViewModel @Inject constructor(
         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
         if (currenciesResult is DataHolder.Success && !currenciesResult.data.isNullOrEmpty()) {
             _liveCurrencies.value = when (orderingStyle) {
-                OrderingStyle.BY_NAME.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.bankName }))
-                OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.bankName }))
-                OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.buyPrice }))
-                OrderingStyle.BY_BUYING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.buyPrice }))
-                OrderingStyle.BY_SELLING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.sellPrice }))
-                OrderingStyle.BY_SELLING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.sellPrice }))
-                OrderingStyle.BY_DIFF.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy {
-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
-                OrderingStyle.BY_DIFF_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending {
-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
+                OrderingStyle.BY_NAME.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedBy { it.bankName })
+                )
+                OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedByDescending { it.bankName })
+                )
+                OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedBy { it.buyPrice })
+                )
+                OrderingStyle.BY_BUYING_PRICE_DESC.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedByDescending { it.buyPrice })
+                )
+                OrderingStyle.BY_SELLING_PRICE.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedBy { it.sellPrice })
+                )
+                OrderingStyle.BY_SELLING_PRICE_DESC.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedByDescending { it.sellPrice })
+                )
+                OrderingStyle.BY_DIFF.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedBy {
+                            it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
+                                3
+                            )
+                        })
+                )
+                OrderingStyle.BY_DIFF_DESC.code -> DataHolder.Success(
+                    currenciesListMapper.map(
+                        currenciesResult.data.sortedByDescending {
+                            it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
+                                3
+                            )
+                        })
+                )
                 else -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
             }
             items = currenciesResult.data
@@ -83,12 +113,14 @@ class LiveCurrenciesViewModel @Inject constructor(
 
         when (orderByBankNameFlag) {
             true -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
                 clearAllFlags()
                 orderingStyle = OrderingStyle.BY_NAME.code
             }
             false -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
                 clearAllFlags()
                 orderByBankNameFlag = true
                 orderingStyle = OrderingStyle.BY_NAME_DESC.code
@@ -100,12 +132,14 @@ class LiveCurrenciesViewModel @Inject constructor(
 
         when (orderByBuyingPriceFlag) {
             true -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
                 clearAllFlags()
                 orderingStyle = OrderingStyle.BY_BUYING_PRICE.code
             }
             false -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
                 clearAllFlags()
                 orderByBuyingPriceFlag = true
                 orderingStyle = OrderingStyle.BY_BUYING_PRICE_DESC.code
@@ -117,12 +151,14 @@ class LiveCurrenciesViewModel @Inject constructor(
 
         when (orderBySellingPriceFlag) {
             true -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
                 clearAllFlags()
                 orderingStyle = OrderingStyle.BY_SELLING_PRICE.code
             }
             false -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
                 clearAllFlags()
                 orderBySellingPriceFlag = true
                 orderingStyle = OrderingStyle.BY_SELLING_PRICE_DESC.code
@@ -134,10 +170,14 @@ class LiveCurrenciesViewModel @Inject constructor(
 
         when (orderByDiffFlag) {
             true -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy {
-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy {
+                        it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
+                            3
+                        )
+                    }
                     )
-                )
+                    )
                 orderByDiffFlag = false
                 orderByBuyingPriceFlag = false
                 orderBySellingPriceFlag = false
@@ -145,10 +185,14 @@ class LiveCurrenciesViewModel @Inject constructor(
                 orderingStyle = OrderingStyle.BY_DIFF.code
             }
             false -> {
-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending {
-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
-                )
-                )
+                _liveCurrencies.value =
+                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending {
+                        it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
+                            3
+                        )
+                    }
+                    )
+                    )
                 orderByDiffFlag = true
                 orderByBuyingPriceFlag = false
                 orderBySellingPriceFlag = false
@@ -167,7 +211,8 @@ class LiveCurrenciesViewModel @Inject constructor(
         )
 
         val saveCurrencyResult = saveCurrencyInteractor.executeAsync(saveCurrencyParams).await()
-        if (saveCurrencyResult is DataHolder.Success) _saveFavorites.value = DataHolder.Success(saveCurrencyResult.data)
+        if (saveCurrencyResult is DataHolder.Success) _saveFavorites.value =
+            DataHolder.Success(saveCurrencyResult.data)
     }, error = {
         _saveFavorites.value = DataHolder.Fail(errorFactory.createConnectionError())
     })

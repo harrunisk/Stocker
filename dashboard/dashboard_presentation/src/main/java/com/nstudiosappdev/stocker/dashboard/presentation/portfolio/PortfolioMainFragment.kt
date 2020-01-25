@@ -35,7 +35,11 @@ class PortfolioMainFragment : BaseFragment() {
                     // no-op
                 }
 
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
                     // no-op
                 }
 
