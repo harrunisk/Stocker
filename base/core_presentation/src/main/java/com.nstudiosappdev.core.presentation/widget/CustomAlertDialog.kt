@@ -26,14 +26,16 @@ class CustomAlertDialog(
     private var alertType: DialogType = DialogType.WARNING
 
     init {
-        val mDialogView = LayoutInflater.from(context).inflate(R.layout.custom_alert_dialog_view, null)
+        val mDialogView =
+            LayoutInflater.from(context).inflate(R.layout.custom_alert_dialog_view, null)
         setView(mDialogView)
         titleText = mDialogView.findViewById(R.id.textViewTitle) as AppCompatTextView
         messageText = mDialogView.findViewById(R.id.textViewMessage) as AppCompatTextView
         inputEditText = mDialogView.findViewById(R.id.editTextMessage) as AppCompatEditText
         positiveButton = mDialogView.findViewById(R.id.positiveButton) as AppCompatButton
         negativeButton = mDialogView.findViewById(R.id.negativeButton) as AppCompatButton
-        alertDialogButtonContainer = mDialogView.findViewById(R.id.alertDialogButtonContainer) as LinearLayout
+        alertDialogButtonContainer =
+            mDialogView.findViewById(R.id.alertDialogButtonContainer) as LinearLayout
     }
 
     override fun setTitle(title: CharSequence?): AlertDialog.Builder {
@@ -49,7 +51,10 @@ class CustomAlertDialog(
         return this
     }
 
-    fun setPositiveCustomButton(text: CharSequence?, positiveButtonAction: (() -> Unit)? = null): (() -> Unit)? {
+    fun setPositiveCustomButton(
+        text: CharSequence?,
+        positiveButtonAction: (() -> Unit)? = null
+    ): (() -> Unit)? {
         positiveButton.apply {
             this.text = text?.toString()
             visibility = View.VISIBLE
@@ -58,7 +63,10 @@ class CustomAlertDialog(
         return mPositiveClickListener
     }
 
-    fun setNegativeCustomButton(text: CharSequence?, nagativeButtonAction: (() -> Unit)? = null): (() -> Unit)? {
+    fun setNegativeCustomButton(
+        text: CharSequence?,
+        nagativeButtonAction: (() -> Unit)? = null
+    ): (() -> Unit)? {
         negativeButton.apply {
             this.text = text?.toString()
             visibility = View.VISIBLE

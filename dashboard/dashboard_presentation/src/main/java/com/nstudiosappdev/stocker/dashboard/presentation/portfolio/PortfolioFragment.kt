@@ -95,45 +95,101 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
 
         headerBankNameLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByName()
-            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
+            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(
+                    context!!,
+                    R.color.green_currency
+                )
+            ) {
                 clearAllColor()
-                bankNameSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                bankNameSortByDecreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             } else {
                 clearAllColor()
-                bankNameSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                bankNameSortByIncreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             }
         }
 
         headerBuyingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByBuyingPrices()
-            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
+            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
+                    context!!,
+                    R.color.green_currency
+                )
+            ) {
                 clearAllColor()
-                buyingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                buyingPriceSortByIncreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             } else {
                 clearAllColor()
-                buyingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                buyingPriceSortByDecreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             }
         }
 
         headerSellingPriceLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesBySellingPrice()
-            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
+            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
+                    context!!,
+                    R.color.green_currency
+                )
+            ) {
                 clearAllColor()
-                sellingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                sellingPriceSortByIncreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             } else {
                 clearAllColor()
-                sellingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                sellingPriceSortByDecreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             }
         }
 
         headerDiffLinearLayout.setOnClickListener {
             viewModel.orderCurrenciesByDiff()
-            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
+            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
+                    context!!,
+                    R.color.green_currency
+                )
+            ) {
                 clearAllColor()
-                diffSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                diffSortByIncreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             } else {
                 clearAllColor()
-                diffSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
+                diffSortByDecreasingSign.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.green_currency
+                    )
+                )
             }
         }
     }

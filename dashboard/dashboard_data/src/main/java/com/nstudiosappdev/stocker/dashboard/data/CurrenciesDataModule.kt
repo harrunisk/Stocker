@@ -33,7 +33,8 @@ class CurrenciesDataModule {
         CurrenciesRemoteDataSource(currenciesServices, errorFactory)
 
     @Provides
-    internal fun provideCurrenciesDbEntityMapper(): DbEntityMapper<CurrenciesEntity, Currency> = CurrenciesDbEntityMapper()
+    internal fun provideCurrenciesDbEntityMapper(): DbEntityMapper<CurrenciesEntity, Currency> =
+        CurrenciesDbEntityMapper()
 
     @Provides
     @Singleton
@@ -50,7 +51,11 @@ class CurrenciesDataModule {
         currenciesRemoteDataSource: DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>>,
         @Named(CURRENCIES_LOCAL) currenciesLocalDataSource: DataSource.LocalDataSource<Long, Currency>,
         @Named(CoroutineManagerModule.AM_NAME_REPOSITORY) asyncManager: AsyncManager
-    ): CurrenciesRepository = CurrenciesRepositoryImpl(currenciesRemoteDataSource, currenciesLocalDataSource, asyncManager)
+    ): CurrenciesRepository = CurrenciesRepositoryImpl(
+        currenciesRemoteDataSource,
+        currenciesLocalDataSource,
+        asyncManager
+    )
 
     companion object {
         const val CURRENCIES_LOCAL = "CurrenciesDataModuleLocal"

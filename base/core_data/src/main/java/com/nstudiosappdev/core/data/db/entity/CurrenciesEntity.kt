@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import com.nstudiosappdev.core.data.db.Db
 
-@Entity(tableName = Db.TABLES.CURRENCIES.NAME,
-        primaryKeys = ["bankName", "currencyType"])
+@Entity(
+    tableName = Db.TABLES.CURRENCIES.NAME,
+    primaryKeys = ["bankName", "currencyType"]
+)
 class CurrenciesEntity constructor(
     @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BANK_NAME) @NonNull val bankName: String,
     @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BUY_PRICE) val buyPrice: String?,

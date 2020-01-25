@@ -14,18 +14,20 @@ class DeleteCurrencyInteractor @Inject constructor(
     private val currenciesRepository: CurrenciesRepository,
     private val errorFactory: ErrorFactory,
     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<DeleteCurrencyInteractor.Params, Boolean> {
+) : BaseInteractor(asyncManager),
+    Interactor.DeferredInteractor<DeleteCurrencyInteractor.Params, Boolean> {
 
-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync {
+    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> =
+        handleAsync {
 
-        return@handleAsync when (val response = currenciesRepository.deleteCurrency(
-            postParams.bankName,
-            postParams.currencyType
-        ).await()) {
-            is DataHolder.Success -> DataHolder.Success(response.data)
-            else -> DataHolder.Fail(errorFactory.createUnknownError())
+            return@handleAsync when (val response = currenciesRepository.deleteCurrency(
+                postParams.bankName,
+                postParams.currencyType
+            ).await()) {
+                is DataHolder.Success -> DataHolder.Success(response.data)
+                else -> DataHolder.Fail(errorFactory.createUnknownError())
+            }
         }
-    }
 
     class Params(
         val bankName: String,

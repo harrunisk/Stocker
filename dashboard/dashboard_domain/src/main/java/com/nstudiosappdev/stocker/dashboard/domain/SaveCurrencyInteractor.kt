@@ -14,23 +14,25 @@ class SaveCurrencyInteractor @Inject constructor(
     private val currenciesRepository: CurrenciesRepository,
     private val errorFactory: ErrorFactory,
     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean> {
-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync {
-        val currency = Currency(
-            bankName = postParams.currency.bankName,
-            buyPrice = postParams.currency.buyPrice,
-            buyStatus = postParams.currency.buyStatus,
-            sellPrice = postParams.currency.sellPrice,
-            sellStatus = postParams.currency.sellStatus,
-            currencyType = postParams.currency.currencyType
-        )
-        return@handleAsync when (val response = currenciesRepository.saveCurrency(
-            currency
-        ).await()) {
-            is DataHolder.Success -> DataHolder.Success(response.data)
-            else -> DataHolder.Fail(errorFactory.createUnknownError())
+) : BaseInteractor(asyncManager),
+    Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean> {
+    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> =
+        handleAsync {
+            val currency = Currency(
+                bankName = postParams.currency.bankName,
+                buyPrice = postParams.currency.buyPrice,
+                buyStatus = postParams.currency.buyStatus,
+                sellPrice = postParams.currency.sellPrice,
+                sellStatus = postParams.currency.sellStatus,
+                currencyType = postParams.currency.currencyType
+            )
+            return@handleAsync when (val response = currenciesRepository.saveCurrency(
+                currency
+            ).await()) {
+                is DataHolder.Success -> DataHolder.Success(response.data)
+                else -> DataHolder.Fail(errorFactory.createUnknownError())
+            }
         }
-    }
 
     class Params(
         val currency: Currency

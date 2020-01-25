@@ -17,7 +17,7 @@ class CurrenciesDomainModule {
         errorFactory: ErrorFactory,
         currenciesRepository: CurrenciesRepository
     ): Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>> =
-            GetCurrenciesInteractor(currenciesRepository, errorFactory, asyncManager)
+        GetCurrenciesInteractor(currenciesRepository, errorFactory, asyncManager)
 
     @Provides
     fun provideGetSavedCurrency(
@@ -25,7 +25,7 @@ class CurrenciesDomainModule {
         errorFactory: ErrorFactory,
         currenciesRepository: CurrenciesRepository
     ): Interactor.DeferredInteractor<GetSavedCurrencyInteractor.Params, Currency> =
-            GetSavedCurrencyInteractor(currenciesRepository, errorFactory, asyncManager)
+        GetSavedCurrencyInteractor(currenciesRepository, errorFactory, asyncManager)
 
     @Provides
     fun provideGetSavedCurrencies(

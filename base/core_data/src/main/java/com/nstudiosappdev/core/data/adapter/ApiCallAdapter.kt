@@ -6,7 +6,8 @@ import com.nstudiosappdev.core.model.DataHolder
 import javax.inject.Inject
 import kotlinx.coroutines.Deferred
 
-class ApiCallAdapter<T : Any> @Inject constructor(private val errorFactory: ErrorFactory) : CallAdapter<T> {
+class ApiCallAdapter<T : Any> @Inject constructor(private val errorFactory: ErrorFactory) :
+    CallAdapter<T> {
 
     override suspend fun adapt(apiCall: Deferred<ApiResponse<T?>>): DataHolder<T> {
         val apiResult = apiCall.await()

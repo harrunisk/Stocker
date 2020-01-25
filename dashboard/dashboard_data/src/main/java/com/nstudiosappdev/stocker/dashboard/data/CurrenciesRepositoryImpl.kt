@@ -16,10 +16,11 @@ class CurrenciesRepositoryImpl @Inject constructor(
     asyncManager: AsyncManager
 ) : BaseDataSource(asyncManager), CurrenciesRepository {
 
-    override suspend fun getCurrencies(currenciesRequest: CurrenciesRequest): Deferred<DataHolder<List<Currency>>> = handleAsync {
-        val result = currenciesRemoteDataSource.getResult(currenciesRequest)
-        result
-    }
+    override suspend fun getCurrencies(currenciesRequest: CurrenciesRequest): Deferred<DataHolder<List<Currency>>> =
+        handleAsync {
+            val result = currenciesRemoteDataSource.getResult(currenciesRequest)
+            result
+        }
 
     override suspend fun getSavedCurrency(
         bankName: String,
@@ -29,10 +30,11 @@ class CurrenciesRepositoryImpl @Inject constructor(
         return@handleAsync DataHolder.Success(result)
     }
 
-    override suspend fun getSavedCurrencies(currencyType: String): Deferred<DataHolder<List<Currency>>> = handleAsync {
-        val result = currenciesLocalDataSource.get(currencyType)
-        return@handleAsync DataHolder.Success(result)
-    }
+    override suspend fun getSavedCurrencies(currencyType: String): Deferred<DataHolder<List<Currency>>> =
+        handleAsync {
+            val result = currenciesLocalDataSource.get(currencyType)
+            return@handleAsync DataHolder.Success(result)
+        }
 
     override suspend fun saveCurrency(
         currency: Currency

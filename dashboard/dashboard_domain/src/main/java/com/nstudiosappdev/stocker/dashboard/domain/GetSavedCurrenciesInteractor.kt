@@ -14,9 +14,11 @@ class GetSavedCurrenciesInteractor @Inject constructor(
     private val currenciesRepository: CurrenciesRepository,
     private val errorFactory: ErrorFactory,
     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<GetSavedCurrenciesInteractor.Params, List<Currency>> {
+) : BaseInteractor(asyncManager),
+    Interactor.DeferredInteractor<GetSavedCurrenciesInteractor.Params, List<Currency>> {
 
-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<List<Currency>>> = handleAsync {
+    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<List<Currency>>> =
+        handleAsync {
             return@handleAsync when (val response = currenciesRepository.getSavedCurrencies(
                 postParams.currencyType
             ).await()) {

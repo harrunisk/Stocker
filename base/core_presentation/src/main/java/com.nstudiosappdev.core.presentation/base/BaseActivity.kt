@@ -79,7 +79,8 @@ abstract class BaseActivity : AppCompatActivity() {
         when (uiNavigation) {
             UiNavigation.BACK -> supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
             UiNavigation.ROOT -> supportActionBar?.setDefaultDisplayHomeAsUpEnabled(false)
-            else -> {}
+            else -> {
+            }
         }
     }
 

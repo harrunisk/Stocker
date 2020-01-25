@@ -13,5 +13,5 @@ class ErrorFactoryModule {
     @Provides
     @Singleton
     internal fun provideErrorFactory(context: Context): ErrorFactory =
-            DefaultErrorFactory(context.applicationContext)
+        DefaultErrorFactory(context.applicationContext)
 }

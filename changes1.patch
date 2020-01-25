@@ -1,0 +1,2347 @@
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+index f3c1cc0..2020b6b 100644
+--- a/app/src/main/AndroidManifest.xml
++++ b/app/src/main/AndroidManifest.xml
+@@ -1,35 +1,37 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-          xmlns:dist="http://schemas.android.com/apk/distribution"
+-          package="com.nstudiosappdev.stocker">
++    xmlns:dist="http://schemas.android.com/apk/distribution"
++    package="com.nstudiosappdev.stocker">
+ 
+-    <uses-permission android:name="android.permission.INTERNET"/>
++    <uses-permission android:name="android.permission.INTERNET" />
+ 
+-    <dist:module dist:instant="true"/>
++    <dist:module dist:instant="true" />
+ 
+     <application
+-            android:allowBackup="true"
+-            android:name=".StockerApp"
+-            android:icon="@mipmap/ic_launcher"
+-            android:logo="@mipmap/ic_launcher"
+-            android:label="@string/app_name"
+-            android:roundIcon="@mipmap/ic_launcher_round"
+-            android:supportsRtl="true"
+-            android:theme="@style/AppTheme"
+-            android:usesCleartextTraffic="true">
++        android:name=".StockerApp"
++        android:allowBackup="true"
++        android:icon="@mipmap/ic_launcher"
++        android:label="@string/app_name"
++        android:logo="@mipmap/ic_launcher"
++        android:roundIcon="@mipmap/ic_launcher_round"
++        android:supportsRtl="true"
++        android:theme="@style/AppTheme"
++        android:usesCleartextTraffic="true">
+         <activity
+             android:name=".ui.SplashActivity"
+             android:screenOrientation="portrait">
+             <intent-filter>
+-                <action android:name="android.intent.action.MAIN"/>
++                <action android:name="android.intent.action.MAIN" />
+ 
+-                <category android:name="android.intent.category.LAUNCHER"/>
++                <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+             <intent-filter>
+                 <action android:name="android.intent.action.VIEW" />
++
+                 <category android:name="android.intent.category.DEFAULT" />
+                 <category android:name="android.intent.category.BROWSABLE" />
+-                <data android:scheme="currency"/>
++
++                <data android:scheme="currency" />
+             </intent-filter>
+         </activity>
+     </application>
+diff --git a/app/src/main/java/com/nstudiosappdev/stocker/injection/modules/ApplicationModule.kt b/app/src/main/java/com/nstudiosappdev/stocker/injection/modules/ApplicationModule.kt
+index 1af9b62..6569b34 100644
+--- a/app/src/main/java/com/nstudiosappdev/stocker/injection/modules/ApplicationModule.kt
++++ b/app/src/main/java/com/nstudiosappdev/stocker/injection/modules/ApplicationModule.kt
+@@ -9,6 +9,7 @@ import dagger.Module
+ import dagger.Provides
+ import java.lang.ref.WeakReference
+ import javax.inject.Singleton
++
+ @Module(
+     includes = [CoreModule::class]
+ )
+@@ -21,5 +22,6 @@ class ApplicationModule {
+ 
+     @Provides
+     @Singleton
+-    fun provideIntentFactory(context: Context): IntentFactory = DefaultIntentFactory(WeakReference(context))
++    fun provideIntentFactory(context: Context): IntentFactory =
++        DefaultIntentFactory(WeakReference(context))
+ }
+diff --git a/app/src/main/res/layout/activity_splash.xml b/app/src/main/res/layout/activity_splash.xml
+index f99789c..ef9c6d4 100644
+--- a/app/src/main/res/layout/activity_splash.xml
++++ b/app/src/main/res/layout/activity_splash.xml
+@@ -1,39 +1,36 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ 
+-<androidx.constraintlayout.widget.ConstraintLayout
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    android:layout_margin="@dimen/space_xxxxl"
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto">
++    android:layout_margin="@dimen/space_xxxxl">
+ 
+     <ImageView
++        android:id="@+id/splashImageView"
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_marginTop="@dimen/font_xxxlarge"
++        android:src="@drawable/ic_splash"
++        app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
+         app:layout_constraintDimensionRatio="H, 1:1"
+-        app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
+-        android:src="@drawable/ic_splash"
+-        android:id="@+id/splashImageView">
+-    </ImageView>
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"></ImageView>
+ 
+     <TextView
++        android:id="@+id/appNameSplashScreen"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        app:layout_constraintStart_toStartOf="parent"
++        android:fontFamily="@font/roboto_bold"
++        android:text="@string/app_name"
++        android:textAlignment="center"
++        android:textSize="@dimen/font_xxxlarge"
++        app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.5"
++        app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintVertical_bias="0.8"
+-        android:fontFamily="@font/roboto_bold"
+-        android:textSize="@dimen/font_xxxlarge"
+-        android:textAlignment="center"
+-        android:id="@+id/appNameSplashScreen"
+-        android:text="@string/app_name">
+-    </TextView>
++        app:layout_constraintVertical_bias="0.8"></TextView>
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+diff --git a/base/core/src/main/AndroidManifest.xml b/base/core/src/main/AndroidManifest.xml
+index 10e05b5..0c8a43a 100644
+--- a/base/core/src/main/AndroidManifest.xml
++++ b/base/core/src/main/AndroidManifest.xml
+@@ -1,2 +1 @@
+-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-          package="com.nstudiosappdev.core"/>
++<manifest package="com.nstudiosappdev.core" />
+diff --git a/base/core/src/main/java/com/nstudiosappdev/core/date/DateTimeConverter.kt b/base/core/src/main/java/com/nstudiosappdev/core/date/DateTimeConverter.kt
+index 2e19df5..9e6649c 100644
+--- a/base/core/src/main/java/com/nstudiosappdev/core/date/DateTimeConverter.kt
++++ b/base/core/src/main/java/com/nstudiosappdev/core/date/DateTimeConverter.kt
+@@ -2,7 +2,10 @@ package com.nstudiosappdev.core.date
+ 
+ interface DateTimeConverter {
+ 
+-    fun convertLongToDate(dateTime: Long, dateFormat: String = DateTimeConstants.DEFAULT_DATE_FORMAT): String
++    fun convertLongToDate(
++        dateTime: Long,
++        dateFormat: String = DateTimeConstants.DEFAULT_DATE_FORMAT
++    ): String
+ 
+     fun convertCurrentDateToLong(): Long
+ }
+diff --git a/base/core/src/main/java/com/nstudiosappdev/core/error/DefaultErrorFactory.kt b/base/core/src/main/java/com/nstudiosappdev/core/error/DefaultErrorFactory.kt
+index e47f0a1..7c5520a 100644
+--- a/base/core/src/main/java/com/nstudiosappdev/core/error/DefaultErrorFactory.kt
++++ b/base/core/src/main/java/com/nstudiosappdev/core/error/DefaultErrorFactory.kt
+@@ -32,11 +32,14 @@ class DefaultErrorFactory @Inject constructor(
+         return Error.ApiErrors(safeErrorList)
+     }
+ 
+-    override fun createUnknownError(): Error = Error.UnknownError(context.getString(R.string.text_error))
++    override fun createUnknownError(): Error =
++        Error.UnknownError(context.getString(R.string.text_error))
+ 
+-    override fun createErrorFromThrowable(t: Throwable) = Error.ExceptionalError(message = t.localizedMessage)
++    override fun createErrorFromThrowable(t: Throwable) =
++        Error.ExceptionalError(message = t.localizedMessage)
+ 
+-    override fun createInvalidResponseError() = Error.InvalidResponseError(context.getString(R.string.text_invalid_response))
++    override fun createInvalidResponseError() =
++        Error.InvalidResponseError(context.getString(R.string.text_invalid_response))
+ 
+     override fun createUnHandledStateError() = Error.UnhandledStateError()
+ 
+diff --git a/base/core/src/main/java/com/nstudiosappdev/core/injection/modules/ErrorFactoryModule.kt b/base/core/src/main/java/com/nstudiosappdev/core/injection/modules/ErrorFactoryModule.kt
+index d8b9185..ab26b7d 100644
+--- a/base/core/src/main/java/com/nstudiosappdev/core/injection/modules/ErrorFactoryModule.kt
++++ b/base/core/src/main/java/com/nstudiosappdev/core/injection/modules/ErrorFactoryModule.kt
+@@ -13,5 +13,5 @@ class ErrorFactoryModule {
+     @Provides
+     @Singleton
+     internal fun provideErrorFactory(context: Context): ErrorFactory =
+-            DefaultErrorFactory(context.applicationContext)
++        DefaultErrorFactory(context.applicationContext)
+ }
+diff --git a/base/core_data/src/main/java/com/nstudiosappdev/core/data/adapter/ApiCallAdapter.kt b/base/core_data/src/main/java/com/nstudiosappdev/core/data/adapter/ApiCallAdapter.kt
+index 0c28f55..3601f93 100644
+--- a/base/core_data/src/main/java/com/nstudiosappdev/core/data/adapter/ApiCallAdapter.kt
++++ b/base/core_data/src/main/java/com/nstudiosappdev/core/data/adapter/ApiCallAdapter.kt
+@@ -6,7 +6,8 @@ import com.nstudiosappdev.core.model.DataHolder
+ import javax.inject.Inject
+ import kotlinx.coroutines.Deferred
+ 
+-class ApiCallAdapter<T : Any> @Inject constructor(private val errorFactory: ErrorFactory) : CallAdapter<T> {
++class ApiCallAdapter<T : Any> @Inject constructor(private val errorFactory: ErrorFactory) :
++    CallAdapter<T> {
+ 
+     override suspend fun adapt(apiCall: Deferred<ApiResponse<T?>>): DataHolder<T> {
+         val apiResult = apiCall.await()
+diff --git a/base/core_data/src/main/java/com/nstudiosappdev/core/data/datasource/DataSource.kt b/base/core_data/src/main/java/com/nstudiosappdev/core/data/datasource/DataSource.kt
+index ec23ee8..8da5168 100644
+--- a/base/core_data/src/main/java/com/nstudiosappdev/core/data/datasource/DataSource.kt
++++ b/base/core_data/src/main/java/com/nstudiosappdev/core/data/datasource/DataSource.kt
+@@ -7,10 +7,12 @@ interface DataSource {
+         interface RequestDataSource<Req, Res : Any> : DataSource {
+             suspend fun getResult(request: Req): DataHolder<Res>
+         }
++
+         interface FetchDataSource<Res : Any> : DataSource {
+             suspend fun fetch(): DataHolder<Res>
+         }
+     }
++
+     interface LocalDataSource<K, V> : DataSource {
+         fun get(key: K): V?
+ 
+diff --git a/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/Migrations.kt b/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/Migrations.kt
+index 568592d..a8f6d93 100644
+--- a/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/Migrations.kt
++++ b/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/Migrations.kt
+@@ -5,14 +5,16 @@ import androidx.sqlite.db.SupportSQLiteDatabase
+ 
+ val MIGRATION_1_2 = object : Migration(1, 2) {
+     override fun migrate(database: SupportSQLiteDatabase) {
+-        database.execSQL("CREATE TABLE IF NOT EXISTS currencies (" +
+-                "'bankName' TEXT PRIMARY KEY NOT NULL," +
+-                "'buyPrice' TEXT," +
+-                "'buyStatus' TEXT," +
+-                "'sellPrice' TEXT," +
+-                "'sellStatus' TEXT," +
+-                "'currencyType ' TEXT PRIMARY KEY NOT NULL," +
+-                "'createdDate' LONG," +
+-                "'updatedDate' LONG )  ")
++        database.execSQL(
++            "CREATE TABLE IF NOT EXISTS currencies (" +
++                    "'bankName' TEXT PRIMARY KEY NOT NULL," +
++                    "'buyPrice' TEXT," +
++                    "'buyStatus' TEXT," +
++                    "'sellPrice' TEXT," +
++                    "'sellStatus' TEXT," +
++                    "'currencyType ' TEXT PRIMARY KEY NOT NULL," +
++                    "'createdDate' LONG," +
++                    "'updatedDate' LONG )  "
++        )
+     }
+ }
+diff --git a/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/entity/CurrenciesEntity.kt b/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/entity/CurrenciesEntity.kt
+index c554291..2693496 100644
+--- a/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/entity/CurrenciesEntity.kt
++++ b/base/core_data/src/main/java/com/nstudiosappdev/core/data/db/entity/CurrenciesEntity.kt
+@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo
+ import androidx.room.Entity
+ import com.nstudiosappdev.core.data.db.Db
+ 
+-@Entity(tableName = Db.TABLES.CURRENCIES.NAME,
+-        primaryKeys = ["bankName", "currencyType"])
++@Entity(
++    tableName = Db.TABLES.CURRENCIES.NAME,
++    primaryKeys = ["bankName", "currencyType"]
++)
+ class CurrenciesEntity constructor(
+     @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BANK_NAME) @NonNull val bankName: String,
+     @ColumnInfo(name = Db.TABLES.CURRENCIES.COLUMNS.BUY_PRICE) val buyPrice: String?,
+diff --git a/base/core_data/src/main/java/com/nstudiosappdev/core/data/modules/CoreDataModule.kt b/base/core_data/src/main/java/com/nstudiosappdev/core/data/modules/CoreDataModule.kt
+index 2c62a30..52814a6 100644
+--- a/base/core_data/src/main/java/com/nstudiosappdev/core/data/modules/CoreDataModule.kt
++++ b/base/core_data/src/main/java/com/nstudiosappdev/core/data/modules/CoreDataModule.kt
+@@ -14,5 +14,5 @@ class CoreDataModule {
+     @Singleton
+     @Provides
+     fun provideApiCallAdapter(errorFactory: ErrorFactory): CallAdapter<Deferred<ApiResponse<out Any?>>> =
+-            ApiCallAdapter(errorFactory)
++        ApiCallAdapter(errorFactory)
+ }
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseActivity.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseActivity.kt
+index 9ec3555..ef87a07 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseActivity.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseActivity.kt
+@@ -79,7 +79,8 @@ abstract class BaseActivity : AppCompatActivity() {
+         when (uiNavigation) {
+             UiNavigation.BACK -> supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
+             UiNavigation.ROOT -> supportActionBar?.setDefaultDisplayHomeAsUpEnabled(false)
+-            else -> {}
++            else -> {
++            }
+         }
+     }
+ 
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseFragment.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseFragment.kt
+index cc21f55..300259a 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseFragment.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/base/BaseFragment.kt
+@@ -42,7 +42,11 @@ abstract class BaseFragment : Fragment(), BaseView {
+         }
+     }
+ 
+-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
++    override fun onCreateView(
++        inflater: LayoutInflater,
++        container: ViewGroup?,
++        savedInstanceState: Bundle?
++    ): View? {
+         return inflater.inflate(getLayoutRes(), null, false)
+     }
+ 
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/extensions/ContextExt.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/extensions/ContextExt.kt
+index 535e568..65a70e0 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/extensions/ContextExt.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/extensions/ContextExt.kt
+@@ -4,7 +4,8 @@ import android.content.Context
+ import android.net.ConnectivityManager
+ import android.widget.Toast
+ 
+-fun Context.alert(message: String, length: Int = Toast.LENGTH_SHORT) = Toast.makeText(this, message, length).show()
++fun Context.alert(message: String, length: Int = Toast.LENGTH_SHORT) =
++    Toast.makeText(this, message, length).show()
+ 
+ fun Context.isWifiConnected(): Boolean {
+     val connManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/factory/DefaultIntentFactory.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/factory/DefaultIntentFactory.kt
+index d42899e..64dfda7 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/factory/DefaultIntentFactory.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/factory/DefaultIntentFactory.kt
+@@ -7,10 +7,14 @@ import java.lang.ref.WeakReference
+ class DefaultIntentFactory(override val context: WeakReference<Context>) :
+     IntentFactory {
+ 
+-    override fun createShareIntent(packageName: String): Intent? = Intent(Intent.ACTION_SEND).apply {
+-        type = "text/plain"
+-        putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=$packageName")
+-    }
++    override fun createShareIntent(packageName: String): Intent? =
++        Intent(Intent.ACTION_SEND).apply {
++            type = "text/plain"
++            putExtra(
++                Intent.EXTRA_TEXT,
++                "https://play.google.com/store/apps/details?id=$packageName"
++            )
++        }
+ 
+     override fun createShareTextIntent(shareBody: String, title: String): Intent {
+         return Intent(Intent.ACTION_SEND)
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/recyclerview/RecyclerViewAdapter.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/recyclerview/RecyclerViewAdapter.kt
+index 7a4fee1..ee65379 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/recyclerview/RecyclerViewAdapter.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/recyclerview/RecyclerViewAdapter.kt
+@@ -111,7 +111,8 @@ class RecyclerViewAdapter constructor(
+ 
+     override fun getSelectedItems(): List<DisplayItem> = selectedItems
+ 
+-    private fun calculateDiffResult(newItems: List<DisplayItem>): Deferred<DiffUtil.DiffResult> = GlobalScope.async {
+-        calculateDiff(newItems)
+-    }
++    private fun calculateDiffResult(newItems: List<DisplayItem>): Deferred<DiffUtil.DiffResult> =
++        GlobalScope.async {
++            calculateDiff(newItems)
++        }
+ }
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/util/PermissionUtil.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/util/PermissionUtil.kt
+index a9f3521..e6d8db2 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/util/PermissionUtil.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/util/PermissionUtil.kt
+@@ -24,26 +24,36 @@ class PermissionUtil {
+          * Permission check methods
+          */
+ 
+-        fun isCameraPermissionsGranted(context: Context) = cameraPermissions.isPermissionsGranted(context)
++        fun isCameraPermissionsGranted(context: Context) =
++            cameraPermissions.isPermissionsGranted(context)
+ 
+-        fun isGalleryPermissionsGranted(context: Context) = galleryPermissions.isPermissionsGranted(context)
++        fun isGalleryPermissionsGranted(context: Context) =
++            galleryPermissions.isPermissionsGranted(context)
+ 
+-        fun isLocationPermissionsGranted(context: Context) = locationPermissions.isPermissionsGranted(context)
++        fun isLocationPermissionsGranted(context: Context) =
++            locationPermissions.isPermissionsGranted(context)
+ 
+-        fun isConnectionPermissionsGranted(context: Context) = connectionPermissions.isPermissionsGranted(context)
++        fun isConnectionPermissionsGranted(context: Context) =
++            connectionPermissions.isPermissionsGranted(context)
+ 
+-        fun isStoragePermissionGranted(context: Context) = storagePermissions.isPermissionsGranted(context)
++        fun isStoragePermissionGranted(context: Context) =
++            storagePermissions.isPermissionsGranted(context)
+ 
+         fun isPermissionResultsGranted(grantResult: IntArray) =
+             grantResult.none { it != PackageManager.PERMISSION_GRANTED }
+     }
+ }
++
+ /**
+  * Permission check extension
+  */
+ private fun Array<String>.isPermissionsGranted(context: Context): Boolean {
+     for (i in this.indices) {
+-        if (ActivityCompat.checkSelfPermission(context, this[i]) != PackageManager.PERMISSION_GRANTED) {
++        if (ActivityCompat.checkSelfPermission(
++                context,
++                this[i]
++            ) != PackageManager.PERMISSION_GRANTED
++        ) {
+             return false
+         }
+     }
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/viewmodel/ViewModelKey.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/viewmodel/ViewModelKey.kt
+index 9a76d4a..63247cb 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/viewmodel/ViewModelKey.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/viewmodel/ViewModelKey.kt
+@@ -5,6 +5,10 @@ import dagger.MapKey
+ import kotlin.reflect.KClass
+ 
+ @Retention(AnnotationRetention.RUNTIME)
+-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
++@Target(
++    AnnotationTarget.FUNCTION,
++    AnnotationTarget.PROPERTY_GETTER,
++    AnnotationTarget.PROPERTY_SETTER
++)
+ @MapKey
+ annotation class ViewModelKey(val value: KClass<out ViewModel>)
+diff --git a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/widget/CustomAlertDialog.kt b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/widget/CustomAlertDialog.kt
+index 49cd6c8..d1aa426 100644
+--- a/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/widget/CustomAlertDialog.kt
++++ b/base/core_presentation/src/main/java/com.nstudiosappdev.core.presentation/widget/CustomAlertDialog.kt
+@@ -26,14 +26,16 @@ class CustomAlertDialog(
+     private var alertType: DialogType = DialogType.WARNING
+ 
+     init {
+-        val mDialogView = LayoutInflater.from(context).inflate(R.layout.custom_alert_dialog_view, null)
++        val mDialogView =
++            LayoutInflater.from(context).inflate(R.layout.custom_alert_dialog_view, null)
+         setView(mDialogView)
+         titleText = mDialogView.findViewById(R.id.textViewTitle) as AppCompatTextView
+         messageText = mDialogView.findViewById(R.id.textViewMessage) as AppCompatTextView
+         inputEditText = mDialogView.findViewById(R.id.editTextMessage) as AppCompatEditText
+         positiveButton = mDialogView.findViewById(R.id.positiveButton) as AppCompatButton
+         negativeButton = mDialogView.findViewById(R.id.negativeButton) as AppCompatButton
+-        alertDialogButtonContainer = mDialogView.findViewById(R.id.alertDialogButtonContainer) as LinearLayout
++        alertDialogButtonContainer =
++            mDialogView.findViewById(R.id.alertDialogButtonContainer) as LinearLayout
+     }
+ 
+     override fun setTitle(title: CharSequence?): AlertDialog.Builder {
+@@ -49,7 +51,10 @@ class CustomAlertDialog(
+         return this
+     }
+ 
+-    fun setPositiveCustomButton(text: CharSequence?, positiveButtonAction: (() -> Unit)? = null): (() -> Unit)? {
++    fun setPositiveCustomButton(
++        text: CharSequence?,
++        positiveButtonAction: (() -> Unit)? = null
++    ): (() -> Unit)? {
+         positiveButton.apply {
+             this.text = text?.toString()
+             visibility = View.VISIBLE
+@@ -58,7 +63,10 @@ class CustomAlertDialog(
+         return mPositiveClickListener
+     }
+ 
+-    fun setNegativeCustomButton(text: CharSequence?, nagativeButtonAction: (() -> Unit)? = null): (() -> Unit)? {
++    fun setNegativeCustomButton(
++        text: CharSequence?,
++        nagativeButtonAction: (() -> Unit)? = null
++    ): (() -> Unit)? {
+         negativeButton.apply {
+             this.text = text?.toString()
+             visibility = View.VISIBLE
+diff --git a/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/BottomNavigation.kt b/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/BottomNavigation.kt
+index 6878dec..6eedb2e 100644
+--- a/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/BottomNavigation.kt
++++ b/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/BottomNavigation.kt
+@@ -5,7 +5,8 @@ import com.nstudiosappdev.navigation.PACKAGE_NAME
+ import com.nstudiosappdev.navigation.loadFragmentOrReturnNull
+ 
+ object BottomNavigation : Feature<Fragment> {
+-    private const val BOTTOM_NAVIGATION = "$PACKAGE_NAME.dashboard.presentation.bottom.BottomNavigationFragment"
++    private const val BOTTOM_NAVIGATION =
++        "$PACKAGE_NAME.dashboard.presentation.bottom.BottomNavigationFragment"
+ 
+     override val dynamicStart: Fragment?
+         get() = BOTTOM_NAVIGATION.loadFragmentOrReturnNull()
+diff --git a/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Currencies.kt b/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Currencies.kt
+index 5239eae..5d9cb5e 100644
+--- a/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Currencies.kt
++++ b/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Currencies.kt
+@@ -5,7 +5,8 @@ import com.nstudiosappdev.navigation.PACKAGE_NAME
+ import com.nstudiosappdev.navigation.loadFragmentOrReturnNull
+ 
+ object Currencies : Feature<Fragment> {
+-    private const val CURRENCIES = "$PACKAGE_NAME.dashboard.presentation.liveCurrencies.LiveCurrenciesMainFragment"
++    private const val CURRENCIES =
++        "$PACKAGE_NAME.dashboard.presentation.liveCurrencies.LiveCurrenciesMainFragment"
+ 
+     override val dynamicStart: Fragment?
+         get() = CURRENCIES.loadFragmentOrReturnNull()
+diff --git a/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Portfolio.kt b/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Portfolio.kt
+index 53d8bf4..66f112b 100644
+--- a/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Portfolio.kt
++++ b/base/navigation/src/main/java/com.nstudiosappdev.navigation/features/Portfolio.kt
+@@ -5,7 +5,8 @@ import com.nstudiosappdev.navigation.PACKAGE_NAME
+ import com.nstudiosappdev.navigation.loadFragmentOrReturnNull
+ 
+ object Portfolio : Feature<Fragment> {
+-    private const val PORTFOLIO = "$PACKAGE_NAME.dashboard.presentation.portfolio.PortfolioMainFragment"
++    private const val PORTFOLIO =
++        "$PACKAGE_NAME.dashboard.presentation.portfolio.PortfolioMainFragment"
+ 
+     override val dynamicStart: Fragment?
+         get() = PORTFOLIO.loadFragmentOrReturnNull()
+diff --git a/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesDataModule.kt b/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesDataModule.kt
+index bd3ac1c..980d38f 100644
+--- a/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesDataModule.kt
++++ b/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesDataModule.kt
+@@ -33,7 +33,8 @@ class CurrenciesDataModule {
+         CurrenciesRemoteDataSource(currenciesServices, errorFactory)
+ 
+     @Provides
+-    internal fun provideCurrenciesDbEntityMapper(): DbEntityMapper<CurrenciesEntity, Currency> = CurrenciesDbEntityMapper()
++    internal fun provideCurrenciesDbEntityMapper(): DbEntityMapper<CurrenciesEntity, Currency> =
++        CurrenciesDbEntityMapper()
+ 
+     @Provides
+     @Singleton
+@@ -50,7 +51,11 @@ class CurrenciesDataModule {
+         currenciesRemoteDataSource: DataSource.RemoteDataSource.RequestDataSource<CurrenciesRequest, List<Currency>>,
+         @Named(CURRENCIES_LOCAL) currenciesLocalDataSource: DataSource.LocalDataSource<Long, Currency>,
+         @Named(CoroutineManagerModule.AM_NAME_REPOSITORY) asyncManager: AsyncManager
+-    ): CurrenciesRepository = CurrenciesRepositoryImpl(currenciesRemoteDataSource, currenciesLocalDataSource, asyncManager)
++    ): CurrenciesRepository = CurrenciesRepositoryImpl(
++        currenciesRemoteDataSource,
++        currenciesLocalDataSource,
++        asyncManager
++    )
+ 
+     companion object {
+         const val CURRENCIES_LOCAL = "CurrenciesDataModuleLocal"
+diff --git a/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesRepositoryImpl.kt b/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesRepositoryImpl.kt
+index b7ff4f7..7279143 100644
+--- a/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesRepositoryImpl.kt
++++ b/dashboard/dashboard_data/src/main/java/com/nstudiosappdev/stocker/dashboard/data/CurrenciesRepositoryImpl.kt
+@@ -16,10 +16,11 @@ class CurrenciesRepositoryImpl @Inject constructor(
+     asyncManager: AsyncManager
+ ) : BaseDataSource(asyncManager), CurrenciesRepository {
+ 
+-    override suspend fun getCurrencies(currenciesRequest: CurrenciesRequest): Deferred<DataHolder<List<Currency>>> = handleAsync {
+-        val result = currenciesRemoteDataSource.getResult(currenciesRequest)
+-        result
+-    }
++    override suspend fun getCurrencies(currenciesRequest: CurrenciesRequest): Deferred<DataHolder<List<Currency>>> =
++        handleAsync {
++            val result = currenciesRemoteDataSource.getResult(currenciesRequest)
++            result
++        }
+ 
+     override suspend fun getSavedCurrency(
+         bankName: String,
+@@ -29,10 +30,11 @@ class CurrenciesRepositoryImpl @Inject constructor(
+         return@handleAsync DataHolder.Success(result)
+     }
+ 
+-    override suspend fun getSavedCurrencies(currencyType: String): Deferred<DataHolder<List<Currency>>> = handleAsync {
+-        val result = currenciesLocalDataSource.get(currencyType)
+-        return@handleAsync DataHolder.Success(result)
+-    }
++    override suspend fun getSavedCurrencies(currencyType: String): Deferred<DataHolder<List<Currency>>> =
++        handleAsync {
++            val result = currenciesLocalDataSource.get(currencyType)
++            return@handleAsync DataHolder.Success(result)
++        }
+ 
+     override suspend fun saveCurrency(
+         currency: Currency
+diff --git a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesDomainModule.kt b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesDomainModule.kt
+index ef74156..c35b89d 100644
+--- a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesDomainModule.kt
++++ b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesDomainModule.kt
+@@ -17,7 +17,7 @@ class CurrenciesDomainModule {
+         errorFactory: ErrorFactory,
+         currenciesRepository: CurrenciesRepository
+     ): Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>> =
+-            GetCurrenciesInteractor(currenciesRepository, errorFactory, asyncManager)
++        GetCurrenciesInteractor(currenciesRepository, errorFactory, asyncManager)
+ 
+     @Provides
+     fun provideGetSavedCurrency(
+@@ -25,7 +25,7 @@ class CurrenciesDomainModule {
+         errorFactory: ErrorFactory,
+         currenciesRepository: CurrenciesRepository
+     ): Interactor.DeferredInteractor<GetSavedCurrencyInteractor.Params, Currency> =
+-            GetSavedCurrencyInteractor(currenciesRepository, errorFactory, asyncManager)
++        GetSavedCurrencyInteractor(currenciesRepository, errorFactory, asyncManager)
+ 
+     @Provides
+     fun provideGetSavedCurrencies(
+diff --git a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesRepository.kt b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesRepository.kt
+index bb95ca3..7ea2de2 100644
+--- a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesRepository.kt
++++ b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/CurrenciesRepository.kt
+@@ -6,11 +6,17 @@ import kotlinx.coroutines.Deferred
+ interface CurrenciesRepository {
+     suspend fun getCurrencies(currenciesRequest: CurrenciesRequest): Deferred<DataHolder<List<Currency>>>
+ 
+-    suspend fun getSavedCurrency(bankName: String, currencyType: String): Deferred<DataHolder<Currency>>
++    suspend fun getSavedCurrency(
++        bankName: String,
++        currencyType: String
++    ): Deferred<DataHolder<Currency>>
+ 
+     suspend fun getSavedCurrencies(currencyType: String): Deferred<DataHolder<List<Currency>>>
+ 
+     suspend fun saveCurrency(currency: Currency): Deferred<DataHolder<Boolean>>
+ 
+-    suspend fun deleteCurrency(bankName: String, currencyType: String): Deferred<DataHolder<Boolean>>
++    suspend fun deleteCurrency(
++        bankName: String,
++        currencyType: String
++    ): Deferred<DataHolder<Boolean>>
+ }
+diff --git a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/DeleteCurrencyInteractor.kt b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/DeleteCurrencyInteractor.kt
+index 4e9b7de..5a1b63c 100644
+--- a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/DeleteCurrencyInteractor.kt
++++ b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/DeleteCurrencyInteractor.kt
+@@ -14,18 +14,20 @@ class DeleteCurrencyInteractor @Inject constructor(
+     private val currenciesRepository: CurrenciesRepository,
+     private val errorFactory: ErrorFactory,
+     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
+-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<DeleteCurrencyInteractor.Params, Boolean> {
++) : BaseInteractor(asyncManager),
++    Interactor.DeferredInteractor<DeleteCurrencyInteractor.Params, Boolean> {
+ 
+-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync {
++    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> =
++        handleAsync {
+ 
+-        return@handleAsync when (val response = currenciesRepository.deleteCurrency(
+-            postParams.bankName,
+-            postParams.currencyType
+-        ).await()) {
+-            is DataHolder.Success -> DataHolder.Success(response.data)
+-            else -> DataHolder.Fail(errorFactory.createUnknownError())
++            return@handleAsync when (val response = currenciesRepository.deleteCurrency(
++                postParams.bankName,
++                postParams.currencyType
++            ).await()) {
++                is DataHolder.Success -> DataHolder.Success(response.data)
++                else -> DataHolder.Fail(errorFactory.createUnknownError())
++            }
+         }
+-    }
+ 
+     class Params(
+         val bankName: String,
+diff --git a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetCurrenciesInteractor.kt b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetCurrenciesInteractor.kt
+index e5f1777..ec13438 100644
+--- a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetCurrenciesInteractor.kt
++++ b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetCurrenciesInteractor.kt
+@@ -14,17 +14,20 @@ class GetCurrenciesInteractor @Inject constructor(
+     private val currenciesRepository: CurrenciesRepository,
+     private val errorFactory: ErrorFactory,
+     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
+-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>> {
++) : BaseInteractor(asyncManager),
++    Interactor.DeferredInteractor<GetCurrenciesInteractor.Params, List<Currency>> {
+ 
+-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<List<Currency>>> = handleAsync {
+-        return@handleAsync when (val response = currenciesRepository.getCurrencies(
+-            CurrenciesRequest(
+-                currencyType = postParams.currencyType
+-            )).await()) {
+-            is DataHolder.Success -> DataHolder.Success(response.data)
+-            else -> DataHolder.Fail(errorFactory.createUnknownError())
++    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<List<Currency>>> =
++        handleAsync {
++            return@handleAsync when (val response = currenciesRepository.getCurrencies(
++                CurrenciesRequest(
++                    currencyType = postParams.currencyType
++                )
++            ).await()) {
++                is DataHolder.Success -> DataHolder.Success(response.data)
++                else -> DataHolder.Fail(errorFactory.createUnknownError())
++            }
+         }
+-    }
+ 
+     class Params(
+         val currencyType: String
+diff --git a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrenciesInteractor.kt b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrenciesInteractor.kt
+index 1502863..704b64d 100644
+--- a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrenciesInteractor.kt
++++ b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrenciesInteractor.kt
+@@ -14,9 +14,11 @@ class GetSavedCurrenciesInteractor @Inject constructor(
+     private val currenciesRepository: CurrenciesRepository,
+     private val errorFactory: ErrorFactory,
+     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
+-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<GetSavedCurrenciesInteractor.Params, List<Currency>> {
++) : BaseInteractor(asyncManager),
++    Interactor.DeferredInteractor<GetSavedCurrenciesInteractor.Params, List<Currency>> {
+ 
+-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<List<Currency>>> = handleAsync {
++    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<List<Currency>>> =
++        handleAsync {
+             return@handleAsync when (val response = currenciesRepository.getSavedCurrencies(
+                 postParams.currencyType
+             ).await()) {
+diff --git a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrencyInteractor.kt b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrencyInteractor.kt
+index 34a0b20..3372e34 100644
+--- a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrencyInteractor.kt
++++ b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/GetSavedCurrencyInteractor.kt
+@@ -14,9 +14,11 @@ class GetSavedCurrencyInteractor @Inject constructor(
+     private val currenciesRepository: CurrenciesRepository,
+     private val errorFactory: ErrorFactory,
+     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
+-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<GetSavedCurrencyInteractor.Params, Currency> {
++) : BaseInteractor(asyncManager),
++    Interactor.DeferredInteractor<GetSavedCurrencyInteractor.Params, Currency> {
+ 
+-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Currency>> = handleAsync {
++    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Currency>> =
++        handleAsync {
+             return@handleAsync when (val response = currenciesRepository.getSavedCurrency(
+                 postParams.bankName,
+                 postParams.currencyType
+diff --git a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/SaveCurrencyInteractor.kt b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/SaveCurrencyInteractor.kt
+index feceab2..6b5a1a8 100644
+--- a/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/SaveCurrencyInteractor.kt
++++ b/dashboard/dashboard_domain/src/main/java/com/nstudiosappdev/stocker/dashboard/domain/SaveCurrencyInteractor.kt
+@@ -14,23 +14,25 @@ class SaveCurrencyInteractor @Inject constructor(
+     private val currenciesRepository: CurrenciesRepository,
+     private val errorFactory: ErrorFactory,
+     @Named(CoroutineManagerModule.AM_NAME_INTERACTOR) asyncManager: AsyncManager
+-) : BaseInteractor(asyncManager), Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean> {
+-    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> = handleAsync {
+-        val currency = Currency(
+-            bankName = postParams.currency.bankName,
+-            buyPrice = postParams.currency.buyPrice,
+-            buyStatus = postParams.currency.buyStatus,
+-            sellPrice = postParams.currency.sellPrice,
+-            sellStatus = postParams.currency.sellStatus,
+-            currencyType = postParams.currency.currencyType
+-        )
+-        return@handleAsync when (val response = currenciesRepository.saveCurrency(
+-            currency
+-        ).await()) {
+-            is DataHolder.Success -> DataHolder.Success(response.data)
+-            else -> DataHolder.Fail(errorFactory.createUnknownError())
++) : BaseInteractor(asyncManager),
++    Interactor.DeferredInteractor<SaveCurrencyInteractor.Params, Boolean> {
++    override suspend fun executeAsync(postParams: Params): Deferred<DataHolder<Boolean>> =
++        handleAsync {
++            val currency = Currency(
++                bankName = postParams.currency.bankName,
++                buyPrice = postParams.currency.buyPrice,
++                buyStatus = postParams.currency.buyStatus,
++                sellPrice = postParams.currency.sellPrice,
++                sellStatus = postParams.currency.sellStatus,
++                currencyType = postParams.currency.currencyType
++            )
++            return@handleAsync when (val response = currenciesRepository.saveCurrency(
++                currency
++            ).await()) {
++                is DataHolder.Success -> DataHolder.Success(response.data)
++                else -> DataHolder.Fail(errorFactory.createUnknownError())
++            }
+         }
+-    }
+ 
+     class Params(
+         val currency: Currency
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/CurrenciesViewHolder.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/CurrenciesViewHolder.kt
+index b67496b..246e877 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/CurrenciesViewHolder.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/CurrenciesViewHolder.kt
+@@ -31,12 +31,14 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
+ 
+         when (item.buyStatus) {
+             CurrencyStatus.DECREASING.value -> {
+-                buyingPrice = item.buyPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.DECREASING.value
++                buyingPrice =
++                    item.buyPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.DECREASING.value
+                 textViewBuyingPrice.text = buyingPrice
+                 textViewBuyingPrice.setTextColor(Color.RED)
+             }
+             CurrencyStatus.INCREASING.value -> {
+-                buyingPrice = item.buyPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.INCREASING.value
++                buyingPrice =
++                    item.buyPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.INCREASING.value
+                 textViewBuyingPrice.text = buyingPrice
+                 textViewBuyingPrice.setTextColor(Color.GREEN)
+             }
+@@ -47,12 +49,14 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
+ 
+         when (item.sellStatus) {
+             CurrencyStatus.DECREASING.value -> {
+-                sellingPrice = item.sellPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.DECREASING.value
++                sellingPrice =
++                    item.sellPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.DECREASING.value
+                 textViewBuyingPrice.text = sellingPrice
+                 textViewSellingPrice.setTextColor(Color.RED)
+             }
+             CurrencyStatus.INCREASING.value -> {
+-                sellingPrice = item.sellPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.INCREASING.value
++                sellingPrice =
++                    item.sellPrice?.adjustSensitivityGiveString(4) + CurrencyStatus.INCREASING.value
+                 textViewSellingPrice.text = sellingPrice
+                 textViewSellingPrice.setTextColor(Color.GREEN)
+             }
+@@ -63,7 +67,9 @@ class CurrenciesViewHolder private constructor(itemView: View) : ViewHolder(item
+ 
+         textViewBankName.text = item.bankName
+         textViewDiff.text = abs(
+-            item.sellPrice!!.adjustSensitivityGiveFloat(4) - item.buyPrice!!.adjustSensitivityGiveFloat(4)
++            item.sellPrice!!.adjustSensitivityGiveFloat(4) - item.buyPrice!!.adjustSensitivityGiveFloat(
++                4
++            )
+         ).toString().adjustSensitivityGiveString(3)
+ 
+         itemView.setOnClickListener {
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/bottom/BottomNavigationFragment.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/bottom/BottomNavigationFragment.kt
+index 47dae10..c6221ef 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/bottom/BottomNavigationFragment.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/bottom/BottomNavigationFragment.kt
+@@ -21,7 +21,7 @@ class BottomNavigationFragment : BaseFragment() {
+             when (it.itemId) {
+                 R.id.navigationCurrencies -> {
+                     navigationController.navigateToCurrencies(R.id.fl_main)
+-                   true
++                    true
+                 }
+                 R.id.navigationPortfolio -> {
+                     navigationController.navigateToPortfolio(R.id.fl_main)
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesFragment.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesFragment.kt
+index fc4111a..9c66daa 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesFragment.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesFragment.kt
+@@ -63,45 +63,101 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>()
+ 
+         headerBankNameLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesByName()
+-            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                bankNameSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                bankNameSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                bankNameSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                bankNameSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+ 
+         headerBuyingPriceLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesByBuyingPrices()
+-            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                buyingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                buyingPriceSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                buyingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                buyingPriceSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+ 
+         headerSellingPriceLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesBySellingPrice()
+-            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                sellingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                sellingPriceSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                sellingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                sellingPriceSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+ 
+         headerDiffLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesByDiff()
+-            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                diffSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                diffSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                diffSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                diffSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+     }
+@@ -157,7 +213,8 @@ class LiveCurrenciesFragment : BaseViewModelFragment<LiveCurrenciesViewModel>()
+                         sellPrice = currenciesViewEntity.sellPrice,
+                         sellStatus = currenciesViewEntity.sellStatus,
+                         currencyType = currenciesViewEntity.currencyType
+-                    ))
++                    )
++                )
+             },
+             negativeButtonText = v.context.getString(R.string.text_cancel)
+         ).show()
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesMainFragment.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesMainFragment.kt
+index 9e687ba..498a1e0 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesMainFragment.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesMainFragment.kt
+@@ -35,7 +35,11 @@ class LiveCurrenciesMainFragment : BaseFragment() {
+                     // no-op
+                 }
+ 
+-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
++                override fun onPageScrolled(
++                    position: Int,
++                    positionOffset: Float,
++                    positionOffsetPixels: Int
++                ) {
+                     // no-op
+                 }
+ 
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesPagerAdapter.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesPagerAdapter.kt
+index 8ff6d77..0e64328 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesPagerAdapter.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesPagerAdapter.kt
+@@ -8,7 +8,8 @@ import androidx.fragment.app.FragmentPagerAdapter
+ import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants
+ import java.lang.IllegalArgumentException
+ 
+-class LiveCurrenciesPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
++class LiveCurrenciesPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) :
++    FragmentPagerAdapter(fm) {
+ 
+     private val _fragments = SparseArray<Fragment>()
+ 
+@@ -18,11 +19,14 @@ class LiveCurrenciesPagerAdapter(private val titles: MutableList<String>, fm: Fr
+     override fun getItem(position: Int): Fragment {
+         return when (position) {
+             DashboardPresentationConstants.TYPES.USD -> LiveCurrenciesFragment.newInstance(
+-                DashboardPresentationConstants.TYPES_STRING.USD)
++                DashboardPresentationConstants.TYPES_STRING.USD
++            )
+             DashboardPresentationConstants.TYPES.EURO -> LiveCurrenciesFragment.newInstance(
+-                DashboardPresentationConstants.TYPES_STRING.EURO)
++                DashboardPresentationConstants.TYPES_STRING.EURO
++            )
+             DashboardPresentationConstants.TYPES.GOLD -> LiveCurrenciesFragment.newInstance(
+-                DashboardPresentationConstants.TYPES_STRING.GOLD)
++                DashboardPresentationConstants.TYPES_STRING.GOLD
++            )
+             else -> throw IllegalArgumentException("Unknown position!")
+         }
+     }
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesViewModel.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesViewModel.kt
+index 7b801bb..c215f01 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesViewModel.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/liveCurrencies/LiveCurrenciesViewModel.kt
+@@ -59,16 +59,46 @@ class LiveCurrenciesViewModel @Inject constructor(
+         val currenciesResult = getCurrenciesInteractor.executeAsync(currenciesParams).await()
+         if (currenciesResult is DataHolder.Success && !currenciesResult.data.isNullOrEmpty()) {
+             _liveCurrencies.value = when (orderingStyle) {
+-                OrderingStyle.BY_NAME.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.bankName }))
+-                OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.bankName }))
+-                OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.buyPrice }))
+-                OrderingStyle.BY_BUYING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.buyPrice }))
+-                OrderingStyle.BY_SELLING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy { it.sellPrice }))
+-                OrderingStyle.BY_SELLING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending { it.sellPrice }))
+-                OrderingStyle.BY_DIFF.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedBy {
+-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
+-                OrderingStyle.BY_DIFF_DESC.code -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data.sortedByDescending {
+-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
++                OrderingStyle.BY_NAME.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedBy { it.bankName })
++                )
++                OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedByDescending { it.bankName })
++                )
++                OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedBy { it.buyPrice })
++                )
++                OrderingStyle.BY_BUYING_PRICE_DESC.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedByDescending { it.buyPrice })
++                )
++                OrderingStyle.BY_SELLING_PRICE.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedBy { it.sellPrice })
++                )
++                OrderingStyle.BY_SELLING_PRICE_DESC.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedByDescending { it.sellPrice })
++                )
++                OrderingStyle.BY_DIFF.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedBy {
++                            it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                                3
++                            )
++                        })
++                )
++                OrderingStyle.BY_DIFF_DESC.code -> DataHolder.Success(
++                    currenciesListMapper.map(
++                        currenciesResult.data.sortedByDescending {
++                            it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                                3
++                            )
++                        })
++                )
+                 else -> DataHolder.Success(currenciesListMapper.map(currenciesResult.data))
+             }
+             items = currenciesResult.data
+@@ -83,12 +113,14 @@ class LiveCurrenciesViewModel @Inject constructor(
+ 
+         when (orderByBankNameFlag) {
+             true -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.bankName }))
+                 clearAllFlags()
+                 orderingStyle = OrderingStyle.BY_NAME.code
+             }
+             false -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.bankName }))
+                 clearAllFlags()
+                 orderByBankNameFlag = true
+                 orderingStyle = OrderingStyle.BY_NAME_DESC.code
+@@ -100,12 +132,14 @@ class LiveCurrenciesViewModel @Inject constructor(
+ 
+         when (orderByBuyingPriceFlag) {
+             true -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.buyPrice }))
+                 clearAllFlags()
+                 orderingStyle = OrderingStyle.BY_BUYING_PRICE.code
+             }
+             false -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.buyPrice }))
+                 clearAllFlags()
+                 orderByBuyingPriceFlag = true
+                 orderingStyle = OrderingStyle.BY_BUYING_PRICE_DESC.code
+@@ -117,12 +151,14 @@ class LiveCurrenciesViewModel @Inject constructor(
+ 
+         when (orderBySellingPriceFlag) {
+             true -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy { it.sellPrice }))
+                 clearAllFlags()
+                 orderingStyle = OrderingStyle.BY_SELLING_PRICE.code
+             }
+             false -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending { it.sellPrice }))
+                 clearAllFlags()
+                 orderBySellingPriceFlag = true
+                 orderingStyle = OrderingStyle.BY_SELLING_PRICE_DESC.code
+@@ -134,10 +170,14 @@ class LiveCurrenciesViewModel @Inject constructor(
+ 
+         when (orderByDiffFlag) {
+             true -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedBy {
+-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedBy {
++                        it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                            3
++                        )
++                    }
++                    )
+                     )
+-                )
+                 orderByDiffFlag = false
+                 orderByBuyingPriceFlag = false
+                 orderBySellingPriceFlag = false
+@@ -145,10 +185,14 @@ class LiveCurrenciesViewModel @Inject constructor(
+                 orderingStyle = OrderingStyle.BY_DIFF.code
+             }
+             false -> {
+-                _liveCurrencies.value = DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending {
+-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
+-                )
+-                )
++                _liveCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(items!!.sortedByDescending {
++                        it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                            3
++                        )
++                    }
++                    )
++                    )
+                 orderByDiffFlag = true
+                 orderByBuyingPriceFlag = false
+                 orderBySellingPriceFlag = false
+@@ -167,7 +211,8 @@ class LiveCurrenciesViewModel @Inject constructor(
+         )
+ 
+         val saveCurrencyResult = saveCurrencyInteractor.executeAsync(saveCurrencyParams).await()
+-        if (saveCurrencyResult is DataHolder.Success) _saveFavorites.value = DataHolder.Success(saveCurrencyResult.data)
++        if (saveCurrencyResult is DataHolder.Success) _saveFavorites.value =
++            DataHolder.Success(saveCurrencyResult.data)
+     }, error = {
+         _saveFavorites.value = DataHolder.Fail(errorFactory.createConnectionError())
+     })
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioFragment.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioFragment.kt
+index fd5b2cb..0174d7d 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioFragment.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioFragment.kt
+@@ -95,45 +95,101 @@ class PortfolioFragment : BaseViewModelFragment<PortfolioViewModel>() {
+ 
+         headerBankNameLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesByName()
+-            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (bankNameSortByDecreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                bankNameSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                bankNameSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                bankNameSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                bankNameSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+ 
+         headerBuyingPriceLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesByBuyingPrices()
+-            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (buyingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                buyingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                buyingPriceSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                buyingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                buyingPriceSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+ 
+         headerSellingPriceLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesBySellingPrice()
+-            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (sellingPriceSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                sellingPriceSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                sellingPriceSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                sellingPriceSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                sellingPriceSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+ 
+         headerDiffLinearLayout.setOnClickListener {
+             viewModel.orderCurrenciesByDiff()
+-            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(context!!, R.color.green_currency)) {
++            if (diffSortByIncreasingSign.currentTextColor != ContextCompat.getColor(
++                    context!!,
++                    R.color.green_currency
++                )
++            ) {
+                 clearAllColor()
+-                diffSortByIncreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                diffSortByIncreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             } else {
+                 clearAllColor()
+-                diffSortByDecreasingSign.setTextColor(ContextCompat.getColor(context!!, R.color.green_currency))
++                diffSortByDecreasingSign.setTextColor(
++                    ContextCompat.getColor(
++                        context!!,
++                        R.color.green_currency
++                    )
++                )
+             }
+         }
+     }
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioMainFragment.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioMainFragment.kt
+index b2994ca..2e38a1d 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioMainFragment.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioMainFragment.kt
+@@ -35,7 +35,11 @@ class PortfolioMainFragment : BaseFragment() {
+                     // no-op
+                 }
+ 
+-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
++                override fun onPageScrolled(
++                    position: Int,
++                    positionOffset: Float,
++                    positionOffsetPixels: Int
++                ) {
+                     // no-op
+                 }
+ 
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioPagerAdapter.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioPagerAdapter.kt
+index da5c60c..292111b 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioPagerAdapter.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioPagerAdapter.kt
+@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentManager
+ import androidx.fragment.app.FragmentPagerAdapter
+ import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants
+ 
+-class PortfolioPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
++class PortfolioPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) :
++    FragmentPagerAdapter(fm) {
+ 
+     private val _fragments = SparseArray<Fragment>()
+ 
+@@ -17,11 +18,14 @@ class PortfolioPagerAdapter(private val titles: MutableList<String>, fm: Fragmen
+     override fun getItem(position: Int): Fragment {
+         return when (position) {
+             DashboardPresentationConstants.TYPES.USD -> PortfolioFragment.newInstance(
+-                DashboardPresentationConstants.TYPES_STRING.USD)
++                DashboardPresentationConstants.TYPES_STRING.USD
++            )
+             DashboardPresentationConstants.TYPES.EURO -> PortfolioFragment.newInstance(
+-                DashboardPresentationConstants.TYPES_STRING.EURO)
++                DashboardPresentationConstants.TYPES_STRING.EURO
++            )
+             DashboardPresentationConstants.TYPES.GOLD -> PortfolioFragment.newInstance(
+-                DashboardPresentationConstants.TYPES_STRING.GOLD)
++                DashboardPresentationConstants.TYPES_STRING.GOLD
++            )
+             else -> throw IllegalArgumentException("Unknown position!")
+         }
+     }
+diff --git a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioViewModel.kt b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioViewModel.kt
+index 454bf35..0080d3a 100644
+--- a/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioViewModel.kt
++++ b/dashboard/dashboard_presentation/src/main/java/com/nstudiosappdev/stocker/dashboard/presentation/portfolio/PortfolioViewModel.kt
+@@ -64,7 +64,8 @@ class PortfolioViewModel @Inject constructor(
+             currencyType = currencyType
+         )
+ 
+-        val savedCurrenciesResult = getSavedCurrenciesInteractor.executeAsync(savedCurrenciesParams).await()
++        val savedCurrenciesResult =
++            getSavedCurrenciesInteractor.executeAsync(savedCurrenciesParams).await()
+         if (savedCurrenciesResult is DataHolder.Success) {
+             savedCurrenciesList = savedCurrenciesResult.data
+ 
+@@ -108,15 +109,39 @@ class PortfolioViewModel @Inject constructor(
+ 
+         _filteredCurrencies.value = when (orderingStyle) {
+             OrderingStyle.BY_NAME.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedBy { it.bankName }))
+-            OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedByDescending { it.bankName }))
+-            OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedBy { it.buyPrice }))
+-            OrderingStyle.BY_BUYING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedByDescending { it.buyPrice }))
+-            OrderingStyle.BY_SELLING_PRICE.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedBy { it.sellPrice }))
+-            OrderingStyle.BY_SELLING_PRICE_DESC.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedByDescending { it.sellPrice }))
++            OrderingStyle.BY_NAME_DESC.code -> DataHolder.Success(
++                currenciesListMapper.map(
++                    selectedItems.sortedByDescending { it.bankName })
++            )
++            OrderingStyle.BY_BUYING_PRICE.code -> DataHolder.Success(
++                currenciesListMapper.map(
++                    selectedItems.sortedBy { it.buyPrice })
++            )
++            OrderingStyle.BY_BUYING_PRICE_DESC.code -> DataHolder.Success(
++                currenciesListMapper.map(
++                    selectedItems.sortedByDescending { it.buyPrice })
++            )
++            OrderingStyle.BY_SELLING_PRICE.code -> DataHolder.Success(
++                currenciesListMapper.map(
++                    selectedItems.sortedBy { it.sellPrice })
++            )
++            OrderingStyle.BY_SELLING_PRICE_DESC.code -> DataHolder.Success(
++                currenciesListMapper.map(
++                    selectedItems.sortedByDescending { it.sellPrice })
++            )
+             OrderingStyle.BY_DIFF.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedBy {
+-                it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
+-            OrderingStyle.BY_DIFF_DESC.code -> DataHolder.Success(currenciesListMapper.map(selectedItems.sortedByDescending {
+-                it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }))
++                it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                    3
++                )
++            }))
++            OrderingStyle.BY_DIFF_DESC.code -> DataHolder.Success(
++                currenciesListMapper.map(
++                    selectedItems.sortedByDescending {
++                        it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                            3
++                        )
++                    })
++            )
+             else -> DataHolder.Success(currenciesListMapper.map(selectedItems))
+         }
+     }
+@@ -125,12 +150,14 @@ class PortfolioViewModel @Inject constructor(
+ 
+         when (orderByBankNameFlag) {
+             true -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.bankName }))
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.bankName }))
+                 clearAllFlags()
+                 orderingStyle = OrderingStyle.BY_NAME.code
+             }
+             false -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.bankName }))
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.bankName }))
+                 clearAllFlags()
+                 orderByBankNameFlag = true
+                 orderingStyle = OrderingStyle.BY_NAME_DESC.code
+@@ -142,12 +169,14 @@ class PortfolioViewModel @Inject constructor(
+ 
+         when (orderByBuyingPriceFlag) {
+             true -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.buyPrice }))
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.buyPrice }))
+                 clearAllFlags()
+                 orderingStyle = OrderingStyle.BY_BUYING_PRICE.code
+             }
+             false -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.buyPrice }))
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.buyPrice }))
+                 clearAllFlags()
+                 orderByBuyingPriceFlag = true
+                 orderingStyle = OrderingStyle.BY_BUYING_PRICE_DESC.code
+@@ -159,12 +188,14 @@ class PortfolioViewModel @Inject constructor(
+ 
+         when (orderBySellingPriceFlag) {
+             true -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.sellPrice }))
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy { it.sellPrice }))
+                 clearAllFlags()
+                 orderingStyle = OrderingStyle.BY_SELLING_PRICE.code
+             }
+             false -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.sellPrice }))
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending { it.sellPrice }))
+                 clearAllFlags()
+                 orderingStyle = OrderingStyle.BY_SELLING_PRICE_DESC.code
+             }
+@@ -175,10 +206,14 @@ class PortfolioViewModel @Inject constructor(
+ 
+         when (orderByDiffFlag) {
+             true -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy {
+-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
+-                )
+-                )
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedBy {
++                        it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                            3
++                        )
++                    }
++                    )
++                    )
+                 orderByDiffFlag = false
+                 orderByBuyingPriceFlag = false
+                 orderBySellingPriceFlag = false
+@@ -186,10 +221,14 @@ class PortfolioViewModel @Inject constructor(
+                 orderingStyle = OrderingStyle.BY_DIFF.code
+             }
+             false -> {
+-                _filteredCurrencies.value = DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending {
+-                    it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(3) }
+-                )
+-                )
++                _filteredCurrencies.value =
++                    DataHolder.Success(currenciesListMapper.map(selectedItems!!.sortedByDescending {
++                        it.sellPrice!!.adjustSensitivityGiveFloat(3) - it.buyPrice!!.adjustSensitivityGiveFloat(
++                            3
++                        )
++                    }
++                    )
++                    )
+                 orderByDiffFlag = true
+                 orderByBuyingPriceFlag = false
+                 orderBySellingPriceFlag = false
+@@ -208,8 +247,10 @@ class PortfolioViewModel @Inject constructor(
+             bankName,
+             currencyType
+         )
+-        val deleteCurrencyResult = deleteCurrencyInteractor.executeAsync(deleteCurrencyParams).await()
+-        if (deleteCurrencyResult is DataHolder.Success) _deleteCurrency.value = DataHolder.Success(deleteCurrencyResult.data)
++        val deleteCurrencyResult =
++            deleteCurrencyInteractor.executeAsync(deleteCurrencyParams).await()
++        if (deleteCurrencyResult is DataHolder.Success) _deleteCurrency.value =
++            DataHolder.Success(deleteCurrencyResult.data)
+     }, error = {
+         _deleteCurrency.value = DataHolder.Fail(errorFactory.createErrorFromThrowable(it))
+     })
+diff --git a/dashboard/dashboard_presentation/src/main/res/layout/activity_main.xml b/dashboard/dashboard_presentation/src/main/res/layout/activity_main.xml
+index 4fdfded..bef84cf 100644
+--- a/dashboard/dashboard_presentation/src/main/res/layout/activity_main.xml
++++ b/dashboard/dashboard_presentation/src/main/res/layout/activity_main.xml
+@@ -1,22 +1,22 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.coordinatorlayout.widget.CoordinatorLayout
+-	xmlns:android="http://schemas.android.com/apk/res/android"
+-	android:id="@+id/coordinatorlayout"
+-	android:layout_width="match_parent"
+-	android:layout_height="match_parent"
+-	android:fitsSystemWindows="true">
++<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:id="@+id/coordinatorlayout"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:fitsSystemWindows="true">
+ 
+-	<LinearLayout android:layout_width="match_parent"
+-	              android:layout_height="match_parent"
+-	              android:orientation="vertical">
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
+ 
+-		<include
+-			layout="@layout/toolbar_default"
+-			android:layout_width="match_parent"
+-			android:layout_height="wrap_content"/>
++        <include
++            layout="@layout/toolbar_default"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content" />
+ 
+-		<include layout="@layout/content_home"/>
++        <include layout="@layout/content_home" />
+ 
+-	</LinearLayout>
++    </LinearLayout>
+ 
+ </androidx.coordinatorlayout.widget.CoordinatorLayout>
+\ No newline at end of file
+diff --git a/dashboard/dashboard_presentation/src/main/res/layout/content_home.xml b/dashboard/dashboard_presentation/src/main/res/layout/content_home.xml
+index 012ae67..0de0dd4 100644
+--- a/dashboard/dashboard_presentation/src/main/res/layout/content_home.xml
++++ b/dashboard/dashboard_presentation/src/main/res/layout/content_home.xml
+@@ -1,35 +1,33 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:orientation="vertical">
+ 
+-
+-
+-
+     <com.google.android.material.tabs.TabLayout
+         android:id="@+id/tabs"
+         android:layout_width="match_parent"
+         android:layout_height="?attr/actionBarSize"
++        android:background="@color/colorAppBackGround"
+         app:tabGravity="fill"
+-        app:tabMaxWidth="0dp"
++        app:tabIndicatorColor="@color/colorWhite"
+         app:tabIndicatorHeight="4dp"
++        app:tabMaxWidth="0dp"
+         app:tabMode="fixed"
+-        app:tabTextColor="@color/colorSecondaryText"
+         app:tabSelectedTextColor="@color/colorWhite"
+-        app:tabIndicatorColor="@color/colorWhite"
+-        android:background="@color/colorAppBackGround" />
++        app:tabTextColor="@color/colorSecondaryText" />
+ 
+-    <FrameLayout android:id="@+id/fl_main"
+-                 android:layout_width="match_parent"
+-                 android:layout_height="0dp"
+-                 android:layout_weight="1">
++    <FrameLayout
++        android:id="@+id/fl_main"
++        android:layout_width="match_parent"
++        android:layout_height="0dp"
++        android:layout_weight="1">
+ 
+     </FrameLayout>
+ 
+     <FrameLayout
+-            android:id="@+id/fl_bottom_navigation"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"/>
++        android:id="@+id/fl_bottom_navigation"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content" />
+ 
+ </LinearLayout>
+\ No newline at end of file
+diff --git a/dashboard/dashboard_presentation/src/main/res/layout/fragment_bottom_navigation.xml b/dashboard/dashboard_presentation/src/main/res/layout/fragment_bottom_navigation.xml
+index 997f94e..d18b810 100644
+--- a/dashboard/dashboard_presentation/src/main/res/layout/fragment_bottom_navigation.xml
++++ b/dashboard/dashboard_presentation/src/main/res/layout/fragment_bottom_navigation.xml
+@@ -1,5 +1,4 @@
+-<FrameLayout
+-    xmlns:android="http://schemas.android.com/apk/res/android"
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+@@ -7,10 +6,10 @@
+     <!-- Main content -->
+     <com.google.android.material.bottomnavigation.BottomNavigationView
+         android:id="@+id/bottomNavigation"
++        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="bottom"
+-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+         app:menu="@menu/menu_bottom_navigation" />
+ 
+ </FrameLayout>
+\ No newline at end of file
+diff --git a/dashboard/dashboard_presentation/src/main/res/layout/fragment_currencies.xml b/dashboard/dashboard_presentation/src/main/res/layout/fragment_currencies.xml
+index 5d1be08..d65e68c 100644
+--- a/dashboard/dashboard_presentation/src/main/res/layout/fragment_currencies.xml
++++ b/dashboard/dashboard_presentation/src/main/res/layout/fragment_currencies.xml
+@@ -2,18 +2,20 @@
+ <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:id="@+id/mainCurrencies"
+-    android:orientation="vertical"
++    android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    android:layout_width="match_parent">
++    android:orientation="vertical">
++
+     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
++        android:id="@+id/pullToRefreshCurrencies"
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:id="@+id/pullToRefreshCurrencies">
++        android:layout_height="match_parent">
++
+         <LinearLayout
+-            android:orientation="vertical"
++            android:id="@+id/liveCurrenciesLinearLayout"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+-            android:id="@+id/liveCurrenciesLinearLayout"
++            android:orientation="vertical"
+             android:visibility="gone">
+ 
+             <androidx.constraintlayout.widget.ConstraintLayout
+@@ -22,161 +24,164 @@
+                 android:orientation="vertical">
+ 
+                 <LinearLayout
++                    android:id="@+id/headerBankNameLinearLayout"
+                     android:layout_width="100dp"
+                     android:layout_height="wrap_content"
++                    android:layout_marginStart="@dimen/space_m"
++                    android:layout_marginBottom="@dimen/space_s"
+                     android:orientation="horizontal"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+-                    android:layout_marginStart="@dimen/space_m"
+-                    android:layout_marginBottom="@dimen/space_s"
+-                    android:id="@+id/headerBankNameLinearLayout">
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerBankName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_bank_name_header"
+-                        android:id="@+id/headerBankName"/>
++                        android:text="@string/recyclerview_bank_name_header" />
++
+                     <TextView
++                        android:id="@+id/bankNameSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/bankNameSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
++
+                     <TextView
++                        android:id="@+id/bankNameSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/bankNameSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+                 </LinearLayout>
+ 
+                 <LinearLayout
++                    android:id="@+id/headerBuyingPriceLinearLayout"
+                     android:layout_width="70dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/space_m"
++                    android:layout_marginEnd="@dimen/space_m"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+                     app:layout_constraintEnd_toStartOf="@+id/headerSellingPriceLinearLayout"
+-                    android:layout_marginEnd="@dimen/space_m"
+-                    android:id="@+id/headerBuyingPriceLinearLayout">
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerBuyingPrice"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_buying_price_header"
+-                        android:id="@+id/headerBuyingPrice"/>
++                        android:text="@string/recyclerview_buying_price_header" />
+ 
+                     <TextView
++                        android:id="@+id/buyingPriceSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/buyingPriceSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                     <TextView
++                        android:id="@+id/buyingPriceSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/buyingPriceSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                 </LinearLayout>
+ 
+                 <LinearLayout
++                    android:id="@+id/headerSellingPriceLinearLayout"
+                     android:layout_width="70dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/space_m"
++                    android:layout_marginEnd="@dimen/space_m"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+                     app:layout_constraintEnd_toStartOf="@+id/headerDiffLinearLayout"
+-                    android:layout_marginEnd="@dimen/space_m"
+-                    android:id="@+id/headerSellingPriceLinearLayout">
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerSellingPrice"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_selling_price_header"
+-                        android:id="@+id/headerSellingPrice"/>
++                        android:text="@string/recyclerview_selling_price_header" />
+ 
+                     <TextView
++                        android:id="@+id/sellingPriceSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/sellingPriceSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                     <TextView
++                        android:id="@+id/sellingPriceSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/sellingPriceSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                 </LinearLayout>
+ 
+                 <LinearLayout
++                    android:id="@+id/headerDiffLinearLayout"
+                     android:layout_width="55dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/space_m"
+                     android:layout_marginEnd="@dimen/space_m"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    android:id="@+id/headerDiffLinearLayout"
+-                    app:layout_constraintTop_toTopOf="parent"
+-                    app:layout_constraintEnd_toEndOf="parent">
++                    app:layout_constraintEnd_toEndOf="parent"
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerDiff"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_diff_header"
+-                        android:id="@+id/headerDiff"/>
++                        android:text="@string/recyclerview_diff_header" />
+ 
+                     <TextView
++                        android:id="@+id/diffSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/diffSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                     <TextView
++                        android:id="@+id/diffSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/diffSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                 </LinearLayout>
+ 
+             </androidx.constraintlayout.widget.ConstraintLayout>
+-            <View style="@style/MenuDivider"/>
++
++            <View style="@style/MenuDivider" />
+ 
+             <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/currenciesRecyclerView"
+                 android:layout_width="match_parent"
+-                android:paddingBottom="4dp"
+-                android:clipToPadding="true"
+                 android:layout_height="0dp"
+-                android:layout_weight="1"/>
++                android:layout_weight="1"
++                android:clipToPadding="true"
++                android:paddingBottom="4dp" />
+ 
+         </LinearLayout>
+     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+@@ -191,34 +196,33 @@
+         <com.airbnb.lottie.LottieAnimationView
+             android:layout_width="0dp"
+             android:layout_height="0dp"
++            android:layout_marginLeft="@dimen/space_xxxxl"
+             android:layout_marginTop="@dimen/space_xl"
+             android:layout_marginRight="@dimen/space_xxxxl"
+-            android:layout_marginLeft="@dimen/space_xxxxl"
++            android:scaleType="centerCrop"
++            app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
+             app:layout_constraintDimensionRatio="H, 1:1"
+-            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+-            app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
+-            android:scaleType="centerCrop"
+             app:lottie_autoPlay="true"
+-            app:lottie_loop= "true"
+-            app:lottie_rawRes="@raw/not_found"/>
++            app:lottie_loop="true"
++            app:lottie_rawRes="@raw/not_found" />
+ 
+         <TextView
++            android:id="@+id/appNameSplashScreen"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            app:layout_constraintStart_toStartOf="parent"
++            android:fontFamily="@font/roboto_bold"
++            android:text="@string/text_connection_error_or"
++            android:textAlignment="center"
++            android:textSize="@dimen/font_xxlarge"
++            app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.5"
++            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+-            app:layout_constraintBottom_toBottomOf="parent"
+-            app:layout_constraintVertical_bias="0.6"
+-            android:fontFamily="@font/roboto_bold"
+-            android:textSize="@dimen/font_xxlarge"
+-            android:textAlignment="center"
+-            android:id="@+id/appNameSplashScreen"
+-            android:text="@string/text_connection_error_or">
+-        </TextView>
++            app:layout_constraintVertical_bias="0.6"></TextView>
+ 
+     </androidx.constraintlayout.widget.ConstraintLayout>
+ 
+diff --git a/dashboard/dashboard_presentation/src/main/res/layout/fragment_dashboard.xml b/dashboard/dashboard_presentation/src/main/res/layout/fragment_dashboard.xml
+index 669d248..a3f8ead 100644
+--- a/dashboard/dashboard_presentation/src/main/res/layout/fragment_dashboard.xml
++++ b/dashboard/dashboard_presentation/src/main/res/layout/fragment_dashboard.xml
+@@ -1,6 +1,6 @@
+-<androidx.viewpager.widget.ViewPager
+-    xmlns:android="http://schemas.android.com/apk/res/android"
++<androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/viewPagerDashboard"
+     android:layout_width="match_parent"
+-    android:layout_height="0dp" android:layout_weight="1"/>
++    android:layout_height="0dp"
++    android:layout_weight="1" />
+ 
+diff --git a/dashboard/dashboard_presentation/src/main/res/layout/fragment_portfolio.xml b/dashboard/dashboard_presentation/src/main/res/layout/fragment_portfolio.xml
+index d5d16c3..2c187d0 100644
+--- a/dashboard/dashboard_presentation/src/main/res/layout/fragment_portfolio.xml
++++ b/dashboard/dashboard_presentation/src/main/res/layout/fragment_portfolio.xml
+@@ -2,18 +2,20 @@
+ <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:id="@+id/mainPortfolio"
+-    android:orientation="vertical"
++    android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    android:layout_width="match_parent">
++    android:orientation="vertical">
++
+     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
++        android:id="@+id/pullToRefreshPortfolio"
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:id="@+id/pullToRefreshPortfolio">
++        android:layout_height="match_parent">
++
+         <LinearLayout
+-            android:orientation="vertical"
++            android:id="@+id/favoritesLinearLayout"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+-            android:id="@+id/favoritesLinearLayout"
++            android:orientation="vertical"
+             android:visibility="gone">
+ 
+             <androidx.constraintlayout.widget.ConstraintLayout
+@@ -22,161 +24,164 @@
+                 android:orientation="vertical">
+ 
+                 <LinearLayout
++                    android:id="@+id/headerBankNameLinearLayout"
+                     android:layout_width="100dp"
+                     android:layout_height="wrap_content"
++                    android:layout_marginStart="@dimen/space_m"
++                    android:layout_marginBottom="@dimen/space_s"
+                     android:orientation="horizontal"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+-                    android:layout_marginStart="@dimen/space_m"
+-                    android:layout_marginBottom="@dimen/space_s"
+-                    android:id="@+id/headerBankNameLinearLayout">
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerBankName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_bank_name_header"
+-                        android:id="@+id/headerBankName"/>
++                        android:text="@string/recyclerview_bank_name_header" />
++
+                     <TextView
++                        android:id="@+id/bankNameSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/bankNameSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
++
+                     <TextView
++                        android:id="@+id/bankNameSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/bankNameSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+                 </LinearLayout>
+ 
+                 <LinearLayout
++                    android:id="@+id/headerBuyingPriceLinearLayout"
+                     android:layout_width="70dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/space_m"
++                    android:layout_marginEnd="@dimen/space_m"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+                     app:layout_constraintEnd_toStartOf="@+id/headerSellingPriceLinearLayout"
+-                    android:layout_marginEnd="@dimen/space_m"
+-                    android:id="@+id/headerBuyingPriceLinearLayout">
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerBuyingPrice"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_buying_price_header"
+-                        android:id="@+id/headerBuyingPrice"/>
++                        android:text="@string/recyclerview_buying_price_header" />
+ 
+                     <TextView
++                        android:id="@+id/buyingPriceSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/buyingPriceSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                     <TextView
++                        android:id="@+id/buyingPriceSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/buyingPriceSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                 </LinearLayout>
+ 
+                 <LinearLayout
++                    android:id="@+id/headerSellingPriceLinearLayout"
+                     android:layout_width="70dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/space_m"
++                    android:layout_marginEnd="@dimen/space_m"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+                     app:layout_constraintEnd_toStartOf="@+id/headerDiffLinearLayout"
+-                    android:layout_marginEnd="@dimen/space_m"
+-                    android:id="@+id/headerSellingPriceLinearLayout">
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerSellingPrice"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_selling_price_header"
+-                        android:id="@+id/headerSellingPrice"/>
++                        android:text="@string/recyclerview_selling_price_header" />
+ 
+                     <TextView
++                        android:id="@+id/sellingPriceSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/sellingPriceSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                     <TextView
++                        android:id="@+id/sellingPriceSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/sellingPriceSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                 </LinearLayout>
+ 
+                 <LinearLayout
++                    android:id="@+id/headerDiffLinearLayout"
+                     android:layout_width="55dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/space_m"
+                     android:layout_marginEnd="@dimen/space_m"
+                     android:paddingTop="@dimen/space_m"
+                     android:paddingBottom="@dimen/space_m"
+-                    android:id="@+id/headerDiffLinearLayout"
+-                    app:layout_constraintTop_toTopOf="parent"
+-                    app:layout_constraintEnd_toEndOf="parent">
++                    app:layout_constraintEnd_toEndOf="parent"
++                    app:layout_constraintTop_toTopOf="parent">
+ 
+                     <TextView
++                        android:id="@+id/headerDiff"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="@dimen/space_xs"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:text="@string/recyclerview_diff_header"
+-                        android:id="@+id/headerDiff"/>
++                        android:text="@string/recyclerview_diff_header" />
+ 
+                     <TextView
++                        android:id="@+id/diffSortByIncreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/diffSortByIncreasingSign"
+-                        android:text="@string/increase"/>
++                        android:text="@string/increase"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                     <TextView
++                        android:id="@+id/diffSortByDecreasingSign"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_bold"
+-                        android:textSize="@dimen/font_xxlarge"
+-                        android:id="@+id/diffSortByDecreasingSign"
+-                        android:text="@string/decrease"/>
++                        android:text="@string/decrease"
++                        android:textSize="@dimen/font_xxlarge" />
+ 
+                 </LinearLayout>
+ 
+             </androidx.constraintlayout.widget.ConstraintLayout>
+-            <View style="@style/MenuDivider"/>
++
++            <View style="@style/MenuDivider" />
+ 
+             <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/portfolioRecyclerView"
+                 android:layout_width="match_parent"
+-                android:paddingBottom="4dp"
+-                android:clipToPadding="true"
+                 android:layout_height="0dp"
+-                android:layout_weight="1"/>
++                android:layout_weight="1"
++                android:clipToPadding="true"
++                android:paddingBottom="4dp" />
+ 
+         </LinearLayout>
+     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+@@ -191,34 +196,33 @@
+         <com.airbnb.lottie.LottieAnimationView
+             android:layout_width="0dp"
+             android:layout_height="0dp"
++            android:layout_marginLeft="@dimen/space_xxxxl"
+             android:layout_marginTop="@dimen/space_xl"
+             android:layout_marginRight="@dimen/space_xxxxl"
+-            android:layout_marginLeft="@dimen/space_xxxxl"
++            android:scaleType="centerCrop"
++            app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
+             app:layout_constraintDimensionRatio="H, 1:1"
+-            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+-            app:layout_constraintBottom_toTopOf="@+id/appNameSplashScreen"
+-            android:scaleType="centerCrop"
+             app:lottie_autoPlay="true"
+-            app:lottie_loop= "true"
+-            app:lottie_rawRes="@raw/not_found"/>
++            app:lottie_loop="true"
++            app:lottie_rawRes="@raw/not_found" />
+ 
+         <TextView
++            android:id="@+id/appNameSplashScreen"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            app:layout_constraintStart_toStartOf="parent"
++            android:fontFamily="@font/roboto_bold"
++            android:text="@string/text_favorite_currency_not_available"
++            android:textAlignment="center"
++            android:textSize="@dimen/font_xxlarge"
++            app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.5"
++            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+-            app:layout_constraintBottom_toBottomOf="parent"
+-            app:layout_constraintVertical_bias="0.6"
+-            android:fontFamily="@font/roboto_bold"
+-            android:textSize="@dimen/font_xxlarge"
+-            android:textAlignment="center"
+-            android:id="@+id/appNameSplashScreen"
+-            android:text="@string/text_favorite_currency_not_available">
+-        </TextView>
++            app:layout_constraintVertical_bias="0.6"></TextView>
+ 
+     </androidx.constraintlayout.widget.ConstraintLayout>
+ 
+diff --git a/dashboard/dashboard_presentation/src/main/res/layout/item_currency.xml b/dashboard/dashboard_presentation/src/main/res/layout/item_currency.xml
+index a33bf3a..8b8fe24 100644
+--- a/dashboard/dashboard_presentation/src/main/res/layout/item_currency.xml
++++ b/dashboard/dashboard_presentation/src/main/res/layout/item_currency.xml
+@@ -1,59 +1,60 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<LinearLayout
+-    xmlns:android="http://schemas.android.com/apk/res/android"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="vertical">
+-        <androidx.constraintlayout.widget.ConstraintLayout
+-            android:layout_width="match_parent"
++
++    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="vertical"
++        android:paddingTop="@dimen/space_m">
++
++        <TextView
++            android:id="@+id/textViewBankName"
++            android:layout_width="100dp"
+             android:layout_height="wrap_content"
+-            android:paddingTop="@dimen/space_m"
+-            android:orientation="vertical"
+-            xmlns:app="http://schemas.android.com/apk/res-auto">
+-                <TextView
+-                    android:layout_width="100dp"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="@dimen/space_m"
+-                    android:layout_marginBottom="@dimen/space_s"
+-                    app:layout_constraintTop_toTopOf="parent"
+-                    app:layout_constraintStart_toStartOf="parent"
+-                    android:fontFamily="@font/roboto_regular"
+-                    android:id="@+id/textViewBankName"/>
+-
+-                <TextView
+-                    android:layout_width="70dp"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="@dimen/space_m"
+-                    android:layout_marginBottom="@dimen/space_s"
+-                    app:layout_constraintTop_toTopOf="parent"
+-                    app:layout_constraintEnd_toStartOf="@+id/textViewSellingPrice"
+-                    android:layout_marginEnd="@dimen/space_m"
+-                    android:fontFamily="@font/roboto_regular"
+-                    android:id="@+id/textViewBuyingPrice"/>
+-
+-                <TextView
+-                    android:layout_width="70dp"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="@dimen/space_m"
+-                    android:layout_marginBottom="@dimen/space_s"
+-                    android:layout_marginEnd="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+-                    app:layout_constraintEnd_toStartOf="@id/textViewDiff"
+-                    android:fontFamily="@font/roboto_regular"
+-                    android:id="@+id/textViewSellingPrice"/>
+-
+-                <TextView
+-                    android:layout_width="55dp"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="@dimen/space_m"
+-                    android:layout_marginBottom="@dimen/space_s"
+-                    android:layout_marginEnd="@dimen/space_m"
+-                    app:layout_constraintTop_toTopOf="parent"
+-                    app:layout_constraintEnd_toEndOf="parent"
+-                    android:fontFamily="@font/roboto_regular"
+-                    android:id="@+id/textViewDiff"/>
+-        </androidx.constraintlayout.widget.ConstraintLayout>
+-        <View style="@style/ItemDivider"/>
++            android:layout_marginStart="@dimen/space_m"
++            android:layout_marginBottom="@dimen/space_s"
++            android:fontFamily="@font/roboto_regular"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent" />
++
++        <TextView
++            android:id="@+id/textViewBuyingPrice"
++            android:layout_width="70dp"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="@dimen/space_m"
++            android:layout_marginEnd="@dimen/space_m"
++            android:layout_marginBottom="@dimen/space_s"
++            android:fontFamily="@font/roboto_regular"
++            app:layout_constraintEnd_toStartOf="@+id/textViewSellingPrice"
++            app:layout_constraintTop_toTopOf="parent" />
++
++        <TextView
++            android:id="@+id/textViewSellingPrice"
++            android:layout_width="70dp"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="@dimen/space_m"
++            android:layout_marginEnd="@dimen/space_m"
++            android:layout_marginBottom="@dimen/space_s"
++            android:fontFamily="@font/roboto_regular"
++            app:layout_constraintEnd_toStartOf="@id/textViewDiff"
++            app:layout_constraintTop_toTopOf="parent" />
++
++        <TextView
++            android:id="@+id/textViewDiff"
++            android:layout_width="55dp"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="@dimen/space_m"
++            android:layout_marginEnd="@dimen/space_m"
++            android:layout_marginBottom="@dimen/space_s"
++            android:fontFamily="@font/roboto_regular"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintTop_toTopOf="parent" />
++    </androidx.constraintlayout.widget.ConstraintLayout>
++
++    <View style="@style/ItemDivider" />
+ </LinearLayout>
+ 
+ 

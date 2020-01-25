@@ -32,11 +32,14 @@ class DefaultErrorFactory @Inject constructor(
         return Error.ApiErrors(safeErrorList)
     }
 
-    override fun createUnknownError(): Error = Error.UnknownError(context.getString(R.string.text_error))
+    override fun createUnknownError(): Error =
+        Error.UnknownError(context.getString(R.string.text_error))
 
-    override fun createErrorFromThrowable(t: Throwable) = Error.ExceptionalError(message = t.localizedMessage)
+    override fun createErrorFromThrowable(t: Throwable) =
+        Error.ExceptionalError(message = t.localizedMessage)
 
-    override fun createInvalidResponseError() = Error.InvalidResponseError(context.getString(R.string.text_invalid_response))
+    override fun createInvalidResponseError() =
+        Error.InvalidResponseError(context.getString(R.string.text_invalid_response))
 
     override fun createUnHandledStateError() = Error.UnhandledStateError()
 

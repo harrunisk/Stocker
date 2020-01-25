@@ -111,7 +111,8 @@ class RecyclerViewAdapter constructor(
 
     override fun getSelectedItems(): List<DisplayItem> = selectedItems
 
-    private fun calculateDiffResult(newItems: List<DisplayItem>): Deferred<DiffUtil.DiffResult> = GlobalScope.async {
-        calculateDiff(newItems)
-    }
+    private fun calculateDiffResult(newItems: List<DisplayItem>): Deferred<DiffUtil.DiffResult> =
+        GlobalScope.async {
+            calculateDiff(newItems)
+        }
 }

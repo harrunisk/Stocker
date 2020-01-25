@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.nstudiosappdev.stocker.dashboard.presentation.DashboardPresentationConstants
 
-class PortfolioPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class PortfolioPagerAdapter(private val titles: MutableList<String>, fm: FragmentManager) :
+    FragmentPagerAdapter(fm) {
 
     private val _fragments = SparseArray<Fragment>()
 
@@ -17,11 +18,14 @@ class PortfolioPagerAdapter(private val titles: MutableList<String>, fm: Fragmen
     override fun getItem(position: Int): Fragment {
         return when (position) {
             DashboardPresentationConstants.TYPES.USD -> PortfolioFragment.newInstance(
-                DashboardPresentationConstants.TYPES_STRING.USD)
+                DashboardPresentationConstants.TYPES_STRING.USD
+            )
             DashboardPresentationConstants.TYPES.EURO -> PortfolioFragment.newInstance(
-                DashboardPresentationConstants.TYPES_STRING.EURO)
+                DashboardPresentationConstants.TYPES_STRING.EURO
+            )
             DashboardPresentationConstants.TYPES.GOLD -> PortfolioFragment.newInstance(
-                DashboardPresentationConstants.TYPES_STRING.GOLD)
+                DashboardPresentationConstants.TYPES_STRING.GOLD
+            )
             else -> throw IllegalArgumentException("Unknown position!")
         }
     }
